@@ -84,12 +84,23 @@ class Company extends BaseModel
     private $region;
 
     /**
+     * @ORM\ManyToMany(targetEntity="\Pequiven\SEIPBundle\Entity\User", mappedBy="userCompanies", cascade={"remove"})
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Pequiven\MasterBundle\Entity\RolUser", mappedBy="company", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $roleUser;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->affiliates = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mixeds = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -285,5 +296,83 @@ class Company extends BaseModel
     
     public function __toString() {
         return $this->getAlias()?:'-';
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Pequiven\SEIPBundle\Entity\User $user
+     *
+     * @return Company
+     */
+    public function addUser(\Pequiven\SEIPBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Pequiven\SEIPBundle\Entity\User $user
+     */
+    public function removeUser(\Pequiven\SEIPBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     *
+     * @return Company
+     */
+    public function addRoleUser(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->roleUser[] = $roleUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     */
+    public function removeRoleUser(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->roleUser->removeElement($roleUser);
+    }
+
+    /**
+     * Get roleUser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoleUser()
+    {
+        return $this->roleUser;
     }
 }

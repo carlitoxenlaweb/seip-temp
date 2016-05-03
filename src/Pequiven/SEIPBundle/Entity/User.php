@@ -99,12 +99,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
     private $cargo;
 
     /**
-     * @var \Pequiven\MasterBundle\Entity\Rol
-     * @ORM\ManyToMany(targetEntity="Pequiven\MasterBundle\Entity\Rol")
-     * @ORM\JoinTable(name="fos_user_user_rol",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="\Pequiven\MasterBundle\Entity\RolUser", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $groups;
 
@@ -292,6 +287,44 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
     private $maintenanceResponsibles;
 
     /**
+     * Default Connection
+     * @var integer
+     * @ORM\ManyToOne(targetEntity="\Pequiven\MasterBundle\Entity\MasterConnection")
+     * @ORM\JoinColumn(name="default_conn", referencedColumnName="id")
+     */
+    protected $defaultConnection = 1;
+
+    /**
+     * User Company
+     * @var integer
+     * @ORM\ManyToOne(targetEntity="\Pequiven\SEIPBundle\Entity\CEI\Company", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     */
+    protected $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Pequiven\MasterBundle\Entity\MasterConnection", inversedBy="user", cascade={"persist","remove"})
+     * @ORM\JoinTable(name="seip_user_connection",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="connection_id", referencedColumnName="id")}
+     * )
+     */
+    protected $connections;
+
+    /**
+     * @var \Pequiven\SEIPBundle\Entity\CEI\Company
+     * @ORM\ManyToMany(targetEntity="Pequiven\SEIPBundle\Entity\CEI\Company", inversedBy="users", cascade={"persist","remove"})
+     * @ORM\JoinTable(name="seip_user_company",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id")}
+     * )
+     */
+    protected $userCompanies;
+
+    //Just for roles!
+    private $currentCompany;
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -311,6 +344,8 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
         $this->feeStructure = new \Doctrine\Common\Collections\ArrayCollection();
         $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
         $this->maintenanceResponsibles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->connections = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userCompanies = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -359,27 +394,6 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
      */
     public function getDeletedAt() {
         return $this->deletedAt;
-    }
-
-    /**
-     * Add groups
-     *
-     * @param \Coramer\Sigtec\CoreBundle\Entity\Group $groups
-     * @return User
-     */
-    public function addGroup(\FOS\UserBundle\Model\GroupInterface $groups) {
-        $this->groups[] = $groups;
-
-        return $this;
-    }
-
-    /**
-     * Remove groups
-     *
-     * @param \Coramer\Sigtec\CoreBundle\Entity\Group $groups
-     */
-    public function removeGroup(\FOS\UserBundle\Model\GroupInterface $groups) {
-        $this->groups->removeElement($groups);
     }
 
     /**
@@ -564,15 +578,6 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
     }
 
     /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups() {
-        return $this->groups;
-    }
-
-    /**
      * Add goals
      *
      * @param \Pequiven\ArrangementProgramBundle\Entity\Goal $goals
@@ -634,6 +639,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
                 Rol::ROLE_SUPER_ADMIN
             );
             foreach ($groups as $group) {
+                $group = $group->getRol();
                 if ($type == CommonObject::TYPE_LEVEL_USER_ONLY_OWNER) {
                     if ($group->getLevel() > $level && !in_array($group->getLevel(), $groupsLevelAdmin) && $group->getTypeRol() == Rol::TYPE_ROL_OWNER) {
                         $level = $group->getLevel();
@@ -659,6 +665,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
             );
             $realGroup = null;
             foreach ($groups as $group) {
+                $group = $group->getRol();
                 if ($group->getLevel() > $level && !in_array($group->getLevel(), $groupsLevelAdmin)) {
                     $level = $group->getLevel();
                     $realGroup = $group;
@@ -1125,6 +1132,204 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
      */
     public function getMaintenanceResponsibles() {
         return $this->maintenanceResponsibles;
+    }
+
+    
+    
+    /**
+     * Get defaultConnection
+     *
+     * @return \Pequiven\MasterBundle\Entity\MasterConnection
+     */
+    public function getDefaultConnection(){
+        return $this->defaultConnection;
+    }
+
+    /**
+     * Set defaultConnection
+     *
+     * @param integer $defaultConnection
+     *
+     * @return $defaultConnection
+     */
+    public function setDefaultConnection(\Pequiven\MasterBundle\Entity\MasterConnection $conn){
+        $this->defaultConnection = $conn;
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \Pequiven\SEIPBundle\Entity\CEI\Company 
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set company
+     *
+     * @param \Pequiven\SEIPBundle\Entity\CEI\Company $company
+     * @return Location
+     */
+    public function setCompany(\Pequiven\SEIPBundle\Entity\CEI\Company $company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * Add connection
+     *
+     * @param \Pequiven\MasterBundle\Entity\MasterConnection $connection
+     * @return User
+     */
+    public function addConnection(\Pequiven\MasterBundle\Entity\MasterConnection $connection) {
+        $this->connections[] = $connection;
+
+        return $this;
+    }
+
+    /**
+     * Remove connection
+     *
+     * @param \Pequiven\MasterBundle\Entity\MasterConnection $connection
+     */
+    public function removeConnection(\Pequiven\MasterBundle\Entity\MasterConnection $connection) {
+        $this->connections->removeElement($connection);
+    }
+
+    /**
+     * Get connections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getConnections() {
+        return $this->connections;
+    }
+
+    /**
+     * Set connections
+     *
+     * @return User
+     */
+    public function setConnections($connections) {
+        $this->connections = $connections;
+
+        return $this;
+    }
+
+    /**
+     * Add userCompany
+     *
+     * @param \Pequiven\SEIPBundle\Entity\CEI\Company $userCompanies
+     * @return User
+     */
+    public function addUserCompany(\Pequiven\SEIPBundle\Entity\CEI\Company $company) {
+        $this->userCompanies->add($company);
+
+        return $this;
+    }
+
+    /**
+     * Remove userCompany
+     *
+     * @param \Pequiven\SEIPBundle\Entity\CEI\Company $userCompanies
+     */
+    public function removeUserCompany(\Pequiven\SEIPBundle\Entity\CEI\Company $company) {
+        $this->userCompanies->removeElement($company);
+    }
+
+    /**
+     * Get userCompanies
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCompanies() {
+        return $this->userCompanies;
+    }
+
+    /**
+     * Set userCompanies
+     *
+     * @return User
+     */
+    public function setUserCompanies($companies) {
+        $this->userCompanies = $companies;
+
+        return $this;
+    }
+
+    public function getCurrentCompany()
+    {
+        return $this->currentCompany;
+    }
+
+    public function getCurrentCompanyId()
+    {
+        return is_null($this->getCurrentCompany()) ?
+            $this->getCompany()->getId() : $this->getCurrentCompany()->getId();
+    }
+
+    public function setCurrentCompany(\Pequiven\SEIPBundle\Entity\CEI\Company $company)
+    {
+        $this->currentCompany = $company;
+        return $this;
+    }
+
+    /**
+     * Returns the user roles
+     *
+     * @return array The roles
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;        
+        if(is_null($this->getCompany()))
+            return $roles;
+
+        foreach ($this->getGroups() as $group) {
+            if($this->getCurrentCompanyId() === $group->getCompany()->getId())
+                $roles = array_merge($roles, $group->getRol()->getRoles());
+        }
+        
+        $roles[] = static::ROLE_DEFAULT;
+        return array_unique($roles);
+    }
+
+    /**
+     * Add roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     *
+     * @return Rol
+     */
+    public function addGroups(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->groups[] = $roleUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     */
+    public function removeGroups(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->groups->removeElement($roleUser);
+    }
+
+    /**
+     * Get roleUser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 
     function getFeeStructure() {

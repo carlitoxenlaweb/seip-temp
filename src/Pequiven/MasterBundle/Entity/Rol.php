@@ -84,6 +84,11 @@ class Rol extends modelRol
     private $typeRol = self::TYPE_ROL_OWNER;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Pequiven\MasterBundle\Entity\RolUser", mappedBy="rol", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $roleUser;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -278,7 +283,42 @@ class Rol extends modelRol
     {
         return $this->typeRol;
     }
+    
     public function __toString() {
         return $this->getDescription()?:'-';
+    }
+
+    /**
+     * Add roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     *
+     * @return Rol
+     */
+    public function addRoleUser(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->roleUser[] = $roleUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove roleUser
+     *
+     * @param \Pequiven\MasterBundle\Entity\RolUser $roleUser
+     */
+    public function removeRoleUser(\Pequiven\MasterBundle\Entity\RolUser $roleUser)
+    {
+        $this->roleUser->removeElement($roleUser);
+    }
+
+    /**
+     * Get roleUser
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoleUser()
+    {
+        return $this->roleUser;
     }
 }
