@@ -8,6 +8,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tecnocreaciones\Bundle\ResourceBundle\Controller\ResourceController as baseController;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
+use Pequiven\MasterBundle\Entity\Complejo;
+use Pequiven\MasterBundle\Model\ControllerFilters;
+
 class DefaultController extends Controller {
 
     /** Página Principal del Sistema
@@ -17,6 +28,10 @@ class DefaultController extends Controller {
 
         $groupsUsers = $this->getUser()->getGroups();
         $securityService = $this->getSecurityService();
+
+        // var_dump($this->get('session')->get('connectionParameter'));
+        // die();
+            
         if ((count($groupsUsers) == 1) && ($securityService->isGranted(array("ROLE_WORKER_PQV"))) && !($securityService->isGranted(array("ROLE_DIRECTIVE","ROLE_GENERAL_COMPLEJO","ROLE_MANAGER_FIRST",'ROLE_MANAGER_SECOND','ROLE_SUPERVISER')))) {
             //CARGAN SOLO ITEMS
             $showButton = false;
@@ -29,6 +44,84 @@ class DefaultController extends Controller {
             "buttonItems" => $showButton
         ));
     }
+    
+    /** Página de Seleccion de empresas
+     * @Route("/selectCompany")
+     */
+    public function selectOptionAction(){
+        $connections = array();
+        foreach ($this->getUser()->getConnections() as $item)
+            array_push($connections, $item->getName());
+        return count($connections) > 1 ? 
+            $this->render('PequivenSEIPBundle:Default:access.html.twig', array(
+                "options" => $connections
+            )) : 
+            $this->render('PequivenSEIPBundle:Default:index.html.twig', array(
+                "buttonItems" => $showButton
+            ));
+    }
+
+    /** SETEAR EMPRESA
+     * @Route("/setCompany/{connection}")
+     */
+    public function setOptionAction($connection){
+        $MasterConn = $this->getDoctrine()
+                           ->getRepository('PequivenMasterBundle:MasterConnection')
+                           ->findOneByName($connection);
+        $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
+        $this->get('session')->set('connectionParameter', $connection);        
+        //return self::indexAction();
+        return $this->redirectToRoute('pequiven_seip_menu_home');
+    }
+
+    // /**
+    //  * @Route("/testMultiEmpresa/{param}")
+    //  */
+    // public function testMultiEmpresaAction($param){
+    //     $conn = $this->get('app.connection_service');
+
+    //     switch($param){
+    //         case 'query':
+    //             $query = $conn->createQuery('SELECT c.id, c.description FROM PequivenMasterBundle:Complejo c');
+    //             $data = $query->getResult();
+    //             break;
+
+    //         case 'repo':
+    //             $array = array();
+
+    //             $data = $conn->getRepository('PequivenMasterBundle:Complejo')
+    //                          ->findAll();
+
+    //             foreach ($data as $item)
+    //                 array_push($array, $item->getId().": ".$item->getDescription());
+
+    //             $data = $array;
+
+    //             break;
+
+    //         case 'insert':
+    //             $complejo = new Complejo;
+
+    //             $complejo->setCreatedAt(new \DateTime("now"));
+    //             $complejo->setUpdatedAt(new \DateTime("now"));
+    //             $complejo->setDescription("COMPLEJO SIN NOMBRE");
+    //             $complejo->setEnabled(1);
+    //             $complejo->setRef("CPAMC");
+
+    //             $em = $conn->getManager();
+
+    //             $em->persist($complejo);
+    //             $em->flush();
+
+    //             $data = "Registro Insertado";
+    //             break;
+
+    //         default:
+    //             $data = $this->get('session')->get('connectionParameter');
+    //             break;
+    //     }
+    //     exit(\Doctrine\Common\Util\Debug::dump($data));
+    // }
 
     /**
      * 
