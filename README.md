@@ -29,6 +29,7 @@ Privilegios y Roles: *Todos*
 - [Modulos Sonata](#modulos-sonata)
 - [Cambios de 2.4 a 2.8](#cambios-de-2.4-a-2.8)
 
+| Para cambiar de empresa utilizar la URL '/setCompany/{nombre_de_la_conexion_en_parametros}'
 
 Dependencias
 ----------------------------------
@@ -134,6 +135,25 @@ Creado listener para los filtros antes de la ejecución de cada controlador
 
 ```php
 DefaultController extends Controller implements ControllerFilters 
+```
+
+Sobreescritos los metodos de doctrine en **SEIPBundle/Doctrine** para gestionar las entidades, ejemplo:
+
+```php
+public function getManager($name = null)
+{
+    if (null === $name) {
+        $name = $this->container->get('session')->get('connectionParameter', 'default'); //selectedManager;
+    }
+
+    $managers = $this->getManagerNames();
+
+    if (!isset($managers[$name])) {
+        throw new \InvalidArgumentException(sprintf('Doctrine %s Manager named "%s" does not exist.', $this->getName(), $name));
+    }
+
+    return $this->getService($managers[$name]);
+}
 ```
 
 Existe un servicio en *MasterBundle* [**MasterConnection**] que se encarga de las conexiones a entidades

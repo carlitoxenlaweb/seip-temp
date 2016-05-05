@@ -8,6 +8,7 @@
     <div id="menu-content">
 
         <header>
+            <a href="/selectCompany">[X]</a>
             {% if app.user.hasRole('ROLE_WORKER_PQV') %}
                 {{ 'pequiven_seip.role.worker_pqv'|trans }}
             {% elseif app.user.hasRole('ROLE_SUPERVISER') %}

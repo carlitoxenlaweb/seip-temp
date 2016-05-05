@@ -56,3 +56,11 @@
         <strong>{{ period }}</strong>
     </h2>#}
 </hgroup>
+
+{#<!-- MUESTRA DE ROLES -->
+<h4>
+  {% for key,value in app.user.getRoles %}
+    <p>Key : {{ key }}<br/>
+    Value : {{ value }}</p>
+  {% endfor %}
+</h4>#}

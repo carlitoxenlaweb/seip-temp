@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 use Pequiven\MasterBundle\Entity\Complejo;
+use Pequiven\ObjetiveBundle\Entity\Objetive;
 use Pequiven\MasterBundle\Model\ControllerFilters;
 
 class DefaultController extends Controller {
@@ -29,7 +30,19 @@ class DefaultController extends Controller {
         $groupsUsers = $this->getUser()->getGroups();
         $securityService = $this->getSecurityService();
 
-        // var_dump($this->get('session')->get('connectionParameter'));
+        // $conn = $this->get('app.connection_service');
+        
+        // $connection = $conn->getConnection();        
+        // $statement = $connection->prepare("SELECT description FROM seip_objetive WHERE id = :id");
+        // $statement->bindValue('id', 1190);
+        // $statement->execute();
+        
+        // $results = $statement->fetchAll();
+
+        // $em = $this->getDoctrine()->getManager();
+        // $results = $em->getRepository('PequivenObjetiveBundle:Objetive')->find(1190);
+
+        // var_dump($results);
         // die();
             
         if ((count($groupsUsers) == 1) && ($securityService->isGranted(array("ROLE_WORKER_PQV"))) && !($securityService->isGranted(array("ROLE_DIRECTIVE","ROLE_GENERAL_COMPLEJO","ROLE_MANAGER_FIRST",'ROLE_MANAGER_SECOND','ROLE_SUPERVISER')))) {
@@ -44,7 +57,7 @@ class DefaultController extends Controller {
             "buttonItems" => $showButton
         ));
     }
-    
+
     /** Página de Seleccion de empresas
      * @Route("/selectCompany")
      */
@@ -71,6 +84,8 @@ class DefaultController extends Controller {
         $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
         $this->get('session')->set('connectionParameter', $connection);        
         //return self::indexAction();
+        var_dump($this->get('session')->get('connectionParameter'));
+        die();
         return $this->redirectToRoute('pequiven_seip_menu_home');
     }
 

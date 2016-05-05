@@ -1,5 +1,5 @@
 parameters:
-	app.security_listener.class: Pequiven\SEIPBundle\EventListener\LoginListener
+    app.security_listener.class: Pequiven\SEIPBundle\EventListener\LoginListener
 
 services:
     app.security_listener_login:

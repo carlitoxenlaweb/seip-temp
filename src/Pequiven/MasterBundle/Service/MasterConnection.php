@@ -48,4 +48,9 @@ class MasterConnection
     {
         return $this->connectionParam;
     }
+
+    public function getConnection()
+    {
+        return $this->entityManager->getConnection();
+    }
 }

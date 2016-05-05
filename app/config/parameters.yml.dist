@@ -40,6 +40,8 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     main_cdn: 'http://seip.pequiven.com'
 
-    bin_node: /usr/bin/nodejs
+    bin_node: /usr/bin/node
     bin_ugly_js: /usr/local/bin/uglifyjs
     bin_ugly_css: /usr/local/bin/uglifycss
+
+    doctrine.class: Pequiven\SEIPBundle\Doctrine\SeipManagerRegistry

@@ -29,7 +29,7 @@ class RolUser
      * @ORM\ManyToOne(targetEntity="\Pequiven\SEIPBundle\Entity\CEI\Company", inversedBy="roleUser", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=false)
      */
-    protected $company;
+    protected $company = 1;
 
     /**
      * Get id
