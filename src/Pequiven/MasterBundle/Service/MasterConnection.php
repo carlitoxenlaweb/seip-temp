@@ -44,6 +44,10 @@ class MasterConnection
     	return $this->entityManager;
     }
 
+    public function getEntityManager() {
+        return $this->getManager();
+    }
+
     public function getManagerName()
     {
         return $this->connectionParam;
@@ -53,4 +57,6 @@ class MasterConnection
     {
         return $this->entityManager->getConnection();
     }
+    
+    abstract function getTable();
 }

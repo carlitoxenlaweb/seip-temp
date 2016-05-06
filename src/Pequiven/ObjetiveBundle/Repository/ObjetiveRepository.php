@@ -303,7 +303,6 @@ class ObjetiveRepository extends EntityRepository {
      * @return QueryBuilder
      */
     function createPaginatorStrategic(array $criteria = null, array $orderBy = null) {
-        var_dump(get_class_methods($this));
         $queryBuilder = $this->getCollectionQueryBuilder();
         //Filtro Objetivo Estratégico
         if (isset($criteria['description'])) {

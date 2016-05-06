@@ -56,7 +56,8 @@
         "shtumi/useful-bundle": "dev-master",
         "phpunit/phpunit": "4.8.*@dev",
         "tecnocreaciones/console-bundle": "dev-master",
-        "symfony/doctrine-bridge": "~2.2"
+        "symfony/doctrine-bridge": "~2.2",
+        "gos/doctrine-query-builder": "~1.0"
     },
     "repositories": [
         {

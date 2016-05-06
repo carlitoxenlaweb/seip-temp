@@ -619,7 +619,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
 //        $level = Rol::ROLE_SUPER_ADMIN;
         $groups = $this->getGroups();
         foreach ($groups as $group) {
-            if (in_array($group->getLevel(), $groupsLevelAdmin)) {
+            if (in_array($group->getRol()->getLevel(), $groupsLevelAdmin)) {
                 $isSuperAdmin = true;
             }
         }

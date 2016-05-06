@@ -108,6 +108,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         default_entity_manager: default
+        #default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\GosEntityRepository
         entity_managers:
             default:
                 auto_mapping: true

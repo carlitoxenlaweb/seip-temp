@@ -83,6 +83,7 @@ shtumi/useful-bundle: dev-master,
 phpunit/phpunit: 4.8.*@dev,
 tecnocreaciones/console-bundle: dev-master,
 symfony/doctrine-bridge: ~3.0
+os/doctrine-query-builder: ~1.0
 ```
 
 Base de Datos
