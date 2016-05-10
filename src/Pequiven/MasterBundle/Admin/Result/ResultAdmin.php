@@ -6,15 +6,27 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 /**
  * Administrador de resultado
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface 
+class ResultAdmin extends Admin implements ContainerAwareInterface, MasterAdminInterface
 {
     protected $container;
+    
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
     
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
@@ -43,19 +55,18 @@ class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjectio
                 'choices' => \Pequiven\SEIPBundle\Model\Result\Result::getTypeCalculations(),
                 'translation_domain' => 'PequivenSEIPBundle'
             ))
-            ->add('objetive','sonata_type_model_autocomplete',array(
-                'property' => array('ref','description'),
-                'required' => false,
+            ->add('objetive', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add('parent','entity',array(
                 'class' => 'Pequiven\SEIPBundle\Entity\Result\Result',
                 'query_builder' => function(\Pequiven\SEIPBundle\Repository\Result\ResultRepository $repository){
                     return $repository->getQueryOfValidParents();
                 },
-                'property' => 'descriptionText',
                 'required' => false,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
-            ;
+        ;
     }
     
     protected function configureDatagridFilters(DatagridMapper $filter) {
@@ -63,9 +74,7 @@ class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjectio
             ->add('description')
             ->add('typeResult')
             ->add('typeCalculation')
-            ->add('objetive','doctrine_orm_model_autocomplete',array(),null,array(
-                'property' => array('ref','description')
-            ))
+            ->add('objetive')
             ->add('period')
             ;
     }
@@ -97,15 +106,6 @@ class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjectio
 
     public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
         $this->container = $container;
-    }
-    
-    public function toString($object) 
-    {
-        $toString = '-';
-        if($object->getId() > 0){
-            $toString = $object->getPeriod()->getDescription().' - '.$object->getDescription();
-        }
-        return \Pequiven\SEIPBundle\Service\ToolService::truncate($toString,array('limit' => 50));
     }
     
     /**

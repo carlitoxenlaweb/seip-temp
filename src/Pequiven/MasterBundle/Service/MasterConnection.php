@@ -58,5 +58,5 @@ class MasterConnection
         return $this->entityManager->getConnection();
     }
     
-    abstract function getTable();
+    //abstract function getTable();
 }

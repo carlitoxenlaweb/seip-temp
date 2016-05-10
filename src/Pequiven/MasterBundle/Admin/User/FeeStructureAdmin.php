@@ -15,14 +15,26 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administracion de Cargos
  *
  * @author Gilbert <glavrjk@gmail.com>
  */
-class FeeStructureAdmin extends Admin {
+class FeeStructureAdmin extends Admin implements MasterAdminInterface
+{
+    protected $modelManager;
 
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show
                 ->add('id')

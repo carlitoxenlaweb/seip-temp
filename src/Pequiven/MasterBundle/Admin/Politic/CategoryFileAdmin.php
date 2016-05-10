@@ -8,12 +8,24 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Admin\Admin;
 //use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Admin de etiquetas de archivos cargadsoa reuniones de circulos de trabajo
  */
-class CategoryFileAdmin extends Admin {
+class CategoryFileAdmin extends Admin implements MasterAdminInterface
+{
+    protected $modelManager;
 
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(ShowMapper $show) {
         $show
                 ->add('id')

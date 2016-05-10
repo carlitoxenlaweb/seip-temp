@@ -6,14 +6,26 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del objetivo
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ObjetiveAdmin extends Admin
+class ObjetiveAdmin extends Admin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show)
     {
          $show
@@ -57,8 +69,12 @@ class ObjetiveAdmin extends Admin
                     ->add('ref')
                     ->add('weight')
                     ->add('goal')
-                    ->add('complejo')
-                    ->add('gerencia')
+                    ->add('complejo', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
+                    ->add('gerencia', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
                     ->add('gerenciaSecond','sonata_type_model_autocomplete',array(
                         'property' => array('description'),
                         'required' => false,
@@ -73,8 +89,12 @@ class ObjetiveAdmin extends Admin
                         'multiple' => true,
                         'required' => false,
                     ))
-                    ->add('objetiveLevel')
-                    ->add('period')
+                    ->add('objetiveLevel', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
+                    ->add('period', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
                 ->end()
             ->end()
             ->tab('Details')
@@ -92,7 +112,7 @@ class ObjetiveAdmin extends Admin
                         'required' => false,
                     ))
                     ->add('evalIndicator',null,array(
-                        'required' => false,
+                        'required' => false
                     ))
                     ->add('evalArrangementProgram',null,array(
                         'required' => false,
@@ -120,8 +140,8 @@ class ObjetiveAdmin extends Admin
             $form
                 ->tab('Details')
                     ->add('updateResultByAdmin', null, array(
-                'required' => false,
-            ))
+                        'required' => false,
+                    ))
                     ->end()
                 ->end()
             ;

@@ -15,14 +15,26 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de entidades
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class EntityAdmin extends BaseAdmin
+class EntityAdmin extends BaseAdmin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show){
         $show
             ->add("id")
@@ -41,11 +53,16 @@ class EntityAdmin extends BaseAdmin
         $form
             ->add("location",null,array(
                 "query_builder" => $queryAllEnable,
+                "em" => $this->modelManager->getEntityManagerName()
             ))
             ->add("name")
             ->add("alias")
-            ->add("typeLocation")
-            ->add('state')
+            ->add("typeLocation", null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('state', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureFormFields($form);
     }
@@ -67,7 +84,6 @@ class EntityAdmin extends BaseAdmin
             ->addIdentifier("name")
             ->add("location")
             ->add("alias")
-            ->add('canBeNetProductionGreaterThanGross', null, array('editable' => true, 'required' => false))
             ;
         parent::configureListFields($list);
     }

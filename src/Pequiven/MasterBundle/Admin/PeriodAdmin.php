@@ -15,19 +15,31 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del periodo
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PeriodAdmin extends Admin {
-
+class PeriodAdmin extends Admin  implements MasterAdminInterface
+{
     /**
      *
      * @var \Pequiven\SEIPBundle\Service\PeriodService
      */
     private $periodService;
+
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
 
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

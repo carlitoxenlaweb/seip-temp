@@ -15,14 +15,27 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de compañia (Control estadistico e informacion)
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class CompanyAdmin extends \Pequiven\MasterBundle\Admin\BaseAdmin
+class CompanyAdmin extends BaseAdmin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show
@@ -44,7 +57,9 @@ class CompanyAdmin extends \Pequiven\MasterBundle\Admin\BaseAdmin
     {
         $object = $this->getSubject();
         
-        $parameters = array();
+        $parameters = array(
+            'em' => $this->modelManager->getEntityManagerName()
+        );
         
         if($object !== null && $object->getId() > 0){
             $parameters['query_builder'] = function(\Doctrine\ORM\EntityRepository $repository) use ($object){
@@ -63,7 +78,7 @@ class CompanyAdmin extends \Pequiven\MasterBundle\Admin\BaseAdmin
             ->add('affiliates',null,$parameters)
             ->add('mixeds',null,$parameters)
             ->add('region',null,array(
-                "query_builder" => $queryAllEnable,
+                "query_builder" => $queryAllEnable
             ))
             ;
         parent::configureFormFields($form);

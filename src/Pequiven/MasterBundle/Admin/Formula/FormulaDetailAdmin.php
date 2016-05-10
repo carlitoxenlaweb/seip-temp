@@ -19,20 +19,32 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del detalle de formula del indicador
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class FormulaDetailAdmin extends Admin implements ContainerAwareInterface
+class FormulaDetailAdmin extends Admin implements ContainerAwareInterface, MasterAdminInterface
 {
     /**
      *
      * @var ContainerAware
      */
     private $container;
-    
+
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+
     protected function configureShowFields(ShowMapper $show)
     {
         $show

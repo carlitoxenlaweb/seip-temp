@@ -743,3 +743,30 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.connections:
+        class: Pequiven\MasterBundle\Admin\ConnectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%sonata.user.admin.groupname%" ,label_catalogue: "SonataUserBundle", label: "Entidades" }
+        arguments:
+            - ~
+            - Pequiven\MasterBundle\Entity\MasterConnection
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
+    sonata.admin.user.roles:
+        class: Pequiven\MasterBundle\Admin\User\RoleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "%sonata.user.admin.groupname%" ,label_catalogue: "SonataUserBundle", label: "Permisos/Roles" }
+        arguments:
+            - ~
+            - Pequiven\MasterBundle\Entity\RolUser
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setMasterSession, ['@session']]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]

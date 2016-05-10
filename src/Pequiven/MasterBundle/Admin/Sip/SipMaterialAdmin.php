@@ -6,13 +6,25 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de los Materiales para los centros por CUTL
  *
  */
-class SipMaterialAdmin extends Admin
+class SipMaterialAdmin extends Admin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show

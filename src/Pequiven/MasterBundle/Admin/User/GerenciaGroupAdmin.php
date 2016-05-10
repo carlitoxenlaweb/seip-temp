@@ -15,14 +15,26 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del grupo de gerencia
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class GerenciaGroupAdmin extends Admin
+class GerenciaGroupAdmin extends Admin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show
             ->add('id')

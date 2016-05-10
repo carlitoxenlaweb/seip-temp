@@ -15,14 +15,26 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del programa de gestion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ArrangementProgramAdmin extends Admin
+class ArrangementProgramAdmin extends Admin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show)
     {
         $show
@@ -49,9 +61,10 @@ class ArrangementProgramAdmin extends Admin
     {
         $object = $this->getSubject();
         $form
-            ->tab("General")
             ->add('ref')
-            ->add('period')
+            ->add('period', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('tacticalObjective','sonata_type_model_autocomplete',array(
                 'property' => array('ref','description')
             ))
@@ -72,11 +85,6 @@ class ArrangementProgramAdmin extends Admin
             ->add('showEvolutionView',null,array(
                 'required' => false,
             ))
-            ->add('managementSystems', 'sonata_type_model_autocomplete', array(
-                    'property' => array('description'),
-                    'multiple' => true,
-                    'required' => false,                    
-            ))            
             ;
         if ($this->isGranted('ROLE_SEIP_UPDATE_RESULT_OBJECTS')){
             $form->add('updateResultByAdmin', null, array(

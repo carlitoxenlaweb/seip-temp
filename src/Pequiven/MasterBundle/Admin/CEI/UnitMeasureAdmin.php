@@ -16,14 +16,26 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de unidad de medida
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class UnitMeasureAdmin extends BaseAdmin
+class UnitMeasureAdmin extends BaseAdmin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(ShowMapper $show) 
     {
         $show

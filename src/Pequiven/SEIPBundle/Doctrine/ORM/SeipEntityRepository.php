@@ -142,8 +142,8 @@ class SeipEntityRepository extends EntityRepository
             ->from($this->_entityName, $alias, $indexBy);
     }
 
-    public function __construct($em, ClassMetadata $class, $session = null) {
-        
+    public function __construct($em, ClassMetadata $class, $session = null)
+    {    
         parent::__construct($em, $class);
     }
 }

@@ -5,6 +5,7 @@ namespace Pequiven\SEIPBundle\Model\Admin;
 use PDOException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager as BaseManager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /**
  * Description of ModelManager
@@ -13,6 +14,54 @@ use Sonata\DoctrineORMAdminBundle\Model\ModelManager as BaseManager;
  */
 class ModelManager extends BaseManager
 {
+    /* @var $emName stores the preferred entity manager name */
+    protected $emName;
+    
+    /**
+     * set preferred entity manager name to be used in ModelManager
+     * @param string $name
+     */
+    public function setEntityManagerName($name){        
+        $this->emName = $name;
+    }
+    
+    /**
+     * get preferred entity manager name to be used in ModelManager
+     */
+    public function getEntityManagerName(){        
+        return $this->emName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */    
+    public function createQuery($class, $alias = 'o') {
+        //adding second parameter to getRepository method specifying entity manager name
+        $repository = $this->getEntityManager($class)
+                           ->getRepository($class, $this->emName);
+
+        return new ProxyQuery($repository->createQueryBuilder($alias));
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getEntityManager($class) {
+        if (is_object($class)) {
+            $class = get_class($class);
+        }                
+        if (isset($this->cache[$class]) === false) {
+            //return fixed value if preferred entity manager name specified
+            if (isset($this->emName) === true) {
+                $this->cache[$class] = $this->registry->getEntityManager($this->emName);
+            } else {
+                $this->cache[$class] = parent::getEntityManager($class);
+            }
+        }
+
+        return $this->cache[$class];
+    }
+    
     /**
      * {@inheritdoc}
      */

@@ -12,7 +12,7 @@ use Doctrine\DBAL\Connection;
 class SeipEntityManager extends EntityManager
 {
     public static function create($conn, Configuration $config, EventManager $eventManager = null)
-    {var_dump($conn);
+    {
         if (!$config->getMetadataDriverImpl()) {
             throw ORMException::missingMappingDriverImpl();
         }

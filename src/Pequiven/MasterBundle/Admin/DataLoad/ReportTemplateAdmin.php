@@ -16,14 +16,27 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Pequiven\SEIPBundle\Model\DataLoad\ReportTemplate;
+use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de plantillas de reportes
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ReportTemplateAdmin extends \Pequiven\MasterBundle\Admin\BaseAdmin
+class ReportTemplateAdmin extends BaseAdmin implements MasterAdminInterface
 {
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
+    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show
             ->add("description")

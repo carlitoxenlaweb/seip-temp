@@ -6,14 +6,27 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador del Rango de Gestión
  *
  */
-class ArrangementRangeAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class ArrangementRangeAdmin extends Admin implements ContainerAwareInterface, MasterAdminInterface
 {   
     private $container;
+    
+    protected $modelManager;
+
+    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
+        parent::setModelManager($modelManager);
+        $this->modelManager = $modelManager;
+    }
+
+    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
+        $this->modelManager->setEntityManagerName($connection->getManagerName());
+    }
     
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show
