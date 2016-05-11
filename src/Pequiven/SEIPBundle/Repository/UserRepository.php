@@ -28,7 +28,8 @@ class UserRepository extends EntityRepository {
         $categoryArrangementProgramId = $criteria['categoryArrangementProgramId'];
 
         $qb
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)
         ;
@@ -124,7 +125,8 @@ class UserRepository extends EntityRepository {
         $qb = $this->getQueryBuilder();
 
         $qb
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)
         ;
@@ -206,7 +208,8 @@ class UserRepository extends EntityRepository {
         $qb = $this->getQueryBuilder();
         $qb
                 ->addSelect('g')
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('u.enabled = :enabled')
                 ->andWhere('g.typeRol = :typeRol')
                 ->setParameter('enabled', true)
@@ -284,7 +287,8 @@ class UserRepository extends EntityRepository {
     function searchUserByCriteria(array $criteria = array()) {
         $qb = $this->getQueryBuilder();
         $qb
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->andWhere('u.enabled = :enabled')
                 ->andWhere('g.level <= :level')
@@ -390,7 +394,8 @@ class UserRepository extends EntityRepository {
     function searchUserByCriteriaUnder(array $criteria = array()) {
         $qb = $this->getQueryBuilder();
         $qb
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->andWhere('u.enabled = :enabled')
                 ->setParameter('enabled', true)
@@ -461,7 +466,8 @@ class UserRepository extends EntityRepository {
      */
     function createPaginatorUser(array $criteria = null, array $orderBy = null) {
         $queryBuilder = $this->getCollectionQueryBuilder();
-        $queryBuilder->leftJoin('u.groups', 'gr');
+        $queryBuilder->leftJoin('u.groups', 'grs');
+        $queryBuilder->leftJoin('grs.rol', 'gr');
         $queryBuilder->leftJoin('u.complejo', 'c');
         $queryBuilder->leftJoin('u.gerencia', 'g');
         $queryBuilder->leftJoin('u.gerenciaSecond', 'gs');
@@ -505,7 +511,8 @@ class UserRepository extends EntityRepository {
      */
     function createPaginatorUserAux(array $criteria = null, array $orderBy = null) {
         $queryBuilder = $this->getCollectionQueryBuilder();
-        $queryBuilder->leftJoin('u.groups', 'gr');
+        $queryBuilder->leftJoin('u.groups', 'grs');
+        $queryBuilder->leftJoin('grs.rol', 'gr');
         $queryBuilder->leftJoin('u.complejo', 'c');
         $queryBuilder->leftJoin('u.gerencia', 'g');
         $queryBuilder->leftJoin('u.gerenciaSecond', 'gs');
@@ -544,7 +551,8 @@ class UserRepository extends EntityRepository {
         $qb = $this->getQueryBuilder();
         $qb
                 ->andWhere('u.numPersonal = :numPersonal')
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)
                 ->setParameter('numPersonal', $numPersonal)
@@ -556,7 +564,8 @@ class UserRepository extends EntityRepository {
         $qb = $this->getQueryBuilder();
 
         $qb
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)
         ;
@@ -579,7 +588,8 @@ class UserRepository extends EntityRepository {
 
         $qb
                 ->innerJoin('u.goals', 'goal')
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->andWhere('goal.id = :goallist')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)
@@ -608,7 +618,8 @@ class UserRepository extends EntityRepository {
 
         $qb
                 ->innerJoin('u.arrangementPrograms', 'ap')
-                ->innerJoin('u.groups', 'g')
+                ->innerJoin('u.groups', 'gr')
+                ->innerJoin('gr.rol', 'g')
                 ->andWhere('g.typeRol = :typeRol')
                 ->andWhere('ap.id = :aplist')
                 ->setParameter('typeRol', \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_OWNER)

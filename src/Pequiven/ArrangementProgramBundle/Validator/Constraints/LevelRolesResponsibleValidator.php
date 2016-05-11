@@ -30,6 +30,7 @@ class LevelRolesResponsibleValidator extends ConstraintValidator implements Cont
             $userTopLevel = null;
             foreach ($responsibles as $r) {
                 foreach ($r->getGroups() as $group) {
+                    $group = $group->getRol();
                     if($group->getTypeRol() == \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_SPECIAL){//En caso de que sea algún rol especial no se toma en cuenta para la validación
                         continue;
                     }
@@ -50,12 +51,14 @@ class LevelRolesResponsibleValidator extends ConstraintValidator implements Cont
             $errors = array();
             if($responsible){
                 foreach ($responsible->getGroups() as $group) {
+                    $group = $group->getRol();
                     if($group->getTypeRol() == \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_SPECIAL){//En caso de que sea algún rol especial no se toma en cuenta para la validación
                         continue;
                     }
                     foreach ($goals as $goal) {
                         foreach ($goal->getResponsibles() as $goalResponsible) {
                             foreach ($goalResponsible->getGroups() as $groupResponsibleGoal) {
+                                $groupResponsibleGoal = $groupResponsibleGoal->getRol();
                                 if($groupResponsibleGoal->getLevel() == 7000 || $groupResponsibleGoal->getLevel() == 8000 || $groupResponsibleGoal->getTypeRol() == \Pequiven\MasterBundle\Entity\Rol::TYPE_ROL_SPECIAL){
                                     continue;
                                 }
