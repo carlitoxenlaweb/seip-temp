@@ -137,13 +137,14 @@ class SeipEntityRepository extends EntityRepository
      */
     public function createQueryBuilder($alias, $indexBy = null)
     {
+        $this->_em = $this->container->get('app.connection_service')->getManager();
         return $this->_em->createQueryBuilder()
             ->select($alias)
             ->from($this->_entityName, $alias, $indexBy);
     }
 
-    public function __construct($em, ClassMetadata $class, $session = null)
-    {    
+    public function __construct($em, ClassMetadata $class, \Pequiven\MasterBundle\Service\MasterConnection $conn = null)
+    {
         parent::__construct($em, $class);
     }
 }
