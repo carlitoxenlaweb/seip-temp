@@ -17,6 +17,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.formula.variable:
         class: Pequiven\MasterBundle\Admin\Formula\VariableAdmin
@@ -29,6 +31,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.formula.formula_detail:
         class: Pequiven\MasterBundle\Admin\Formula\FormulaDetailAdmin
@@ -41,6 +45,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
     
     sonata.admin.indicator.value_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\ValueIndicatorAdmin
@@ -52,6 +58,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.tag_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\TagIndicatorAdmin
@@ -64,6 +72,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.indicator_chart_details:
         class: Pequiven\MasterBundle\Admin\Indicator\IndicatorChartDetailsAdmin
@@ -76,6 +86,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.type_feature_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\TypeFeatureIndicatorAdmin
@@ -87,6 +99,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.type_indicator_file:
         class: Pequiven\MasterBundle\Admin\Indicator\IndicatorFileAdmin
@@ -98,6 +112,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
     
     sonata.admin.objetive:
         class: Pequiven\MasterBundle\Admin\Objetive\ObjetiveAdmin
@@ -109,6 +125,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     sonata.admin.result:
         class: Pequiven\MasterBundle\Admin\Result\ResultAdmin
         tags:
@@ -120,6 +139,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.frequency_notification:
         class: Pequiven\MasterBundle\Admin\Indicator\FrequencyNotificationIndicatorAdmin
@@ -132,6 +153,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.indicatorgroup:
         class: Pequiven\MasterBundle\Admin\IndicatorGroupAdmin
@@ -144,6 +167,8 @@ services:
         calls:
             - [ setTranslationDomain, [PequivenIndicatorBundle]]            
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.indicator:
         class: Pequiven\MasterBundle\Admin\IndicatorAdmin
@@ -155,8 +180,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [PequivenIndicatorBundle]]
-            - [ setModelManager, [@seip.model.manager]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.indicator_details_admin:
         class: Pequiven\MasterBundle\Admin\Indicator\IndicatorDetailsAdmin
@@ -169,6 +195,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.report_template:
         class: Pequiven\MasterBundle\Admin\DataLoad\ReportTemplateAdmin
@@ -180,6 +208,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.core.period:
         class: Pequiven\MasterBundle\Admin\PeriodAdmin
@@ -192,6 +222,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setPeriodService, ['@pequiven_seip.service.period']]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.arrangement_program.arrangement_program:
         class: Pequiven\MasterBundle\Admin\ArrangementProgram\ArrangementProgramAdmin
@@ -203,6 +235,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.arrangement_program.goal:
         class: Pequiven\MasterBundle\Admin\ArrangementProgram\GoalAdmin
@@ -214,6 +248,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.arrangement_program.goal_details:
         class: Pequiven\MasterBundle\Admin\ArrangementProgram\GoalDetailsAdmin
@@ -225,6 +261,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.arrangement_program.timeline:
         class: Pequiven\MasterBundle\Admin\ArrangementProgram\TimelineAdmin
@@ -236,6 +274,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.arrangement_range.arrangement_range:
         class: Pequiven\MasterBundle\Admin\ArrangementRangeAdmin
@@ -249,6 +289,7 @@ services:
             - [ setTranslationDomain, [PequivenMasterBundle]]
             - [ setModelManager, [@seip.arrangementRange.manager]]
             - [ setContainer, [@service_container]]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.line_strategic.line_strategic:
         class: Pequiven\MasterBundle\Admin\LineStrategic\LineStrategicAdmin
@@ -261,6 +302,8 @@ services:
         calls:
             - [ setTranslationDomain, [PequivenMasterBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
     
     sonata.admin.chart:
         class: Pequiven\MasterBundle\Admin\ChartAdmin
@@ -273,6 +316,8 @@ services:
         calls:
             - [ setTranslationDomain, [PequivenSEIPBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.user.complejo:
         class: Pequiven\MasterBundle\Admin\User\ComplejoAdmin
@@ -284,6 +329,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.user.gerencia:
         class: Pequiven\MasterBundle\Admin\User\GerenciaAdmin
@@ -295,6 +342,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.user.gerencia_second:
         class: Pequiven\MasterBundle\Admin\User\GerenciaSecondAdmin
@@ -306,6 +355,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.user.gerencia_group:
         class: Pequiven\MasterBundle\Admin\User\GerenciaGroupAdmin
@@ -317,6 +368,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
 
     sonata.admin.user.coordinacion:
         class: Pequiven\MasterBundle\Admin\User\CoordinacionAdmin
@@ -328,6 +381,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.value_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\ValueIndicatorAdmin
@@ -339,6 +394,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.tag_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\TagIndicatorAdmin
@@ -351,6 +408,8 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.indicator.type_feature_indicator:
         class: Pequiven\MasterBundle\Admin\Indicator\TypeFeatureIndicatorAdmin
@@ -362,6 +421,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
          
     sonata.admin.cei.cause_stop:
         class: Pequiven\MasterBundle\Admin\CEI\CauseStopAdmin
@@ -373,6 +434,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.company:
         class: Pequiven\MasterBundle\Admin\CEI\CompanyAdmin
@@ -384,6 +447,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.location:
         class: Pequiven\MasterBundle\Admin\CEI\LocationAdmin
@@ -395,6 +460,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.entity:
         class: Pequiven\MasterBundle\Admin\CEI\EntityAdmin
@@ -406,6 +473,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.plant:
         class: Pequiven\MasterBundle\Admin\CEI\PlantAdmin
@@ -417,8 +486,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setModelManager, [@seip.model.manager]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.product:
         class: Pequiven\MasterBundle\Admin\CEI\ProductAdmin
@@ -430,8 +500,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-    
-    
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
   
     sonata.admin.cei.factor_conversion:
         class: Pequiven\MasterBundle\Admin\CEI\FactorConversionAdmin
@@ -443,6 +513,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [FactorConversion]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.factor_conversion_value:
         class: Pequiven\MasterBundle\Admin\CEI\FactorConversionValueAdmin
@@ -454,6 +526,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [FactorConversion]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     
     sonata.admin.cei.service:
@@ -466,6 +540,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
     
     sonata.admin.cei.country:
         class: Pequiven\MasterBundle\Admin\CEI\CountryAdmin
@@ -477,6 +553,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.currency:
         class: Pequiven\MasterBundle\Admin\CEI\CurrencyAdmin
@@ -488,6 +566,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.production_line:
         class: Pequiven\MasterBundle\Admin\CEI\ProductionLineAdmin
@@ -499,6 +579,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.record_type:
         class: Pequiven\MasterBundle\Admin\CEI\RecordTypeAdmin
@@ -510,6 +592,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.sector:
         class: Pequiven\MasterBundle\Admin\CEI\SectorAdmin
@@ -521,6 +605,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.sub_sector:
         class: Pequiven\MasterBundle\Admin\CEI\SubSectorAdmin
@@ -532,6 +618,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.type_incidence:
         class: Pequiven\MasterBundle\Admin\CEI\TypeIncidenceAdmin
@@ -543,6 +631,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.type_location:
         class: Pequiven\MasterBundle\Admin\CEI\TypeLocationAdmin
@@ -554,6 +644,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.fail:
         class: Pequiven\MasterBundle\Admin\CEI\FailAdmin
@@ -565,6 +657,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.unit_measure:
         class: Pequiven\MasterBundle\Admin\CEI\UnitMeasureAdmin
@@ -576,6 +670,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.region:
         class: Pequiven\MasterBundle\Admin\CEI\RegionAdmin
@@ -587,6 +683,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.stop_time:
         class: Pequiven\MasterBundle\Admin\CEI\StopTimeAdmin
@@ -598,6 +696,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.supply_center:
         class: Pequiven\MasterBundle\Admin\CEI\SupplyCenterAdmin
@@ -609,7 +709,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]            
             
     sonata.admin.cei.Warehouse:
         class: Pequiven\MasterBundle\Admin\CEI\WarehouseAdmin
@@ -621,6 +722,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.cei.delivery_point:
         class: Pequiven\MasterBundle\Admin\CEI\DeliveryPointAdmin
@@ -632,6 +735,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.configuration:
         class: Tecnocreaciones\Bundle\ToolsBundle\Admin\Configuration\ConfigurationAdmin
@@ -644,6 +749,9 @@ services:
         calls:
             - [ setTranslationDomain, [admin]]
             - [ setContainer, [@service_container]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     sonata.admin.configuration_group:
         class: Tecnocreaciones\Bundle\ToolsBundle\Admin\Configuration\GroupAdmin
         tags:
@@ -654,6 +762,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [admin]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
     
     # Sistemas de Gestión
     sonata.admin.sig_management_system:
@@ -666,6 +776,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     # Políticas de Sistemas de Gestión
     sonata.admin.sig_politic_management_system:
@@ -678,6 +790,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     # Procesos de los Sistemas de Getión
     sonata.admin.sig_process_management_system:
         class: Pequiven\MasterBundle\Admin\SIG\ProcessManagementSystemAdmin
@@ -689,6 +804,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     # Tipos de plan de acción del informe de evolución
     sonata.admin.sig_typeaction_management_system:
         class: Pequiven\MasterBundle\Admin\SIG\TypeActionManagementSystemAdmin
@@ -700,6 +818,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     # Tipos de Verificación para el plan de acción y seguimiento
     sonata.admin.sig_typeverification_management_system:
         class: Pequiven\MasterBundle\Admin\SIG\TypeVerificationManagementSystemAdmin
@@ -711,6 +832,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
             
     sonata.admin.workstudycircle.categoryfile:
         class: Pequiven\MasterBundle\Admin\Politic\CategoryFileAdmin
@@ -722,6 +845,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
+
     sonata.admin.sip.material:
         class: Pequiven\MasterBundle\Admin\Sip\SipMaterialAdmin
         tags:
@@ -732,6 +858,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
                         
     sonata.admin.user.feestructure:
         class: Pequiven\MasterBundle\Admin\User\FeeStructureAdmin
@@ -743,6 +871,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setModelManager, ['@seip.model.manager']]
+            - [ setCustomEntityManager, ['@app.connection_service']]
 
     sonata.admin.connections:
         class: Pequiven\MasterBundle\Admin\ConnectionAdmin
@@ -767,6 +897,5 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setMasterSession, ['@session']]
             - [ setModelManager, ['@seip.model.manager']]
             - [ setCustomEntityManager, ['@app.connection_service']]

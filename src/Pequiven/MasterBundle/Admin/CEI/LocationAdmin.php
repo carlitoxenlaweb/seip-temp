@@ -15,26 +15,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de sede
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class LocationAdmin extends BaseAdmin implements MasterAdminInterface
+class LocationAdmin extends BaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show
@@ -51,14 +39,10 @@ class LocationAdmin extends BaseAdmin implements MasterAdminInterface
     protected function configureFormFields(FormMapper $form) 
     {
         $form
-            ->add('company', null, array(
-                'em' => $this->modelManager->getEntityManagerName()
-            ))
+            ->add('company')
             ->add('name')
             ->add('alias')
-            ->add('typeLocation', null, array(
-                'em' => $this->modelManager->getEntityManagerName()
-            ))
+            ->add('typeLocation')
             ->add('region')
             ->add('state')
             ;

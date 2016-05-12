@@ -1,8 +1,8 @@
 <?php
 
-namespace Pequiven\MasterBundle\Model;
+namespace Pequiven\MasterBundle\Model\Admin;
 
-interface MasterAdminInterface 
+interface MasterInterface 
 {
     public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager);
     public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection);

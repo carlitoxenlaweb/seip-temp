@@ -81,12 +81,12 @@ class DefaultController extends Controller {
         $MasterConn = $this->getDoctrine()
                            ->getRepository('PequivenMasterBundle:MasterConnection')
                            ->findOneByName($connection);
-        $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
-        $this->get('session')->set('connectionParameter', $connection);        
-        //return self::indexAction();
-        var_dump($this->get('session')->get('connectionParameter'));
-        die();
-        return $this->redirectToRoute('pequiven_seip_menu_home');
+        if($MasterConn) {
+            $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
+            $this->get('session')->set('connectionParameter', $connection);
+        } else {
+            throw new \Exception('Empresa no encontrada');
+        } return $this->redirectToRoute('pequiven_seip_menu_home');
     }
 
     // /**

@@ -16,26 +16,14 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de servicio
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ServiceAdmin extends BaseAdmin implements MasterAdminInterface
+class ServiceAdmin extends BaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(ShowMapper $show) 
     {
         $show
@@ -50,9 +38,7 @@ class ServiceAdmin extends BaseAdmin implements MasterAdminInterface
     {
         $form
             ->add('name')
-            ->add('serviceUnit', null, array(
-                'em' => $this->modelManager->getEntityManagerName()
-            ))
+            ->add('serviceUnit')
             ;
         parent::configureFormFields($form);
     }

@@ -2,29 +2,17 @@
 
 namespace Pequiven\MasterBundle\Admin\SIG;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador los tipos de verificación para el plan de acción
  *
  */
-class TypeVerificationManagementSystemAdmin extends Admin implements MasterAdminInterface
+class TypeVerificationManagementSystemAdmin extends SonataBaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show

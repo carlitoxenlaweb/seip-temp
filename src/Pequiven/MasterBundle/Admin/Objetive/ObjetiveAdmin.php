@@ -2,30 +2,18 @@
 
 namespace Pequiven\MasterBundle\Admin\Objetive;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del objetivo
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ObjetiveAdmin extends Admin implements MasterAdminInterface
+class ObjetiveAdmin extends SonataBaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show)
     {
          $show
@@ -69,12 +57,8 @@ class ObjetiveAdmin extends Admin implements MasterAdminInterface
                     ->add('ref')
                     ->add('weight')
                     ->add('goal')
-                    ->add('complejo', null, array(
-                        'em' => $this->modelManager->getEntityManagerName()
-                    ))
-                    ->add('gerencia', null, array(
-                        'em' => $this->modelManager->getEntityManagerName()
-                    ))
+                    ->add('complejo')
+                    ->add('gerencia')
                     ->add('gerenciaSecond','sonata_type_model_autocomplete',array(
                         'property' => array('description'),
                         'required' => false,
@@ -89,30 +73,16 @@ class ObjetiveAdmin extends Admin implements MasterAdminInterface
                         'multiple' => true,
                         'required' => false,
                     ))
-                    ->add('objetiveLevel', null, array(
-                        'em' => $this->modelManager->getEntityManagerName()
-                    ))
-                    ->add('period', null, array(
-                        'em' => $this->modelManager->getEntityManagerName()
-                    ))
+                    ->add('objetiveLevel')
+                    ->add('period')
                 ->end()
             ->end()
             ->tab('Details')
-                    ->add('managementSystems','sonata_type_model_autocomplete',array(
-                        'property' => array('description'),
-                        'multiple' => true,
-                        'required' => false,
-                    ))
-                    ->add('processManagementSystem','sonata_type_model_autocomplete',array(
-                        'property' => array('description'),
-                        'multiple' => true,
-                        'required' => false,
-                    ))
                     ->add('evalObjetive',null,array(
                         'required' => false,
                     ))
                     ->add('evalIndicator',null,array(
-                        'required' => false
+                        'required' => false,
                     ))
                     ->add('evalArrangementProgram',null,array(
                         'required' => false,
@@ -134,14 +104,29 @@ class ObjetiveAdmin extends Admin implements MasterAdminInterface
                         'translation_domain' => 'PequivenObjetiveBundle'
                     ))
                 ->end()
+                    ->with('SIG')
+                    ->add('managementSystems','sonata_type_model_autocomplete',array(
+                        'property' => array('description'),
+                        'multiple' => true,
+                        'required' => false,
+                    ))
+                    ->add('processManagementSystem','sonata_type_model_autocomplete',array(
+                        'property' => array('description'),
+                        'multiple' => true,
+                        'required' => false,
+                    ))
+                    ->add('showEvolutionView',null,array(                        
+                        'required' => false,
+                    ))
+                    ->end()
             ->end()
         ;
         if ($this->isGranted('ROLE_SEIP_UPDATE_RESULT_OBJECTS')){
             $form
                 ->tab('Details')
                     ->add('updateResultByAdmin', null, array(
-                        'required' => false,
-                    ))
+                'required' => false,
+            ))
                     ->end()
                 ->end()
             ;

@@ -11,29 +11,19 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
+
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
- * Base para administradores
+ * Administrador del programa de gestion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
+ * @author Carlos Martínez <carloscemg@gmail.com>
  */
-abstract class BaseAdmin extends Admin implements MasterAdminInterface
-{
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
+abstract class BaseAdmin extends SonataBaseAdmin {
 
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

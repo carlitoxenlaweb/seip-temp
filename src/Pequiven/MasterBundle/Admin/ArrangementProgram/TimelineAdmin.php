@@ -11,30 +11,18 @@
 
 namespace Pequiven\MasterBundle\Admin\ArrangementProgram;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
- * Administracion de la linea de tiempo
+ * Administrador del programa de gestion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class TimelineAdmin extends Admin implements MasterAdminInterface
+class TimelineAdmin extends SonataBaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show

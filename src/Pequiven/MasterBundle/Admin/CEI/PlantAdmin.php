@@ -15,28 +15,16 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de planta
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PlantAdmin extends BaseAdmin implements MasterAdminInterface
-{
+class PlantAdmin extends BaseAdmin {
+
     private $container;
 
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show
                 ->add('id')
@@ -65,12 +53,9 @@ class PlantAdmin extends BaseAdmin implements MasterAdminInterface
                 ->add('name')
                 ->add('alias')
                 ->add('designCapacity')
-                ->add('unitMeasure', null, array(
-                    'em' => $this->modelManager->getEntityManagerName()
-                ))
+                ->add('unitMeasure')
                 ->add('entity', null, array(
                     "query_builder" => $queryAllEnable,
-                    'em' => $this->modelManager->getEntityManagerName()
                 ))
                 ->add('products', "sonata_type_model_autocomplete", array(
                     'property' => 'name',
@@ -101,6 +86,9 @@ class PlantAdmin extends BaseAdmin implements MasterAdminInterface
                         ->setParameter('enabled', true)
                         ;
                     }
+                ))
+                ->add('permitGroupProduct',null, array(
+                    'required' => false,
                 ))
         ;
         parent::configureFormFields($form);

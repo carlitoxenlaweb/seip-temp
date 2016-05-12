@@ -36,7 +36,7 @@ class MasterConnection
 
     public function createQuery($query)
     {
-    	return $this->entityManager->createQuery($query);
+        return $this->entityManager->createQuery($query, $this->connectionParam);
     }
 
     public function getManager()

@@ -12,26 +12,14 @@
 namespace Pequiven\MasterBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\UserBundle\Admin\Entity\GroupAdmin as BaseGroupAdmin;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataGroupAdmin;
 
 /**
  * Description of GroupAdmin
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class GroupAdmin extends BaseGroupAdmin implements MasterAdminInterface
-{
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
+class GroupAdmin extends SonataGroupAdmin {
 
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

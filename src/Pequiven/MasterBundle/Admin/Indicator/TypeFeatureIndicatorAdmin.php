@@ -11,32 +11,18 @@
 
 namespace Pequiven\MasterBundle\Admin\Indicator;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Pequiven\MasterBundle\Admin\BaseAdmin;
-use Pequiven\MasterBundle\Model\MasterAdminInterface;
 
 /**
  * Administrador de tipos de puntos de atencion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class TypeFeatureIndicatorAdmin extends BaseAdmin implements MasterAdminInterface
+class TypeFeatureIndicatorAdmin extends BaseAdmin
 {
-    protected $modelManager;
-
-    public function setModelManager(\Sonata\AdminBundle\Model\ModelManagerInterface $modelManager) {
-        parent::setModelManager($modelManager);
-        $this->modelManager = $modelManager;
-    }
-
-    public function setCustomEntityManager(\Pequiven\MasterBundle\Service\MasterConnection $connection) {
-        $this->modelManager->setEntityManagerName($connection->getManagerName());
-    }
-    
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
         $show

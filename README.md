@@ -207,6 +207,7 @@ public function testMultiEmpresaAction($param){
     var_dump($data);
 }
 ```
+| Existe un alias que apunta a todas las entidades modificadas dentro de los métodos de doctrine, por ejemplo, llamar a *$this->getDoctrine()->getManager()* es un alias a *$this->get('app.connection_service')->getManager()*
 
 Implementada interfaz en las clases de SONATA para múltiples EMs (Multi-Empresa)
 

@@ -27,7 +27,7 @@
         "tecnocreaciones/vzla-government-bundle": "dev-master",
         "tecnocreaciones/ajax-fos-user-bundle": "1.*@dev",
         "tecnocreaciones/install-bundle": "dev-master",
-        "tecnocreaciones/tools-bundle": "v0.1",
+        "tecnocreaciones/tools-bundle": "dev-master",
         "tecnocreaciones/vzla-entity-bundle": "dev-master",
         "tecnocreaciones/vzla-fixtures-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "~1.7.3",
@@ -75,6 +75,10 @@
         {
             "type": "vcs",
             "url":  "git@172.20.124.26:sonata-project/cache-bundle.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@172.20.124.26:tecnocreaciones/tools-bundle.git"
         }
     ],  
     "scripts": {
