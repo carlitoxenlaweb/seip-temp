@@ -62,23 +62,23 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@172.20.124.26:sonata-project/admin-bundle.git"
+            "url":  "git@github.com:carlitoxenlaweb/admin-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@172.20.124.26:sonata-project/doctrine-orm-admin-bundle.git"
+            "url":  "git@github.com:carlitoxenlaweb/doctrine-orm-admin-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@172.20.124.26:sonata-project/block-bundle.git"
+            "url":  "git@github.com:carlitoxenlaweb/block-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@172.20.124.26:sonata-project/cache-bundle.git"
+            "url":  "git@github.com:carlitoxenlaweb/cache-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@172.20.124.26:tecnocreaciones/tools-bundle.git"
+            "url":  "git@github.com:carlitoxenlaweb/tools-bundle.git"
         }
     ],  
     "scripts": {
