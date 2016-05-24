@@ -35,7 +35,7 @@
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "friendsofsymfony/oauth-server-bundle": "1.4.2",
         "jms/translation-bundle": "~1.2.1",
-        "jms/serializer-bundle": "~1.1.2",
+        "jms/serializer-bundle": "0.12.*",
         "knplabs/knp-menu": "2.1.1",
         "knplabs/knp-menu-bundle": "2.1.1",
         "white-october/pagerfanta-bundle": "1.0.*",
@@ -57,7 +57,7 @@
         "phpunit/phpunit": "4.8.*@dev",
         "tecnocreaciones/console-bundle": "dev-master",
         "symfony/doctrine-bridge": "~2.2",
-        "gos/doctrine-query-builder": "~1.0"
+        "gos/doctrine-query-builder": "dev-master"
     },
     "repositories": [
         {

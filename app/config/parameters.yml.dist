@@ -45,3 +45,4 @@ parameters:
     bin_ugly_css: /usr/local/bin/uglifycss
 
     doctrine.class: Pequiven\SEIPBundle\Doctrine\SeipManagerRegistry
+    doctrine.orm.entity_manager.class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityManager
