@@ -71,7 +71,9 @@ class ModelManager extends BaseManager
             $entityManager = $this->getEntityManager($object);
             $entityManager->persist($object);
             $entityManager->flush();
-            $this->persistAssociations($object);
+            if( get_class($object) == 'Pequiven\IndicatorBundle\Entity\Indicator' ||
+                get_class($object) == 'Pequiven\SEIPBundle\Entity\CEI\Plant')
+                    $this->persistAssociations($object);
         } catch (PDOException $e) {
             throw new ModelManagerException('', 0, $e);
         }
@@ -81,33 +83,50 @@ class ModelManager extends BaseManager
      * {@inheritdoc}
      */
     public function update($object)
-    {       
-        try {
-            $entityManager = $this->getEntityManager($object);
-            $originaObjects = $entityManager->getRepository(get_class($object))->findBy(array(
-                'parent' => $object,
-            ));
-            
-            $childrensObject = $object->getChildrens();
-            foreach ($originaObjects as $indicatorChild) {
-                $find = false;
-                foreach ($childrensObject as $child) {
-                    if($child === $indicatorChild){
-                        $find = true;
-                        break;
+    {
+        switch(get_class($object)) {
+            case 'Pequiven\IndicatorBundle\Entity\Indicator':
+            case 'Pequiven\SEIPBundle\Entity\CEI\Plant':
+                try {
+                    $entityManager = $this->getEntityManager($object);
+                    $originaObjects = $entityManager->getRepository(get_class($object))->findBy(array(
+                        'parent' => $object,
+                    ));
+                    
+                    $childrensObject = $object->getChildrens();
+                    foreach ($originaObjects as $indicatorChild) {
+                        $find = false;
+                        foreach ($childrensObject as $child) {
+                            if($child === $indicatorChild){
+                                $find = true;
+                                break;
+                            }
+                        }
+                        if($find === false){
+                            $indicatorChild->setParent(null);
+                            $entityManager->persist($indicatorChild);
+                        }
                     }
+                    
+                    $entityManager->persist($object);
+                    $entityManager->flush();
+                    $this->persistAssociations($object);
+                } catch (PDOException $e) {
+                    throw new ModelManagerException('', 0, $e);
                 }
-                if($find === false){
-                    $indicatorChild->setParent(null);
-                    $entityManager->persist($indicatorChild);
+                break;
+
+            default:
+                try {
+                    $entityManager = $this->getEntityManager($object);
+                    $entityManager->persist($object);
+                    $entityManager->flush();
+                } catch (\PDOException $e) {
+                    throw new ModelManagerException(sprintf('Failed to update object: %s', ClassUtils::getClass($object)), $e->getCode(), $e);
+                } catch (DBALException $e) {
+                    throw new ModelManagerException(sprintf('Failed to update object: %s', ClassUtils::getClass($object)), $e->getCode(), $e);
                 }
-            }
-            
-            $entityManager->persist($object);
-            $entityManager->flush();
-            $this->persistAssociations($object);
-        } catch (PDOException $e) {
-            throw new ModelManagerException('', 0, $e);
+                break;
         }
     }
 
