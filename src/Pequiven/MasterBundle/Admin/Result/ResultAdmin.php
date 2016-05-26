@@ -44,9 +44,10 @@ class ResultAdmin extends SonataBaseAdmin implements ContainerAwareInterface
                 'choices' => \Pequiven\SEIPBundle\Model\Result\Result::getTypeCalculations(),
                 'translation_domain' => 'PequivenSEIPBundle'
             ))
-            ->add('objetive','sonata_type_model_autocomplete',array(
+            ->add('objetive', null, array( //'sonata_type_model_autocomplete'
                 'property' => array('ref','description'),
                 'required' => false,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add('parent','entity',array(
                 'class' => 'Pequiven\SEIPBundle\Entity\Result\Result',
@@ -55,6 +56,7 @@ class ResultAdmin extends SonataBaseAdmin implements ContainerAwareInterface
                 },
                 'property' => 'descriptionText',
                 'required' => false,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ;
     }

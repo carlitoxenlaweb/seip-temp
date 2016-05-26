@@ -22,7 +22,7 @@ use Pequiven\MasterBundle\Model\Admin\MasterUserAdmin;
  */
 class UserAdmin extends MasterUserAdmin
 {    
-    protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper) {
+    protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper){
         $formMapper
             ->tab('General')
                 ->with('Datos Básicos')

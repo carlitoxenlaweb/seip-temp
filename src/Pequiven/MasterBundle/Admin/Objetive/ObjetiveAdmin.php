@@ -21,13 +21,21 @@ class ObjetiveAdmin extends SonataBaseAdmin
             ->add('ref')
             ->add('weight')
             ->add('goal')
-            ->add('complejo')
-            ->add('gerencia')
+            ->add('complejo', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('gerencia', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('gerenciaSecond')
             ->add('parents')
             ->add('indicators')
-            ->add('objetiveLevel')
-            ->add('period')
+            ->add('objetiveLevel', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('period', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('evalObjetive')
             ->add('evalIndicator')
             ->add('evalArrangementProgram')

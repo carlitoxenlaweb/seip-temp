@@ -53,9 +53,12 @@ class PlantAdmin extends BaseAdmin {
                 ->add('name')
                 ->add('alias')
                 ->add('designCapacity')
-                ->add('unitMeasure')
+                ->add('unitMeasure', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('entity', null, array(
                     "query_builder" => $queryAllEnable,
+                    'em' => $this->modelManager->getEntityManagerName()
                 ))
                 ->add('products', "sonata_type_model_autocomplete", array(
                     'property' => 'name',

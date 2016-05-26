@@ -131,9 +131,15 @@ class IndicatorAdmin extends SonataBaseAdmin implements ContainerAwareInterface 
                 ->add('weight')
                 ->add('indicatorWeight')
                 ->add('goal')
-                ->add('formula')
-                ->add('tendency')
-                ->add('frequencyNotificationIndicator')
+                ->add('formula', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
+                ->add('tendency', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
+                ->add('frequencyNotificationIndicator', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('valueFinal')
                 ->add('charts', 'sonata_type_model_autocomplete', array(
                     'property' => array('alias', 'description'),
@@ -220,13 +226,17 @@ class IndicatorAdmin extends SonataBaseAdmin implements ContainerAwareInterface 
             if ($object->getIndicatorLevel()->getLevel() == IndicatorLevel::LEVEL_ESTRATEGICO) {
                 $form
                         ->with('Estratégico')
-                        ->add('lineStrategics')
+                        ->add('lineStrategics', null, array(
+                            'em' => $this->modelManager->getEntityManagerName()
+                        ))
                         ->end();
             }
         }
         $form
                 ->with('Gráficos Personalizados')
-                ->add('lineStrategics')
+                ->add('lineStrategics', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('complejoDashboardSpecific', 'sonata_type_model_autocomplete', array(
                     'property' => array('description'),
                     'required' => false,

@@ -28,7 +28,7 @@ class ModelManager extends BaseManager
     /**
      * get preferred entity manager name to be used in ModelManager
      */
-    public function getEntityManagerName(){        
+    public function getEntityManagerName(){
         return $this->emName;
     }
 

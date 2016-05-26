@@ -12,6 +12,7 @@ class RoleAdmin extends MasterBaseAdmin
 {
     protected function configureFormFields(FormMapper $form)
     {
+        var_dump("A");
         $form
             ->add('user', 'sonata_type_model_list', array(
                 'label'        => 'pequiven_seip.user_label',

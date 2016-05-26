@@ -45,7 +45,9 @@ class CompanyAdmin extends BaseAdmin
     {
         $object = $this->getSubject();
         
-        $parameters = array();
+        $parameters = array(
+            'em' => $this->modelManager->getEntityManagerName()
+        );
         
         if($object !== null && $object->getId() > 0){
             $parameters['query_builder'] = function(\Doctrine\ORM\EntityRepository $repository) use ($object){

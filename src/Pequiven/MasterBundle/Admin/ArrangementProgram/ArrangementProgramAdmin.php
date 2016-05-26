@@ -51,7 +51,9 @@ class ArrangementProgramAdmin extends SonataBaseAdmin
         $form
             ->tab("General")
             ->add('ref')
-            ->add('period')
+            ->add('period', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('tacticalObjective','sonata_type_model_autocomplete',array(
                 'property' => array('ref','description')
             ))
