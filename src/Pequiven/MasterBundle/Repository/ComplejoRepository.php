@@ -2,8 +2,7 @@
 
 namespace Pequiven\MasterBundle\Repository;
 
-//use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
+use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * ComplejoRepository

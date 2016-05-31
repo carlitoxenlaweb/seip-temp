@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Description of UnitMeasureRepository
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class UnitMeasureRepository extends SeipEntityRepository
+class UnitMeasureRepository extends EntityRepository
 {
     
 }

@@ -2,14 +2,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\Politic;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de meetingFile
  *
  * @author Victor Tortolero vart10.30@gmail.com
  */
-class MeetingFileRepository extends SeipEntityRepository {
+class MeetingFileRepository extends EntityRepository {
 
     function createPaginatorMeetingFile(array $criteria = null, array $orderBy = null) {
         return $this->createPaginator($criteria, $orderBy);

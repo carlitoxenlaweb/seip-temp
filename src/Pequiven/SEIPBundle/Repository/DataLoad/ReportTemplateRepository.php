@@ -15,14 +15,14 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de Reporte plantilla
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ReportTemplateRepository extends SeipEntityRepository 
+class ReportTemplateRepository extends EntityRepository 
 {
     /**
      * Busca un reporte con todos los datos pre establecidos

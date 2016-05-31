@@ -2,12 +2,12 @@
 
 namespace Pequiven\IndicatorBundle\Repository\Indicator\EvolutionIndicator;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de las acciones
  */
-class EvolutionActionRepository extends SeipEntityRepository {
+class EvolutionActionRepository extends EntityRepository {
 	
 	function getQueryActionPlan($id, $typeObject) {
         

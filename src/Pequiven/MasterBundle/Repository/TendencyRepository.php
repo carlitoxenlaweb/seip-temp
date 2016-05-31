@@ -9,6 +9,7 @@
 namespace Pequiven\MasterBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+
 /**
  * Description of TendencyRepository
  *

@@ -80,7 +80,7 @@
             "type": "vcs",
             "url":  "git@github.com:carlitoxenlaweb/tools-bundle.git"
         }
-    ],  
+    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandledr\\ScriptHandler::buildParameters",

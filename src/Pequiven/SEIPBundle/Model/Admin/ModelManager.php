@@ -67,15 +67,18 @@ class ModelManager extends BaseManager
      */
     public function create($object)
     {
-        try {
-            $entityManager = $this->getEntityManager($object);
-            $entityManager->persist($object);
-            $entityManager->flush();
-            if( get_class($object) == 'Pequiven\IndicatorBundle\Entity\Indicator' ||
-                get_class($object) == 'Pequiven\SEIPBundle\Entity\CEI\Plant')
-                    $this->persistAssociations($object);
-        } catch (PDOException $e) {
-            throw new ModelManagerException('', 0, $e);
+        $class = get_class($object);
+        if($class !== 'Pequiven\MasterBundle\Entity\RolUser'){
+            try {
+                $entityManager = $this->getEntityManager($object);
+                $entityManager->persist($object);
+                $entityManager->flush();
+                if( $class == 'Pequiven\IndicatorBundle\Entity\Indicator' ||
+                    $class == 'Pequiven\SEIPBundle\Entity\CEI\Plant')
+                        $this->persistAssociations($object);
+            } catch (PDOException $e) {
+                throw new ModelManagerException('', 0, $e);
+            }
         }
     }
     

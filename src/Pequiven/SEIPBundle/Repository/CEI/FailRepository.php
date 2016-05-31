@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de falla
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class FailRepository extends SeipEntityRepository
+class FailRepository extends EntityRepository
 {
     
     public function findQueryByTypeResult($typeFail){

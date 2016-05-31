@@ -292,7 +292,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
      * @ORM\ManyToOne(targetEntity="\Pequiven\MasterBundle\Entity\MasterConnection")
      * @ORM\JoinColumn(name="default_conn", referencedColumnName="id")
      */
-    protected $defaultConnection = 1;
+    protected $defaultConnection;
 
     /**
      * User Company

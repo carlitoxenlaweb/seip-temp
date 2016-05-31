@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\DataLoad;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de reporte de planta
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PlantReportRepository extends SeipEntityRepository 
+class PlantReportRepository extends EntityRepository 
 {   
     public function findByPlantReport() 
     {

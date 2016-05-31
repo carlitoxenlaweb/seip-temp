@@ -11,7 +11,7 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 use Pequiven\SEIPBundle\Entity\CEI\Company;
 
 /**
@@ -19,7 +19,7 @@ use Pequiven\SEIPBundle\Entity\CEI\Company;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class CompanyRepository extends SeipEntityRepository
+class CompanyRepository extends EntityRepository
 {
     public function getQueryNotMe(Company $company)
     {

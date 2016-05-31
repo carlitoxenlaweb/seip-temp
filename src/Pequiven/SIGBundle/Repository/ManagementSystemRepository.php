@@ -3,13 +3,13 @@
 namespace Pequiven\SIGBundle\Repository;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de sistema de gestión (pequiven.repository.sig_management_system)
  *
  */
-class ManagementSystemRepository extends SeipEntityRepository
+class ManagementSystemRepository extends EntityRepository
 {   
     /**
      * Retorna solo los sistemas de la calidad activos

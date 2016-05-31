@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de planta
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PlantRepository extends SeipEntityRepository
+class PlantRepository extends EntityRepository
 {
     public function findByEntity($location) 
     {

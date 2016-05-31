@@ -2,13 +2,13 @@
 
 namespace Pequiven\SEIPBundle\Repository\Politic;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de categorias de archivos
  * @author Victor Tortolero vart10.30@gmail.com
  */
-class CategoryFileRepository extends SeipEntityRepository {
+class CategoryFileRepository extends EntityRepository {
 
     function findCategoryFile() {
         $qb = $this->getQueryBuilder();
