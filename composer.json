@@ -62,23 +62,23 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@github.com:carlitoxenlaweb/admin-bundle.git"
+            "url":  "git@172.20.124.26:carlitoxenlaweb/admin-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:carlitoxenlaweb/doctrine-orm-admin-bundle.git"
+            "url":  "git@172.20.124.26:carlitoxenlaweb/doctrine-orm-admin-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:carlitoxenlaweb/block-bundle.git"
+            "url":  "git@172.20.124.26:carlitoxenlaweb/block-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:carlitoxenlaweb/cache-bundle.git"
+            "url":  "git@172.20.124.26:carlitoxenlaweb/cache-bundle.git"
         },
         {
             "type": "vcs",
-            "url":  "git@github.com:carlitoxenlaweb/tools-bundle.git"
+            "url":  "git@172.20.124.26:carlitoxenlaweb/tools-bundle.git"
         }
     ],
     "scripts": {

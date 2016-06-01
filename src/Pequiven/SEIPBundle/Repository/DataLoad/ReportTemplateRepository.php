@@ -113,9 +113,8 @@ class ReportTemplateRepository extends EntityRepository
     public function getQueryBuilderByUser(){
         $queryBuilder = $this->getCollectionQueryBuilder();
         $user = $this->getUser();
-        
-       if(!$this->getSecurityContext()->isGranted(array('ROLE_SEIP_OPERATION_LIST_PLANNING_PRODUCTION_TEMPLATES_ALL'))){
-           $queryBuilder
+        if(!$this->getSecurityContext()->isGranted(array('ROLE_SEIP_OPERATION_LIST_PLANNING_PRODUCTION_TEMPLATES_ALL'))){
+            $queryBuilder
                 ->innerJoin("rt.users", 'rt_u')
                 ->andWhere("rt_u.id = :user")
                 ->setParameter("user", $user)

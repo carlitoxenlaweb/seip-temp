@@ -15,14 +15,14 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Admin\BaseAdminMaster;
 
 /**
  * Administrador de compañia (Control estadistico e informacion)
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class CompanyAdmin extends BaseAdmin
+class CompanyAdmin extends BaseAdminMaster
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
