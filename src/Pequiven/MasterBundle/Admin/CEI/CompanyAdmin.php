@@ -68,8 +68,35 @@ class CompanyAdmin extends BaseAdmin
             ->add('region',null,array(
                 "query_builder" => $queryAllEnable,
             ))
-            ;
+            ->add('base64image', 'file', array(
+                'required' => false,
+                'data_class' => null
+            ))
+        ;
         parent::configureFormFields($form);
+    }
+
+    public function prePersist($object)
+    {
+        $this->encodeBase64($object);
+    }
+
+    public function preUpdate($object)
+    {
+        $this->encodeBase64($object);
+    }
+
+    protected function encodeBase64($object)
+    {
+        $base64 = null;
+        $image  = $object->getBase64Image();
+        if($image !== null){
+            $data   = file_get_contents($image->getPathname());
+            $base64 = 'data:' . $image->getMimeType() . ';base64,' . base64_encode($data);
+        } else {
+            $entity = (object) $this->getModelManager()->getEntityManager($this->getClass())->getUnitOfWork()->getOriginalEntityData($object);
+            $base64 = $entity->base64image;
+        } $object->setBase64Image($base64);
     }
     
     protected function configureDatagridFilters(DatagridMapper $filter) 
