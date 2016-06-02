@@ -62,18 +62,24 @@ class DefaultController extends Controller {
      * @Route("/selectCompany")
      */
     public function selectOptionAction(){
-        $companies = array();
+        $user_companies = array();
+        $conn = $this->get('app.connection_service');
+        $query = $conn->createQuery('SELECT c.id, c.rif, c.description, c.alias, c.base64image FROM PequivenSEIPBundle:CEI\Company c');
+        $companies = $query->getResult();
+
         foreach ($this->getUser()->getConnections() as $item){
             if($item->getName() !== 'master'){
-                array_push($companies, array(
-                    "alias"  => $item->getCompany(),
-                    "image"  => $item->getCompany()->getBase64Image(),
-                    "server" => $item->getName()
+                array_push($user_companies, array(
+                    "company" => $item->getCompany()->getId(),
+                    "server"  => $item->getName()
                 ));
             }
-        } return $this->render('PequivenSEIPBundle:Default:switch.html.twig', array(
-            "options" => $companies,
-            "lastUrl" => $this->getRequest()->headers->get('referer')
+        }
+
+        return $this->render('PequivenSEIPBundle:Default:switch.html.twig', array(
+            "available" => $user_companies,
+            "companies" => $companies,
+            "lastUrl"   => $this->getRequest()->headers->get('referer')
         ));
         /*
         return count($connections) > 1 ? 

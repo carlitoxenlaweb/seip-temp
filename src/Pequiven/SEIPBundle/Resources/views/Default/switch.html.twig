@@ -154,10 +154,20 @@
         <h1>SELECCIONE UNA EMPRESA</h1>
 
         <ul id="navigation">
-            {% for company in options %}
+            {% for company in companies %}
+                {% set break = false %} 
+                {% set company_link = "#!" %}
+
+                {% for item in available if not break %}
+                    {% if item.company == company.id %}
+                        {% set company_link = path('switch_server', {'connection': item.server, 'url': lastUrl}) %}
+                        {% set break = true %}
+                    {% endif %}
+                {% endfor %}
+                
                 <li>
-                    <a href="{{ path('switch_server', {'connection': company.server, 'url': lastUrl}) }}">
-                        <img style="display:block; width:100px;height:100px;" src="{{ company.image }}" />
+                    <a href="{{ company_link }}">
+                        <img style="display:block; width:100px;height:100px;" src="{{ company.base64image }}" />
                         <br/>{{ company.alias }}
                     </a>
                 </li>
