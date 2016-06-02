@@ -322,6 +322,7 @@ security:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
                 default_target_path: /selectCompany
+                always_use_default_target_path: true
                 target_path_parameter: /selectCompany
                 use_referer: true
             logout:
