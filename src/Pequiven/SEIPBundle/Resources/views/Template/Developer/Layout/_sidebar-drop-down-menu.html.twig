@@ -8,7 +8,7 @@
     <div id="menu-content">
 
         <header>
-            <a href="{{ path('_selectCompany') }}">{{ not app.session.get('connectionParameter') ? "Default" : app.session.get('connectionParameter') }}</a><br/>
+            <a href="{{ path('seip_select_company') }}">{{ not app.session.get('connectionParameter') ? "Default" : app.session.get('connectionParameter') }}</a><br/>
             {% if app.user.hasRole('ROLE_WORKER_PQV') %}
                 {{ 'pequiven_seip.role.worker_pqv'|trans }}
             {% elseif app.user.hasRole('ROLE_SUPERVISER') %}

@@ -59,7 +59,7 @@ class DefaultController extends Controller {
     }
 
     /** Página de Seleccion de empresas
-     * @Route("/selectCompany", name="_selectCompany")
+     * @Route("/selectCompany")
      */
     public function selectOptionAction(){
         $companies = array();
@@ -99,7 +99,8 @@ class DefaultController extends Controller {
             $this->get('session')->set('connectionParameter', $connection);
         } else {
             throw new \Exception('Empresa no encontrada');
-        } return $this->redirect($request->query->get('url'));
+        } // return $this->redirect($request->query->get('url'));
+        return $this->redirectToRoute('pequiven_seip_menu_home');
     }
 
     // /**

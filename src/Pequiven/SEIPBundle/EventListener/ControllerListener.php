@@ -49,8 +49,7 @@ class ControllerListener
 	            $user->setCurrentCompany($connection->getCompany());
 	            $this->session->set('currentCompanyId', $connection->getCompany()->getId());
 	        } else {
-		        $company = $this->doctrine
-		        				->getRepository('PequivenSEIPBundle:CEI\\Company')
+		        $company = $this->doctrine->getRepository('PequivenSEIPBundle:CEI\\Company')
 		                        ->findOneById($this->session->get('currentCompanyId'));
 		        $user->setCurrentCompany($company);
 	        }
