@@ -137,6 +137,7 @@ class SeipEntityRepository extends EntityRepository
      */
     public function createQueryBuilder($alias, $indexBy = null)
     {
+        var_dump($this->container);
         $entityManager = $this->container ? $this->container->get('app.connection_service')->getManager() : $this->_em;
         return $entityManager
             ->createQueryBuilder()
