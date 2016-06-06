@@ -21,7 +21,7 @@ and open the template in the editor.
         margin-top: 15px; 
 }
 #contentP{
-    min-height: 800px;
+    min-height: 700px;
 }
 
 .contentLogoCompany{
@@ -51,4 +51,12 @@ and open the template in the editor.
     height:100px;
     margin: 50px 50px;
     position: absolute
+}
+
+table{
+    border-top: solid #585858;
+}
+
+hr{
+    border:none;
 }
