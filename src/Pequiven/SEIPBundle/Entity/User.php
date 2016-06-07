@@ -173,7 +173,7 @@ class User extends BaseUser implements UserInterface, UserBoxInterface, PeriodIt
      * Periodo.
      * 
      * @var \Pequiven\SEIPBundle\Entity\Period
-     * @ORM\ManyToOne(targetEntity="Pequiven\SEIPBundle\Entity\Period", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Pequiven\SEIPBundle\Entity\Period")
      */
     private $period;
 
