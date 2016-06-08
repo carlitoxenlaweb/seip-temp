@@ -527,3 +527,11 @@ En la línea 90, cambiar el
 por
     'choices'           => array(),
 ```
+
+**Logos Empresas**
+```
+Los logos de las empresas (color blanco) que se mostrarán en el header de la aplicación se deben guardar en el dir:
+Pequiven/SEIPBundle/Resources/public/logotipos-pqv/logotipos-pdf/nombre_de_la_empresa.png
+
+En la BD se almacenaran los logos con los colores originales de cada empresa.
+```
