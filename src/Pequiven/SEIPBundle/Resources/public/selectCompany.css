@@ -60,3 +60,7 @@ table{
 hr{
     border:none;
 }
+
+#logoCompany{
+    visibility: hidden;
+}
