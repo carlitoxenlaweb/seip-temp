@@ -103,6 +103,7 @@ class DefaultController extends Controller {
         if($MasterConn) {
             $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
             $this->get('session')->set('currentLogoCompany', $MasterConn->getCompany()->getBase64Image());
+            $this->get('session')->set('companyAlias', $MasterConn->getCompany());
             $this->get('session')->set('connectionParameter', $connection);
         } else {
             throw new \Exception('Empresa no encontrada');

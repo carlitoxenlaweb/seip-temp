@@ -5,7 +5,7 @@
 <table width="100%">
     <tr bgcolor="#FFFFFF">
         <td width="12%" height="70px" style="text-align: center; vertical-align: middle; background-color: #B00000;">
-            <img src="{{ asset(( app.user != null ) ? 'bundles/pequivenseip/logotipos-pqv/logotipos-pdf/' ~ app.session.get('connectionParameter') ~ '.png' : 'bundles/pequivenseip/logotipos-pqv/logotipos-pdf/PQV_Diamante.png') }}" width="60px" height="65px">
+            <img src="{{ asset(( app.user != null ) ? 'bundles/pequivenseip/logotipos-pqv/logotipos-pdf/' ~ app.session.get('companyAlias')|lower ~ '.png' : 'bundles/pequivenseip/logotipos-pqv/logotipos-pdf/PQV_Diamante.png') }}" width="60px" height="65px">
         </td>
         <td width="76%" height="70px" style="text-align: center; vertical-align: middle; background-color: #B00000; color: #FFFFFF; font-weight: bold; font-family: Arial,Helvetica,sans-serif; font-size: 16pt;">
             SISTEMA ESTADÍSTICO DE INFORMACIÓN PETROQUÍMICA
