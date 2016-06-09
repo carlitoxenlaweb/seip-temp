@@ -67,6 +67,7 @@ class PeriodAdmin extends SonataBaseAdmin {
     protected function configureFormFields(FormMapper $form) {
         $object = $this->getSubject();
         $childrensParameters = array(
+            'em' => $this->modelManager->getEntityManagerName(),
             'class' => 'Pequiven\SEIPBundle\Entity\Period',
             'required' => false,
         );

@@ -527,3 +527,9 @@ En la línea 90, cambiar el
 por
     'choices'           => array(),
 ```
+
+**OJO PeriodService**
+```php
+$this->getDoctrine()->getEntityManager()->persist($user->getPeriod());
+$this->getDoctrine()->getEntityManager()->persist($user->getParent());
+```
