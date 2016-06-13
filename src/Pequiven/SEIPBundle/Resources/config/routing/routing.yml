@@ -1,0 +1,129 @@
+#Devuelve el paginador con la data de los objetivos tácticos por tipo de Grupo
+monitorTypeGroupList:
+    path: /monitor/list/typeGroup
+    defaults: 
+        _controller: pequiven.controller.seipmonitor:monitorTypeGroupListAction
+        _sylius:
+            method: createPaginatorTypeGroup
+            
+#Monitor de Objetivos Tácticos Agrupados por Grupo de Gerencia de 1ra línea
+monitorObjetiveTactic:
+    path: /monitor/tactic
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayObjetiveTacticAction
+
+#Monitor de Objetivos Operativos Agrupados por Grupo de Gerencia de 1ra línea
+monitorObjetiveOperative:
+    path: /monitor/operative
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayObjetiveOperativeAction
+        
+#Monitor de Programas de Gestión
+monitorArrangementProgram:
+    path: /monitor/arrangementProgram
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayArrangementProgramAction
+        
+#Monitor de Objetivos Tácticos por Grupo de Gerencia de 1ra Línea
+monitorObjetiveTacticByGroup:
+    path: /monitor/tactic/{typeGroup}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayObjetiveTacticByGroupAction
+    methods: [GET]
+
+#Monitor de Objetivos Operativos por Grupo de Gerencia de 1ra Línea
+monitorObjetiveOperativeByGroup:
+    path: /monitor/operative/{typeGroup}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayObjetiveOperativeByGroupAction
+    methods: [GET]
+
+#Monitor de Programs de Gestión por Grupo de Gerencia de 1ra Línea
+monitorArrangementProgramByGroup:
+    path: /monitor/arrangementProgram/{typeGroup}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:displayArrangementProgramByGroupAction
+    methods: [GET]
+    
+#Lista de Objetivos Tácticos por Gerencia de 1ra Línea
+listObjetiveTacticByGroup:
+    path: /list/tactic/{typeGroup}/{idGerencia}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:listObjetiveTacticByGroupAction
+    requirements:
+        idGerencia: "\d+"
+    methods: [GET]
+    
+#Lista de Objetivos Operativos por Gerencia de 1ra Línea
+listObjetiveOperativeByGroup:
+    path: /list/operative/{typeGroup}/{idGerencia}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:listObjetiveOperativeByGroupAction
+    requirements:
+        idGerencia: "\d+"
+    methods: [GET]
+    
+#Lista de Objetivos Operativos Vinculantes del Complejo
+listObjetiveOperativeVinculant:
+    path: /list/operativeVinculant/{typeGroup}/{idGerencia}/{idComplejo}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:listObjetiveOperativeVinculantAction
+    requirements:
+        idGerencia: "\d+"
+    methods: [GET]
+    
+#Lista de Programas de Gestión por Gerencia de 1ra Línea
+listArrangementProgramByGroup:
+    path: /list/arrangementProgram/{typeGroup}/{idGerencia}
+    defaults:
+        _controller: pequiven.controller.seipmonitor:listArrangementProgramByGroupAction
+    requirements:
+        idGerencia: "\d+"
+    methods: [GET]
+
+pequiven_seip_modules_ventas:
+    path:     /module/ventas
+    defaults: { _controller: PequivenSEIPBundle:Default:module }
+pequiven_seip_modules_despacho:
+    path:     /module/despachos
+    defaults: { _controller: PequivenSEIPBundle:Default:module }
+pequiven_seip_modules_contrataciones:
+    path:     /module/contrataciones
+    defaults: { _controller: PequivenSEIPBundle:Default:module }
+pequiven_seip_modules_proyectos:
+    path:     /module/proyectos
+    defaults: { _controller: PequivenSEIPBundle:Default:module }
+
+pequiven_user_notification_data:
+    path: /user/notification
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:notificationAction 
+seip_notification_view_message:
+    path: /user/get-message
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:getNotificationAction
+seip_notification_delete_message:
+    path: /user/delete-message
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:delNotificationAction
+seip_notification_favourite_message:
+    path: /user/favourite-message
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:NotificationFavouriteAction   
+seip_notification_view_messages_data:
+    path: /user/get-message-data
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:getNotifyDataAction
+    methods: [GET]
+seip_notification_view_messages_return_data:
+    path: /user/get-messages
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:getMessagesDataAction
+    methods: [GET|POST]
+seip_notification_get_data_notify:
+    path: /user/get-notify
+    defaults:
+        _controller: pequiven_seip.controller.userNotification:getNotificationUserAction
+    methods: [GET]
+    
+

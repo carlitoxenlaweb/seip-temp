@@ -1,0 +1,12 @@
+{% extends "PequivenArrangementProgramBundle:ArrangementProgram:email/base.html.twig" %}
+
+{% block subject %}
+    El programa de gestión {{ arrangementProgram.ref }} fue revisado - SEIP
+{% endblock subject %}
+
+{% block content_html %}
+    El usuario <b>{{ user.getFullNameUser }}</b> acaba de enviar el programa de gestión 
+    <a href="{{ url('pequiven_seip_arrangementprogram_show',{id: arrangementProgram.id }) }}">{{ arrangementProgram.ref }}</a>.
+    
+    {% include 'PequivenArrangementProgramBundle:ArrangementProgram:email/detailsArrangementProgram.html.twig' %}
+{% endblock content_html %}

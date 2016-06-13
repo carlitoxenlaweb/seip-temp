@@ -1,0 +1,39 @@
+<br/><br/>
+<b>Detalles del programa de gestión:</b>
+<br/>
+<table>
+    <tr>
+        <th>Periodo</th>
+        <td>{{ arrangementProgram.period }}<td>
+    </tr>
+    <tr>
+        <th>Referencia</th>
+        <td><a href="{{ url('pequiven_seip_arrangementprogram_show',{id: arrangementProgram.id }) }}">{{ arrangementProgram.ref }}</a><td>
+    </tr>
+    <tr>
+        <th>Localidad</th>
+        <td>
+             {% if arrangementProgram.type == constant('Pequiven\\ArrangementProgramBundle\\Entity\\ArrangementProgram::TYPE_ARRANGEMENT_PROGRAM_TACTIC') %}
+                {{ arrangementProgram.tacticalObjective.gerencia.complejo }}
+            {% endif %}
+            {% if arrangementProgram.type == constant('Pequiven\\ArrangementProgramBundle\\Entity\\ArrangementProgram::TYPE_ARRANGEMENT_PROGRAM_OPERATIVE') %}
+                {{ arrangementProgram.operationalObjective.gerenciaSecond.complejo }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Gerencia de primera linea</th>
+        <td>
+            {{ arrangementProgram.tacticalObjective.gerencia }}
+        </td>
+    </tr>
+    {% if arrangementProgram.type == constant('Pequiven\\ArrangementProgramBundle\\Entity\\ArrangementProgram::TYPE_ARRANGEMENT_PROGRAM_OPERATIVE') %}
+        <tr>
+            <th>Gerencia de segunda linea</th>
+            <td>{{ arrangementProgram.operationalObjective.gerenciaSecond }}</td>
+        </tr>
+    {% endif%}
+</table>
+<br/>
+Para mayor información acerca del programa de gestión, por favor de click <a href="{{ url('pequiven_seip_arrangementprogram_show',{id: arrangementProgram.id }) }}">aquí</a>.
+    

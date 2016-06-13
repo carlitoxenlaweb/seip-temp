@@ -1,0 +1,415 @@
+{% trans_default_domain 'PequivenSEIPBundle' %}
+<style> 
+    .white-gradient {
+        background-color: #535353;
+        color: #ffffff;
+        text-align: center;
+        font-size: 9pt;
+    }    
+    .header-tr {
+        background-color: lightgrey;
+        border-bottom: lightgrey;
+        border-style: solid;
+        border-bottom-style: solid;
+    }
+    .content {
+        color: #4a4a4a;
+        font-size: 9px;
+    }    
+    .header-values{
+        text-align: right; 
+        font-weight: bold;
+        font-size: 8pt;
+    }
+    .values{
+        text-align: right;         
+        font-size: 8pt;
+    }
+    .header-product{
+        text-align: left; 
+        font-weight: bold;
+        font-size: 9pt;
+    }
+    .product{
+        text-align: left;         
+        font-size: 8pt;
+    }
+
+
+</style>
+{% if production is not empty %}
+    {#<br>
+    <div class="title">Reporte de Producción</div>
+    <br>#}
+    {% if typeReport== 'Net' %}
+        {% set tipoProd='(PRODUCCIÓN NETA)'%}
+    {% else %}
+        {% set tipoProd='(PRODUCCIÓN BRUTA)'%}
+    {% endif %}    
+    <table style="text-align: center; width: 100%">
+        <tr>
+            <th width="70%" style="font-weight: bold; font-size: 9pt; text-align: left;">Complejo:</th>            
+            <th width="15%" style="font-weight: bold; font-size: 9pt; text-align: left;">Producción del</th>
+            <th width="15%" style="font-weight: bold; font-size: 9pt; text-align: left;">Emision: </th>
+        </tr>
+        <tr>
+            <td width="75%" style="font-size: 8pt; text-align: left;">
+                {% for plant in plantsNames%}
+                    {{ plant }}. <br>
+                {% endfor %}
+            </td>
+            <td width="15%" style="font-size: 8pt; text-align: left;">{{ dateReport|date("d/m/Y") }}</td>
+            <td width="15%" style="font-size: 8pt; text-align: left;">{{ "now"|date("d/m/Y") }}</td>
+        </tr>
+    </table>
+    <br>    
+    {% if showProduction %}        
+        {% if showDay  %}                
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th class="white-gradient" colspan="5">DÍA {{ tipoProd }}</th>
+                    </tr>
+                    <tr class="header-tr">
+                        <th scope="col" width="40%" class="header-product">PRODUCTO</th>
+                        <th scope="col" width="15%" class="header-values">PPTO</th>
+                        <th scope="col" width="15%" class="header-values">REAL</th>
+                        <th scope="col" width="15%" class="header-values">EJEC(%)</th>
+                        <th scope="col" width="15%" class="header-values">VARIACIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for productDay in production["day"] %} 
+                        <tr>
+                            <td scope="col" width="40%" class="product">{{ productDay.nameProduct|upper}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.plan}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.real}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.ejecution}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.var}}</td>
+                        </tr>
+                    {% endfor  %}
+                </tbody>
+                <tfoot>
+                    <tr class="header-tr">
+                        <th scope="col" width="40%" class="header-product">TOTALES</th>
+                            {% for  totals in totalProduction["day"] %}    
+                            <th scope="col" width="15%" class="header-values">{{ totals }}</th>                                   
+                            {% endfor %}
+                    </tr>
+                </tfoot>
+            </table>
+            <br><br>
+        {% endif %}
+        {% if showMonth %}  
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th class="white-gradient" colspan="6">MES {{ tipoProd }}</th>
+                    </tr>
+                    <tr class="header-tr">
+                        <th scope="col" width="25%" class="header-product">PRODUCTO</th>
+                        <th scope="col" width="15%" class="header-values">PPTO-MES</th>
+                        <th scope="col" width="15%" class="header-values">PPTO-ACUM</th>
+                        <th scope="col" width="15%" class="header-values">REAL-ACUM</th>
+                        <th scope="col" width="15%" class="header-values">EJEC(%)</th>
+                        <th scope="col" width="15%" class="header-values">VARIACIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for productDay in production["month"] %} 
+                        <tr>
+                            <td scope="col" width="25%" class="product">{{ productDay.nameProduct|upper }}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.plan_month}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.plan_acumulated}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.real_acumulated}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.ejecution}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.var}}</td>
+                        </tr>
+                    {% endfor  %}
+                </tbody>
+                <tfoot>
+                    <tr class="header-tr">
+                        <th scope="col" width="25%" class="header-product">TOTALES</th>
+                            {% for  totals in totalProduction["month"] %}    
+                            <th scope="col" width="15%" class="header-values">{{ totals }}</th> 
+                            {% endfor %}
+                    </tr>
+                </tfoot>
+            </table>
+        {% endif %}
+        <br><br>
+        {% if showYear  %}           
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th class="header text-center white-gradient" colspan="6">AÑO {{ tipoProd }}</th>
+                    </tr>
+                    <tr class="header-tr">
+                        <th scope="col" width="25%" class="header-product">PRODUCTO</th>
+                        <th scope="col" width="15%" class="header-values">PPTO-AÑO</th>
+                        <th scope="col" width="15%" class="header-values">PPTO-ACUM</th>
+                        <th scope="col" width="15%" class="header-values">REAL-ACUM</th>
+                        <th scope="col" width="15%" class="header-values">EJEC(%)</th>
+                        <th scope="col" width="15%" class="header-values">VARIACIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for productDay in production["year"] %} 
+                        <tr>
+                            <td scope="col" width="25%" class="product">{{ productDay.nameProduct|upper}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.plan_year}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.plan_acumulated}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.real_acumulated}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.ejecution}}</td>
+                            <td scope="col" width="15%" class="values">{{ productDay.var}}</td>
+                        </tr>
+                    {% endfor  %}
+                </tbody>
+                <tfoot>
+                    <tr class="header-tr">
+                        <th scope="col" width="25%" class="header-product">TOTALES</th>
+                            {% for  totals in totalProduction["year"] %}    
+                            <th scope="col" width="15%" class="header-values">{{ totals }}</th>
+                            {% endfor %}
+                    </tr>
+                </tfoot>
+            </table>            
+        {% endif %}
+    {% endif %}
+    <table style=" page-break-before: always;"></table>
+    <br><br>
+
+    {% if showRawMaterial %}
+        <table width="100%">
+            <thead>            
+                <tr>
+                    <th class="header text-center white-gradient" colspan="7">CONSUMO DE MATERIA PRIMA {{ tipoProd }}</th>
+                </tr>
+                <tr class="header-tr">
+                    <th scope="col" width="22%" class="header-product">PRODUCTO</th>
+                        {%  if showDay %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">DÍA</th>
+                        {% endif %}
+                        {%  if showMonth %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">MES</th>
+                        {% endif %}
+                        {%  if showYear %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">AÑO</th>
+                        {% endif %}
+                </tr>
+                <tr class="header-tr">
+                    <th>&nbsp;</th>
+                        {%  if showDay %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                        {%  if showMonth %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                        {%  if showYear %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for  rawMaterial in rawMaterials  %}
+                    <tr>
+                        <td scope="col" width="22%" class="product">{{ rawMaterial.productName|upper }}</td>
+                        {%  if showDay %}
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.plan }}</td>
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.real }}</td>
+                        {% endif %}
+                        {%  if showMonth %}
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.plan_month }}</td>
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.real_month }}</td>
+                        {% endif %}
+                        {%  if showYear %}
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.plan_year }}</td>
+                            <td scope="col" width="13%" class="values">{{ rawMaterial.real_year }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <br><br>
+
+    {% if showService %}        
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th class="header text-center white-gradient" colspan="7">CONSUMO DE SERVICIOS {{ tipoProd }}</th>
+                </tr>
+                <tr class="header-tr">
+                    <th scope="col" width="22%" class="header-product">PRODUCTO</th>
+                        {%  if showDay %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">DÍA</th>
+                        {% endif %}
+                        {%  if showMonth %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">MES</th>
+                        {% endif %}
+                        {%  if showYear %}
+                        <th scope="col" width="13%" class="header-product"> </th>
+                        <th scope="col" width="13%" class="header-product">AÑO</th>
+                        {% endif %}
+                </tr>
+                <tr class="header-tr">
+                    <th>&nbsp;</th>
+                        {%  if showDay %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                        {%  if showMonth %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                        {%  if showYear %}
+                        <th scope="col" width="13%" class="header-values">PLAN</th>
+                        <th scope="col" width="13%" class="header-values">REAL</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for  consumerService in consumerServices %}
+                    <tr style="text-align: center;"> 
+                        <td scope="col" width="22%" class="product">{{ consumerService.productName|upper}} </td>
+                        {%  if showDay %}
+                            <td scope="col" width="13%" class="values">{{ consumerService.plan|myNumberFormat }}</td>
+                            <td scope="col" width="13%" class="values">{{ consumerService.real|myNumberFormat }}</td>
+                        {% endif %}
+                        {%  if showMonth %}
+                            <td scope="col" width="13%" class="values">{{ consumerService.plan_month|myNumberFormat }}</td>
+                            <td scope="col" width="13%" class="values">{{ consumerService.real_month|myNumberFormat }}</td>
+                        {% endif %}
+                        {%  if showYear %}
+                            <td scope="col" width="13%" class="values">{{ consumerService.plan_year|myNumberFormat }}</td>
+                            <td scope="col" width="13%" class="values">{{ consumerService.real_year|myNumberFormat }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+            {#<tfoot>
+                <tr class="header-tr">
+                    <th scope="col" width="22%" class="header-product">TOTALES</th>
+                        {% for totalConsumerService in totalConsumerServices  %}
+                        <th scope="col" width="13%" class="header-values">{{ totalConsumerService|myNumberFormat }}</th>
+                        {% endfor %}
+                </tr>
+            </tfoot>#}
+        </table>
+    {% endif %}
+    <br><br>
+    {% if showPnr %}
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th class="header text-center white-gradient" colspan="5" >PRODUCCIÓN NO REALIZADA {{ tipoProd }}</th>
+                </tr>
+                <tr class="header-tr">
+                    <th scope="col" width="40%" class="header-product">PRODUCTO</th>
+                        {%  if showDay %}
+                        <th scope="col" width="20%" class="header-values">DÍA</th>
+                        {% endif %}
+                        {%  if showMonth %}
+                        <th scope="col" width="20%" class="header-values">MES</th>
+                        {% endif %}
+                        {%  if showYear %}
+                        <th scope="col" width="20%" class="header-values">AÑO</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for unrealizedProduction in unrealizedProductions %}
+                    <tr>
+                        <td scope="col" width="40%" class="product">{{ unrealizedProduction.productName|upper }}</td>
+                        {%  if showDay %}
+                            <td scope="col" width="20%" class="values">{{ validPnr(unrealizedProduction.day)|myNumberFormat }}</td>
+                        {% endif %}
+                        {%  if showMonth %}
+                            <td scope="col" width="20%" class="values">{{ validPnr(unrealizedProduction.month)|myNumberFormat }}</td>
+                        {% endif %}
+                        {%  if showYear %}
+                            <td scope="col" width="20%" class="values">{{validPnr(unrealizedProduction.year)|myNumberFormat }}</td>
+                        {% endif %}
+                    </tr>                
+                {% endfor %}
+            </tbody>
+            {#<tfoot>
+                <tr class="header-tr">
+                    <th scope="col" width="40%" class="header-product">TOTALES</th>
+                        {% for totals in totalUnrealizedProduction %}
+                        <th scope="col" width="20%" class="header-values">{{ totals|myNumberFormat }}</th>
+                        {% endfor %}
+                </tr>
+            </tfoot>#}
+        </table>
+    {% endif %}
+    <table style=" page-break-before: always;"></table>
+    <br><br>
+    {% if showInventory %}        
+        <table class="simple-table responsive-table responsive-table-on">
+            <thead>
+                <tr>
+                    <th class="header text-center white-gradient" colspan="5">INVENTARIO {{ tipoProd }}</th>
+                </tr>
+                <tr class="header-tr">
+                    <th scope="col" width="40%" class="header-product">PRODUCTO</th>
+                    <th scope="col" width="20%" class="header-values">DÍA</th>
+                    <th scope="col" width="20%" class="header-values">DÍA ANTERIOR</th>
+                    <th scope="col" width="20%" class="header-values">VARIACIÓN</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inventory in inventorys  %}
+                    <tr>
+                        <td scope="col" width="40%" class="product">{{ inventory.productName|upper }}</td>
+                        <td scope="col" width="20%" class="values">{{ inventory.day|myNumberFormat }}</td>
+                        <td scope="col" width="20%" class="values">{{ inventory.day_preview|myNumberFormat }}</td>
+                        <td scope="col" width="20%" class="values">{{ (inventory.day-inventory.day_preview)|myNumberFormat }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            {#<tfoot>
+                <tr class="header-tr">
+                    <th scope="col" width="40%" class="header-product">TOTALES</th>
+                        {% for totals in totalInventorys %}
+                        <th scope="col" width="20%" class="header-values">{{ totals|myNumberFormat }}</th>
+                        {% endfor %}
+                    <th scope="col" width="20%" class="header-values">-</th>
+                </tr>
+            </tfoot>#}
+        </table>
+    {% endif %}
+    <br><br>
+    {% if showObservation %}
+        <table class="simple-table responsive-table responsive-table-on">
+            <thead>
+                <tr>
+                    <th class="header text-center white-gradient" colspan="5">PUNTOS DE ATENCIÓN</th>
+                </tr>
+                <tr class="header-tr">
+                    <th scope="col" width="40%" class="header-product">PRODUCTO</th>
+                    <th scope="col" width="60%" class="header-product">COMENTARIO</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obs in observations %}
+                    <tr>
+                        <td scope="col" width="40%" class="product">{{ obs.nameProduct|upper }}</td>
+                        <td scope="col" width="60%" class="product">{{ (obs['obs'] is null ? ("pequiven_seip.comment_none"|trans):obs['obs']) |upper }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% else %}
+    <h2 class="text-center">{{ "Select the plant"|trans }}</h2>
+{% endif %}

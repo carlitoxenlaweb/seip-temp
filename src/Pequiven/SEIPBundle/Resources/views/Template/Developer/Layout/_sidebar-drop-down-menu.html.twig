@@ -1,0 +1,104 @@
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+{% set logo = templateConfig.getTemplateOption('developer','logo') %}
+    
+<section id="menu" role="complementary">
+
+    <!-- This wrapper is used by several responsive layouts -->
+    <div id="menu-content">
+
+        <header>
+            {% if app.user.hasRole('ROLE_WORKER_PQV') %}
+                {{ 'pequiven_seip.role.worker_pqv'|trans }}
+            {% elseif app.user.hasRole('ROLE_SUPERVISER') %}
+                {{ 'pequiven_seip.role.superviser'|trans }}
+            {% elseif app.user.hasRole('ROLE_GENERAL_COMPLEJO') %}
+                {{ 'pequiven_seip.role.general_complejo'|trans({ '%complejo%': app.user.complejo.ref }) }}
+            {% elseif app.user.hasRole('ROLE_GENERAL_COMPLEJO_AUX') %}
+                {{ 'pequiven_seip.role.general_complejo_aux'|trans({ '%complejo%': app.user.complejo.ref }) }}
+            {% elseif app.user.hasRole('ROLE_MANAGER_FIRST') %}
+                {{ 'pequiven_seip.role.manager_first'|trans }}
+            {% elseif app.user.hasRole('ROLE_MANAGER_FIRST_AUX') %}
+                {% if app.user.username matches '/_cpg$/' %}
+                    {{ 'pequiven_seip.role.chargeArrangementProgram'|trans }}
+                {% else %}
+                    {{ 'pequiven_seip.role.manager_first_aux'|trans }}
+                {% endif %}
+            {% elseif app.user.hasRole('ROLE_MANAGER_SECOND') %}
+                {{ 'pequiven_seip.role.manager_second'|trans }}
+            {% elseif app.user.hasRole('ROLE_MANAGER_SECOND_AUX') %}
+                {{ 'pequiven_seip.role.manager_second_aux'|trans }}
+            {% elseif app.user.hasRole('ROLE_DIRECTIVE') %}
+                {{ 'pequiven_seip.role.directive'|trans }}
+            {% elseif app.user.hasRole('ROLE_DIRECTIVE_AUX') %}
+                {{ 'pequiven_seip.role.directive_aux'|trans }}
+            {% elseif app.user.hasRole('ROLE_ADMIN') %}
+                {{ 'pequiven_seip.role.administrator'|trans }}
+            {% elseif app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                {{ 'pequiven_seip.role.super_administrator'|trans }}
+            {% endif %}
+        </header>
+
+        <div id="profile">
+            <img src="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/img/user.png') }}" width="64" height="64" alt="User name" class="user-icon">
+            {{ 'pequiven_seip.hello' | trans }}
+            <span class="name">{{ app.user.firstname }} <b>{{ app.user.lastname }}</b></span>
+        </div>
+
+        <!-- By default, this section is made for 4 icons, see the doc to learn how to change this, in "basic markup explained" -->
+        <ul id="access" class="children-tooltip">
+            <li>
+                <a href="{{ path('pequiven_user_notification_data') }}" title="Messages">
+                    <span class="icon-inbox"></span>
+                    {# Notificaciones #}
+                    {# {{ app.user.notify }} #}                    
+                    <span class="count" id="userNotify" style='display:none;'></span>
+                </a>
+            </li>
+            <!--<li><a href title="Calendar"><span class="icon-calendar"></span></a></li>-->
+            <li>
+                <a href="{{ path('fos_user_profile_show') }}" title="{{ 'pequiven_seip.profile.profile'|trans }}">
+                    <span class="icon-user"></span>                    
+                </a>
+            </li>
+            {% if is_granted('ROLE_WORKER_PLANNING') %}
+                <li><a href="{{ path('tecnocreaciones_box_index') }}" title="{{ 'pequiven_seip.profile.config'|trans }}"><span class="fa fa-wrench"></span></a></li>
+            {% endif %}
+            <li><a href="{{ path('fos_user_security_logout') }}" title="{{ 'pequiven_seip.logout'|trans }}" style="margin:8px"><img src="{{ asset('bundles/pequivenseip/logotipos-pqv/icon_application_exit.png') }}" width="32" height="32" /></a></li>
+        </ul>
+
+        <section class="navigable">
+            {% set menu = knp_menu_get('main') %}
+            {{ knp_menu_render(menu, {'template': 'PequivenSEIPBundle:Template/Developer:menu.html.twig', 'currentClass': 'current navigable-current'}) }}
+        </section>  
+        <ul class="unstyled-list">
+            <li class="title-menu">&nbsp;</li>
+            <li style="background-color:white;text-align:center" class="with-padding">
+                <a href="{{ templateConfig.getOption('main_route') != null ? path(templateConfig.getOption('main_route')) : '' }}">
+                    <img src="{{ asset('bundles/pequivenseip/logotipos-pqv/logo_menu_seip.png') }}"  />
+                </a>
+            </li>
+        </ul>
+        <div>
+        </div>
+    </div>
+    <!-- End content wrapper -->
+</section>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var urlNotifyData = "{{ path("seip_notification_get_data_notify") }}";                    
+        var data = 0;
+        $.ajax({
+                type: 'get',
+                url: urlNotifyData,
+                data: data,                                              
+                success: function (data) {                                                                            
+                    if (data['notifyUser'] > 0) {
+                        $('#userNotify').show().text(data['notifyUser']);
+                    }else{
+                        $('#userNotify').hide();        
+                    };
+                }
+        });            
+    });
+</script>

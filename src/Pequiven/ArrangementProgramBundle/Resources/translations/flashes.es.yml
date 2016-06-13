@@ -1,0 +1,98 @@
+pequiven_seip:
+    arrangementprogram:
+        create: Programa de gestión creado.
+        update: Programa de gestión actualizado.
+        delete: Programa de gestión eliminado.
+        revised: Programa de gestión revisado.
+        approved: Programa de gestión aprobado.
+        send_to_review: Programa de gestión enviado a revisión.
+        rejected: Programa de gestión fue rechazado.
+        return_to_draft: El programa de gestión se regreso al estatus de borrador.
+        return_to_review: El programa de gestión se regreso al estatus de revisión.
+        error_observation: La acción que esta realizando requiere que ingrese una observación.
+        planned_not_complete: Todas las metas del programa de gestión debe tener planificado y distribuido un 100%.
+        start_the_notification_process: El proceso de notificación fue iniciado por "%user%"
+        finish_the_notification_process: El proceso de notificación fue finalizado por "%user%"
+        already_start_the_notification_process: No se puede iniciar el proceso de notificación hasta que el usuario "%user%" termine el proceso.
+        notification_process_user_finish: El proceso de notificación lo debe finalizar el usuario "%user%" que lo inicio.
+        notification_process_dont_start: El proceso de notificación no se ha iniciado por ningun notificador.
+        not_allow_load_arrangementprogram: La carga de programas de gestión no se encuentra habilitada para este período.
+    arrangementprogram_template:
+        create: Plantilla de programa de gestión creado.
+        update: Plantilla de programa de gestión actualizado.
+        delete: Plantilla de programa de gestión eliminado.
+pequiven:
+    objetive:
+        create: El objetivo se creó correctamente.
+        update: El objetivo se actualizó correctamente.
+        delete: El objetivo se eliminó correctamente.
+        approved: El objetivo se aprobó correctamente.
+    indicator:
+        create: El indicador se creó correctamente.
+        update: El indicador se actualizó correctamente.
+        delete: El indicador se eliminó correctamente.
+        approved: El indicador se aprobó correctamente.
+    value_indicator_config:
+        create: El indicador se configuró correctamente.
+        update: La configuración del indicador se actualizó correctamente.
+        delete: La configuración del indicador se eliminó correctamente.
+    report_template:
+        create: El reporte se creó de correctamente.
+        update: El reporte se actualizó correctamente.
+        delete: El reporte se eliminó correctamente.
+    product_report:
+        create: El producto se agregó de correctamente.
+        update: El producto se actualizó correctamente.
+        delete: El producto se eliminó correctamente.
+    product_planning:
+        create: La planificación del producto se agregó de correctamente.
+        update: La planificación del producto se actualizó correctamente.
+        delete: La planificación del producto se eliminó correctamente.
+    range:
+        create: El rango de distribución se agregó de correctamente.
+        update: El rango de distribución se actualizó correctamente.
+        delete: El rango de distribución se eliminó correctamente.
+    product_detail_daily_month:
+        create: El detalle de produccion se agregó de correctamente.
+        update: El detalle de produccion se actualizó correctamente.
+        delete: El detalle de produccion se eliminó correctamente.
+    raw_material_consumption_planning:
+        create: La materia prima se agregó de correctamente.
+        update: La materia prima se actualizó correctamente.
+        delete: La materia prima se eliminó correctamente.
+    detail_raw_material_consumption:
+        create: El detalle de consumo de materia prima se agregó de correctamente.
+        update: El detalle de consumo de materia prima se actualizó correctamente.
+        delete: El detalle de consumo de materia prima se eliminó correctamente.
+    plant_stop_planning:
+        create: La planificación de parada se agregó de correctamente.
+        update: La planificación de parada se actualizó correctamente.
+        delete: La planificación de parada se eliminó correctamente.
+    plant_report:
+        create: El reporte de la planta se creó correctamente.
+        update: El reporte de la planta se actualizó correctamente.
+        delete: El reporte de la planta se eliminó correctamente.
+    inventory:
+        create: El inventario de agregó correctamente.
+        update: El inventario de actualizó correctamente.
+        delete: El inventario de eliminó correctamente.
+    unrealized_production:
+        create: La producción no realizada se agregó correctamente.
+        update: La producción no realizada se actualizó correctamente.
+        delete: La producción no realizada se eliminó correctamente.
+    detail_consumer_planning_service:
+        create: El detalle de consumo de servicio se agregó correctamente.
+        update: El detalle de consumo de servicio se actualizó correctamente.
+        delete: El detalle de consumo de servicio se eliminó correctamente.
+    consumer_planning_service:
+        create: El consumo de servicio se agregó correctamente.
+        update: El consumo de servicio se actualizó correctamente.
+        delete: El consumo de servicio se eliminó correctamente.
+    consumer_planning_gasflow:
+        create: El consumo de flujo de gas se agregó correctamente.
+        update: El consumo de flujo de gas se actualizó correctamente.
+        delete: El consumo de flujo de gas se eliminó correctamente.
+    detail_consumer_planning_gasflow:
+        create: El detalle de consumo de flujo de gas se agregó correctamente.
+        update: El detalle de consumo de flujo de gas se actualizó correctamente.
+        delete: El detalle de consumo de flujo de gas se eliminó correctamente.

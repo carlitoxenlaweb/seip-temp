@@ -1,0 +1,128 @@
+pequiven_sig:
+    resource: "@PequivenSIGBundle/Controller/"
+    type:     annotation
+    prefix:   /sig
+
+pequiven_arrangement_program:
+    resource: "@PequivenArrangementProgramBundle/Controller/Rest"
+    type:     annotation
+    prefix:   /
+
+pequiven_arrangement:
+    resource: "@PequivenArrangementBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pequiven_indicator:
+    resource: "@PequivenIndicatorBundle/Controller/"
+    type:     annotation
+    prefix:   /indicator
+
+pequiven_master:
+    resource: "@PequivenMasterBundle/Controller/"
+    type:     annotation
+    prefix:   /master
+
+pequiven_objetive:
+    resource: "@PequivenObjetiveBundle/Controller/"
+    type:     annotation
+    prefix:   /objetive
+
+pequiven_seip:
+    resource: "@PequivenSEIPBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+tecnocreaciones_template:
+    resource: "@TecnocreacionesTemplateBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pequiven_seip_menu:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/menu.yml"
+
+pequiven_seip_route:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/routing.yml"
+
+pequiven_master_route:
+    resource: "@PequivenMasterBundle/Resources/config/routing/routing.yml"
+    prefix:   /master
+    
+pequiven_objetive_route:
+    resource: "@PequivenObjetiveBundle/Resources/config/routing/routing.yml"
+
+pequiven_indicator_route:
+    resource: "@PequivenIndicatorBundle/Resources/config/routing/routing.yml"
+    
+pequiven_sig_route:
+    resource: "@PequivenSIGBundle/Resources/config/routing/routing.yml"
+    
+pequiven_arrangement_program_yml:
+    resource: "@PequivenArrangementProgramBundle/Resources/config/routing/main.yml"
+    
+pequiven_planning:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/main.yml"
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+    
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+    
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"    
+    
+tpg_extjs:
+  resource: "@TpgExtjsBundle/Resources/config/routing.yml"
+  prefix:   /extjs
+  
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+    
+TecnocreacionesBoxBundle:
+    resource: "@TecnocreacionesBoxBundle/Resources/config/routing.yml"
+    prefix:   /boxes
+    
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+    
+TecnocreacionesToolsBundleExtraFormTypes:
+    resource: "@TecnocreacionesToolsBundle/Resources/config/routing/extra_form_types.xml"
+    prefix: /extra-form-types
+    
+_console:
+    resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
+    prefix: /admin/_console

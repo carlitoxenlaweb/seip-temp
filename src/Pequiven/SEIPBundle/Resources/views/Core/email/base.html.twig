@@ -1,0 +1,41 @@
+{% block subject '' %}
+    
+{% block body_text '' %}
+    
+{% block body_html %}
+    <style>
+        .header-seip {
+            font-family: Open Sans Light;
+            color: #FF0000;
+            font-size: 1.8em;
+            font-weight: bold;
+            font-variant: small-caps;
+            font-style: oblique;
+        }
+        .hr-line-vzla-red {
+            background-color: #f42a41;
+            border: 2px solid #f42a41;
+        }
+        table tr th {
+            background: #A0A0A0;
+            color: #F9F9F9;
+        }
+    </style>
+    <table>
+        <tr>
+            <td>
+                {% include 'PequivenSEIPBundle:Core:email/header.html.twig' %}
+            </td>
+        </tr>
+        <tr style="height: 200px">
+            <td style="vertical-align: top;padding: 10px">
+                {% block content_html '' %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% include 'PequivenSEIPBundle:Core:email/footer.html.twig' %}
+            </td>
+        </tr>
+    </table>
+{% endblock body_html %}

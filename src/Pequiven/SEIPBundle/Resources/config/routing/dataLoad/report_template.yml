@@ -1,0 +1,107 @@
+pequiven_report_template_index:
+    path: /.{_format}
+    defaults:
+        _controller: pequiven.controller.report_template:indexAction
+        _format: html
+    requirements:
+        _format: json|html
+    methods: [GET]
+    
+pequiven_report_template_vizualice:
+    path: /vizualice.{_format}
+    defaults:
+        _controller: pequiven.controller.report_template:reportAction
+        _format: html
+    requirements:
+        _format: json|html
+    methods: [GET|POST]
+    options:
+        expose: true
+        
+pequiven_report_template_export_excel_pnr:
+    path: /.{_format}
+    defaults:
+        _controller: pequiven.controller.report_template:exportExcelPnr
+        _format: html
+    requirements:
+        _format: json|html
+    methods: [GET|POST]
+    options:
+        expose: true
+        
+#pequiven_report_export_excel:
+#    path: /exportExcel/{report}
+#    defaults:
+#        _controller: pequiven.controller.report_template:exportExcelAction
+#        _format: html
+#    requirements:
+#        _format: json|html
+#    methods: [GET|POST]
+#    options:
+#        expose: true
+
+pequiven_report_template_create:
+    path: /create
+    defaults:
+        _controller: pequiven.controller.report_template:createAction
+        _sylius:
+            form: pequiven_seipbundle_dataload_reporttemplate
+    methods: [GET|POST]
+    
+pequiven_report_template_show:
+    path: /{id}/show
+    defaults:
+        _controller: pequiven.controller.report_template:showAction
+    methods: [GET]
+    
+pequiven_report_template_update:
+    path: /{id}/update
+    defaults:
+        _controller: pequiven.controller.report_template:updateAction
+        _sylius:
+            form: pequiven_seipbundle_dataload_reporttemplate
+    methods: [GET|POST|PUT]
+    
+pequiven_report_template_delete:
+    path: /{id}/delete
+    defaults:
+        _controller: pequiven.controller.report_template:deleteAction
+    methods: [GET|DELETE]
+    
+pequiven_report_template_list:
+    path: /list
+    defaults:
+        _controller: pequiven.controller.report_template:listAction
+    methods: [GET]
+    
+pequiven_report_template_load:
+    path: /{id}/load
+    defaults:
+        _controller: pequiven.controller.report_template:loadAction
+    methods: [GET|POST|PUT]
+    options:
+        expose: true
+        
+pequiven_report_template_visualize_pnr_time:
+    path: /{idProduct}/visualizePnr
+    defaults:
+        _controller: pequiven.controller.report_template:visualizePnrProduct
+    methods: [GET|POST|PUT]
+    options:
+        expose: true
+        
+pequiven_report_template_visualize_pnr_range_time:
+    path: /{idProduct}/visualizeRangePnr
+    defaults:
+        _controller: pequiven.controller.report_template:visualizePnrPerRangeProduct
+    methods: [GET|POST|PUT]
+    options:
+        expose: true
+        
+pequiven_report_template_obtain_observations:
+    path: /{idReportTemplate}/observations
+    defaults:
+        _controller: pequiven.controller.report_template:obtainObservations
+    methods: [GET|POST|PUT]
+    options:
+        expose: true

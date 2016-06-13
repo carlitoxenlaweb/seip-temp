@@ -1,0 +1,244 @@
+pequiven_seip_complejos:
+    path: /complejos.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getComplejosAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_category_file:
+    path: /categoryFile.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getCategoryFileAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+
+pequiven_seip_first_line_management:
+    path: /first-line-management.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getFirstLineManagementAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_second_line_management:
+    path: /second-line-management.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getSecondLineManagementAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_frequency_notification:
+    path: /frequency-notification.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getFrequencyNotificationIndicatorsAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_location_by_company:
+    path: /get-location-by-company.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getLocationByAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+        
+pequiven_seip_entity_by_location:
+    path: /entity-by-location.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getEntityByLocationAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+        
+pequiven_seip_plant_by_entity:
+    path: /plant-by-entity.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getPlantByEntityAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+        
+pequiven_seip_product_by_plant:
+    path: /product-by-plant.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getProductByPlantAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+        
+pequiven_seip_product_report_by_plant_report:
+    path: /product-report-by-plant-report.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getProductReportByPlantReportAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    
+pequiven_seip_search_service:
+    path: /search-service.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchServiceAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_product:
+    path: /search-product.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchProductAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_entity:
+    path: /search-entity.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchEntityAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_plant:
+    path: /search-plant.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchPlantAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_region:
+    path: /search-region.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchRegionAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_location:
+    path: /search-location.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchLocationAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_company:
+    path: /search-company.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchCompanyAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_search_period:
+    path: /search-period.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:searchPeriodAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_work_study_circle:
+    path: /work-study-circle.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getWorkStudyCircleAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_profiles_politic_evaluation:
+    path: /profile-politic-evaluation.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getProfilesPoliticEvaluationAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_seip_line_strategic:
+    path: /line-strategic.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getLineStrategicAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+        
+pequiven_seip_work_study_circle_category_file:
+    path: /categoryFile.{_format}
+    defaults: 
+        _controller: pequiven_seip.controller.generic_data:getCategoryFileAction
+        _format: json
+    requirements:
+        _format: "json|xml"
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_user_search:
+    path: /user-search.{_format}
+    defaults:
+        _controller: pequiven_seip.controller.user:searchAction
+        _format: json
+    requirements:
+        id: "\d+"
+        _format: json
+    methods: GET
+    options:
+        expose: true

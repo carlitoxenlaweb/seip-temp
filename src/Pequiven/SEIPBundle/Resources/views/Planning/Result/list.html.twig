@@ -1,0 +1,48 @@
+{#% extends "::base.html.twig" %#}
+{% extends "PequivenSEIPBundle:Template:Developer/Common/tableFormat1.html.twig" %}
+{% trans_default_domain 'PequivenSEIPBundle' %}
+{% block title %}- {{ 'pequiven_master.gerencia_second'|trans({},'PequivenMasterBundle') }}{% endblock %}
+
+{% block before_body %}
+    {% if is_granted('ROLE_SEIP_RESULT_BY_PERIOD') %}
+        {{ contentHeader(
+            [("result.list.titleObjetiveOperative"|trans)],0,1,0
+        ) }}
+    {% else %}
+        {{ contentHeader(
+            ("result.list.titleObjetiveOperative"|trans)
+        ) }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div ng-controller="TableFormatController">
+            <div loading-container="tableParams.settings().$loading">
+                <table ng-table="tableParams" show-filter="true" template-pagination="custom/pager"  template-header="custom/header" api-data-url="{{ path('pequiven_seip_result_visualize_by_gerencia',{_format:'json'}) }}" export-csv="csv" class="table table-responsive table-extra-info">
+                    <tr ng-repeat="result in $data | filter:tableParams.search " data="{$ result|json $}">
+                        <td data-title="'{{ 'result.list.columnLocation'|trans }}'" filter="{ 'complejo': 'text' }" >
+                            {$result.gerencia.complejo.description$}
+                        </td>
+                        <td data-title="'{{ 'result.list.columnGerenciaFirst'|trans }}'" filter="{ 'gerenciaFirst': 'text' }" >
+                            <a href="{$ result.gerencia._links.show_result $}">{$result.gerencia.description$}</a>
+                        </td>
+                        <td data-title="'{{ 'result.list.columnGerenciaSecond'|trans }}'" sortable="'description'" filter="{ 'gerenciaSecond': 'text' }">
+                            <a href="{$ result._links.show_result $}">{$result.description$}</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    
+    <script type="text/javascript">
+        function getTableExtraInfo(data)
+            {
+                
+            }
+    </script>
+    
+{% endblock %}

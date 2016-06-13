@@ -1,0 +1,15 @@
+pequiven_update:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/update.yml"
+    prefix:   /updater
+    
+pequiven_seip_user_routes:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/user.yml"
+    prefix:   /user
+    
+pequiven_value_indicator_config_routes:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/valueIndicator/value_indicator_config.yml"
+    prefix:   /value-indicator-config
+    
+pequiven_value_indicator_detail_routes:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/valueIndicator/value_indicator_detail.yml"
+    prefix:   /value-indicator-detail

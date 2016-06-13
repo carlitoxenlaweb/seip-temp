@@ -1,0 +1,35 @@
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+<fieldset class="fieldset fields-list">
+    <legend class="legend">{{ 'pequiven_seip.consumer_planning_service.consumer_planning_service'|trans }}</legend>
+    <div class="field-block button-height">
+        {{ form_label(form.plantReport) }}
+        {{ form_widget(form.plantReport) }}
+        {{ form_errors(form.plantReport) }}
+    </div>
+    <div class="field-block button-height">
+        {{ form_label(form.service) }}
+        {{ form_widget(form.service) }}
+        {{ form_errors(form.service) }}
+    </div>
+    <div class="field-block button-height">
+        {{ form_label(form.aliquot) }}
+        {{ form_widget(form.aliquot) }}
+        {{ form_errors(form.aliquot) }}
+    </div>
+    <div class="field-block button-height">
+        {{ form_label(form.typeOfPlanning) }}
+        {{ form_widget(form.typeOfPlanning) }}
+        {{ form_errors(form.typeOfPlanning) }}
+    </div>
+    <div class="field-block button-height">
+        {{ form_label(form.typeOfAliquot) }}
+        {{ form_widget(form.typeOfAliquot) }}
+        {{ form_errors(form.typeOfAliquot) }}
+    </div>
+    <div class="field-block button-height">
+        {{ form_label(form.enabled) }}
+        {{ form_widget(form.enabled) }}
+        {{ form_errors(form.enabled) }}
+    </div>
+</fieldset>

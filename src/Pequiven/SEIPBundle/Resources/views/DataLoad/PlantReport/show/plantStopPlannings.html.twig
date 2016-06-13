@@ -1,0 +1,86 @@
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+<div class="block">
+    <div class="block-title">
+        <h3> {{ 'pequiven_seip.plant_report.plant_stop_planning'|trans }}&nbsp;
+            {% if(plant_report.getchildrensGroup|length>0) %}
+                ({{ stopPlanning|length }})
+            {% else  %}
+                ({{ plant_report.plantStopPlannings|length }})
+            {% endif %}
+        </h3>
+        <div class="button-group absolute-right compact">
+            {% if periodService().isAllowPlanningReport %}
+                {% if(plant_report.plant.childrens|length == 0) %}
+                    <a class="button icon-list-add" href="{{ path('pequiven_plant_stop_planning_create',{plantReport: plant_report.id}) }}">{{ 'pequiven.add'|trans({},'messages') }}</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="with-padding">
+        <table class="simple-table responsive-table tables-extras" id="sorting-example2">
+            <thead>
+                <tr>
+                    <th scope="col" width="50%">{{ 'Month'|trans }}</th>
+                    <th scope="col" width="15%" class="hide-on-mobile-portrait" align="left">{{ 'pequiven_seip.totalStops'|trans }}</th>
+                    <th scope="col" width="15%" class="hide-on-tablet" align="right">{{ 'pequiven_seip.totalHours'|trans }}</th>
+                    <th scope="col" width="10%">&nbsp;</th>                    
+                </tr>
+            </thead>
+            {% set colspan = 6 %}
+            <tbody>
+                {% if(plant_report.getchildrensGroup|length>0) %}
+                    {% for stop in stopPlanning %}
+                        <tr>
+                            <td>{{ stop.month }}</td>
+                            <td>{{ stop.stop }}</td>
+                            <td>{{ stop.hours}} h</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+
+                    {% set totalStops = 0 %}
+                    {% set totalHours = 0 %}
+                    {% for plantReport in plant_report.getchildrensGroup %}
+                        {% for plantStopPlanning in plantReport.plantStopPlannings %}
+                            <tr>
+                                <td>{{ loop.index }} - 
+                                    {{ generateLink(plantStopPlanning) }}
+                                </td>
+                                <td scope="row" align="left">
+                                    {{ plantStopPlanning.totalStops }}&nbsp;{{ "pequiven_seip.days"|trans }}
+                                    {% set totalStops = totalStops + plantStopPlanning.totalStops %}
+                                </td>
+                                <td align="right">
+                                    {{ plantStopPlanning.totalHours }}&nbsp;h
+                                    {% set totalHours = totalHours + plantStopPlanning.totalHours %}
+                                </td>
+                                <td class="low-padding align-center">
+                                    {% if periodService().isAllowPlanningReport %}
+                                        <a href="{{ path("pequiven_plant_stop_planning_update",{id: plantStopPlanning.id}) }}" class="button compact icon-pencil">{{ "pequiven_seip.actions.edit"|trans }}</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr >
+                                <td colspan="{{ colspan }}" class="empty_row">
+                                    {{ "empty.plant_stop_planning"|trans }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                    
+                {% endif %}
+            </tbody>
+            {# <tfoot>
+                 <tr>
+                     <th scope="col" width="35%">&nbsp;</th>
+                     <th scope="col" width="10%" class="hide-on-mobile-portrait">{{ totalStops }}&nbsp;{{ "pequiven_seip.days"|trans }}</th>
+                     <th scope="col" width="10%" class="hide-on-tablet">{{ totalHours }}&nbsp;h</th>
+                     <th scope="col" width="10%">&nbsp;</th>
+                 </tr>
+             </tfoot>#}
+        </table>
+    </div>
+</div>

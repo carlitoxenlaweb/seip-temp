@@ -1,0 +1,24 @@
+Pequiven\SEIPBundle\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [id]
+        firstname:
+            expose: true
+            groups: [api_list]
+        lastname:
+            expose: true
+            groups: [api_list]
+        numPersonal:
+            expose: true
+            groups: [api_list]
+        complejo:
+            expose: true
+            groups: [complejo]
+        gerencia:
+            expose: true
+            groups: [gerencia]
+        gerenciaSecond:
+            expose: true
+            groups: [gerenciaSecond]

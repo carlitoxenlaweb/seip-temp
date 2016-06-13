@@ -1,0 +1,109 @@
+.empty_row {
+    height: 70px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #e6e6e6;
+    font-size: 20px;
+}
+
+.input-mini,
+input.mini,
+textarea.mini,
+select.mini {
+  width: 60px;
+}
+.input-small,
+input.small,
+textarea.small,
+select.small {
+  width: 90px;
+}
+.input-medium,
+input.medium,
+textarea.medium,
+select.medium {
+  width: 150px;
+}
+.input-large,
+input.large,
+textarea.large,
+select.large {
+  width: 210px;
+}
+.input-xlarge,
+input.xlarge,
+textarea.xlarge,
+select.xlarge {
+  width: 270px;
+  min-width: 270px;
+}
+.input-xxlarge,
+input.xxlarge,
+textarea.xxlarge,
+select.xxlarge {
+  width: 530px;
+}
+
+.pull-right {
+    float: right;
+}
+
+.alert-danger-seip {
+    color: white;
+    font-weight: bold;
+}
+
+.semaphore {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+.page-input-sub {
+    color: #666;
+    font-size: 11px;
+    padding-top: 3px;
+    width: 350px;
+    padding-left: 20px;
+}
+
+.padding-left-40 {
+    padding-left: 40px;
+}
+.inline-div {
+    display: inline-block;
+}
+.font-20 {
+    font-size: 20px;
+}
+.title-monitor{
+    fill: rgb(255, 255, 255);
+    display: inline-block;
+    text-anchor: middle;
+    font-family: Verdana, sans;
+    font-size: 24px;
+    font-weight: bold;
+}
+.title-dashboard{
+    fill: rgb(255, 255, 255);
+    display: inline-block;
+    text-anchor: middle;
+    font-family: Verdana, sans;
+    font-size: 18px;
+    font-weight: bold;
+}
+.scroll-vertical{
+    scrollbar-face-color: #6685CA; 
+    scrollbar-highlight-color: #6685CA; 
+    scrollbar-shadow-color: #6685CA; 
+    scrollbar-3dlight-color:#FFFFFF;
+    scrollbar-arrow-color:#FFFFFF; 
+    scrollbar-track-color:#E5E5E5; 
+    scrollbar-drakshadow-color:#000000;
+}

@@ -1,0 +1,108 @@
+pequiven_user_list:
+    path: /view
+    defaults:
+        _controller: pequiven_seip.controller.user:listAction
+    methods: [GET]
+
+pequiven_user_aux_list:
+    path: /view/aux
+    defaults:
+        _controller: pequiven_seip.controller.user:listAuxAction
+    methods: [GET]
+    
+pequiven_user_feestructure:
+    path: /view/feeStructure
+    defaults:
+        _controller: pequiven_seip.controller.feestructure:showAction
+    methods: [GET|POST]
+
+pequiven_user_loadfeestructure:
+    path: /view/loadfeeStructure
+    defaults:
+        _controller: pequiven_seip.controller.feestructure:createAction
+    methods: [GET|POST]
+    
+pequiven_user_feestructure_add:
+    path: /{id}/add-form.{_format}
+    defaults:
+        _controller: pequiven_seip.controller.feestructure:assignAction
+        _format: html
+    requirements:
+        _format: html|json
+    methods: [GET|POST]
+    options:
+        expose: true 
+
+pequiven_user_feestructure_remove:
+    path: /{id}/remove-form.{_format}
+    defaults:
+        _controller: pequiven_seip.controller.feestructure:removeAction
+        _format: html
+    requirements:
+        _format: html|json
+    methods: [GET|POST]
+    options:
+        expose: true        
+#Devuelve el paginador con la data de los usuarios
+userList:
+    path: /list
+    defaults: 
+        _controller: pequiven_seip.controller.user:userListAction
+        _sylius:
+            method: createPaginatorUser
+
+userAuxList:
+    path: /list/aux
+    defaults: 
+        _controller: pequiven_seip.controller.user:userListAuxAction
+        _sylius:
+            method: createPaginatorUserAux
+
+pequiven_seip_user_show:
+    path: /{id}/.{_format}
+    defaults:
+        _controller: pequiven_seip.controller.user:showAction
+        _format: html
+    requirements:
+        id: "\d+"
+        _format: html|json
+    methods: [GET]
+    options:
+        expose: true
+    
+pequiven_user_update:
+    path: /{id}/update
+    defaults:
+        _controller: pequiven_seip.controller.user:updateAction
+        _sylius:
+            form: pequiven_seipbundle_user
+    requirements:
+        id: "\d+"
+    methods: [GET|POST|PUT]
+
+        
+#Select que devuelve las Gerencias de 2da Línea
+select_gerenciaSecond:
+    path: /select_gerenciaSecond
+    defaults:
+        _controller: pequiven_seip.controller.user:selectGerenciaSecondListAction
+        
+pequiven_seip_user_add_configuration:
+    path: /{id}/add-configuration
+    defaults:
+        _controller: pequiven_seip.controller.user:addConfigurationAction
+        _format: html
+    requirements:
+        id: "\d+"
+        _format: html|json
+    methods: [GET]
+    options:
+        expose: true
+        
+pequiven_user_localization:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/user/localization.yml"
+    prefix:   /localization
+    
+pequiven_user_pre_planning_configuration:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/user/pre_planning_configuration.yml"
+    prefix:   /pre-planning-configuration

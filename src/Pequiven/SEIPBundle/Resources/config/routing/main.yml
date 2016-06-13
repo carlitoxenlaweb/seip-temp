@@ -1,0 +1,87 @@
+pequiven_sig:
+    resource: "@PequivenSIGBundle/Resources/config/routing/indicator/indicator.yml"
+    prefix:   /sig
+
+pequiven_planning_main:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/main.yml"
+    prefix:   /planning
+    
+pequiven_indicator:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/indicator.yml"
+    prefix:   /indicator
+    
+pequiven_indicator_feature:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/indicator/feature_indicator.yml"
+    prefix:   /indicator/feature-indicator
+    
+pequiven_value_indicator:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/value_indicator.yml"
+    prefix:   /value-indicator
+
+pequiven_objetive:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/objetive.yml"
+    prefix:   /objetive
+
+pequiven_planning_result:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/result.yml"
+    prefix:   /planning/result
+    
+pequiven_result:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/result.yml"
+    prefix:   /result
+
+pequiven_generic_data:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/generic_data.yml"
+    prefix:   /generic_data
+pequiven_api:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/api/result.yml"
+    prefix:   /api
+    
+pequiven_pre_planning_main:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/prePlanning/main.yml"
+    prefix:   /pre-planning
+    
+pequiven_line_strategic:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/line_strategic.yml"
+    prefix:   /line-strategic
+
+pequiven_planning_arrangement_program:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/planning/arrangement_program.yml"
+    prefix:   /arrangementprogram
+    
+pequiven_data_load:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/dataLoad/data_load.yml"
+    prefix:   /data-load
+    
+pequiven_delivery:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/delivery/main.yml"
+    prefix:   /delivery
+
+pequiven_chart:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/chart.yml"
+    prefix:   /chart
+    
+pequiven_data_load_main:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/dataLoad/main.yml"
+    prefix:   /data-load
+    
+pequiven_politic_workstudycircle:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/politic/work_study_circle.yml"
+    prefix:   /workstudycircle
+    
+pequiven_politic_proposal:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/politic/proposal.yml"
+    prefix:   /proposal
+    
+pequiven_politic_meetingl:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/politic/meeting.yml"
+    prefix:   /meeting
+    
+pequiven_politic_assistance:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/politic/assistance.yml"
+    prefix:   /assistance
+
+###SISTEMA DE INFORMACION POLIICA
+pequiven_sip:
+    resource: "@PequivenSEIPBundle/Resources/config/routing/sip/sip.yml"
+    prefix:   /sip

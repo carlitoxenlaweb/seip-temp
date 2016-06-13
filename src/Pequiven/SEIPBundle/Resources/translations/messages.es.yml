@@ -1,0 +1,116 @@
+tecnocreaciones_vzla_government:
+                            no: No
+                            yes: Si
+                            step: Paso
+                            back: Atras
+                            next: Siguiente
+                            save: Guardar
+                            save_and_close: Guardar y cerrar
+                            question:
+                                    delete: Desea eliminar este elemento
+                                    downloadLast: Visualizar Plantilla
+pequiven:
+    yes: Si
+    no: No
+    calculate: Calcular
+    description: Descripción
+    history: Historial
+    details: Detalles
+    observations: Observaciones
+    add_observation: Añadir observación
+    events: Eventos
+    ref: Referencia
+    select: Seleccione
+    actions: Acciones
+    no_assigned: No asignado.
+    form:
+        not_applicable: No aplica
+    list: Lista
+    add: Añadir
+    update: Actualizar
+    edit: Editar
+    delete: Eliminar
+    show: Ver
+    view: Vista
+    details: Detalles
+    evolution: Informe de Evolución
+    go_to_the_historical: Ir al Historico del Informe de Evolución
+    evolution_history: Historico Informe de Evolución
+    view_evolution_history: Ver Historico Informe de Evolución
+    hide_evolution_history: Ocultar Historico Informe de Evolución
+    dialog:
+        confirm: Confirmar
+    advances:
+        nope: Nada
+        better: Mejor
+        complete: Completo
+    filters: Filtros
+    limit: Limite
+    table:
+        header:
+            event: Evento
+            user:  Usuario
+            date: Fecha
+            comment: Comentario
+            observation: Observación
+    validations:
+        blank_text: Este campo es obligatorio
+    created_by: Creado por
+    created_at: Fecha de creación
+    buttons:
+        cancel: Cancelar
+        submit: Enviar
+    period: Período
+    
+Updated: actualizado(a)
+Update: Actualización
+
+chart:
+    captionObjTactic: Objetivos Tácticos
+    captionObjOperative: Objetivos Operativos
+    captionArrangementPrograms: Programas de Gestión
+    arrangementPrograms:
+        xAxisName: Gerencias
+        pYAxisName: N° de Programas de Gestión
+        sYAxisName: % Carga
+        seriesNamePlan: Plan
+        seriesNameReal: Real
+        seriesNameCarga: % Carga
+    objetives:
+        xAxisName: Gerencias
+        pYAxisName: N° de Objetivos
+        sYAxisName: % Carga
+        seriesNamePlan: Plan
+        seriesNameReal: Real
+        seriesNameCarga: % Carga
+    result:
+        objetiveOperative:
+            xAxisName: Objetivos
+            yAxisName: Meta del objetivo
+            seriesNamePlan1: Indicadores
+            seriesNamePlan2: Programas de Gestión
+            seriesNamePlan3: Objetivos
+        
+app:
+    http:
+        return_to_home: Ir a la página de inicio
+        error:
+            generic: Lo sentimos, ha ocurrido un error.
+            403: Usted no tiene permisos para acceder a esta sección.
+            404: La página que esta tratando de acceder no existe.
+
+sig:
+    trend_analysis: Análisis de Tendencia
+    analysis_causes: Análisis de Causas
+    causes_desviation: Causas de Desviación
+    chart_evolution: Graficas de Datos y Tendencia del Proceso
+    causes_deviation:  Causas de Desviación
+    relation_indicator: Relación Indicador Período Anterior
+    action_plan: Plan de Acción y Seguimiento
+    verification_of_the_effectiveness: Verificación de la Eficacia
+objetives: Objetivos
+programt: Programas
+indicators: Indicadores
+standardization: Seguimiento y Eficacia
+production: Producción
+evolution: Informe de Evolución

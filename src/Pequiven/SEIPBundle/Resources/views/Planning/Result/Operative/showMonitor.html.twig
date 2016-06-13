@@ -1,0 +1,165 @@
+{% extends 'PequivenSEIPBundle:Template:Developer/Common/formLayoutShow.html.twig' %}
+{% import 'PequivenSEIPBundle:Template:Developer/Macros/buttons.html.twig' as buttons %}
+{% import 'PequivenSEIPBundle:Template:Developer/Macros/actions.html.twig' as actions %}
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+{% block before_body %}
+    {% if is_granted('ROLE_SEIP_RESULT_BY_PERIOD') %}
+        {{ contentHeader(
+            ['Resultados por Gerencia'],0,1,0
+        ) }}
+    {% else %}
+        {{ contentHeader(
+        ('Resultados por Gerencia')
+    ) }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+
+    <fieldset class="fieldset">
+        <legend class="legend"><b>Datos de la Gerencia</b></legend>
+        <div class="columns">   
+            <div class="new-row two-columns bold align-left">Periodo:</div>
+            <div class="four-columns align-left">{{period}}</div>
+            <div class="two-columns bold align-left">Complejo: </div>
+            <div class="four-columns align-left">{{entity.complejo.description}}</div>
+            <div class="new-row two-columns bold align-left">Gerencia de 1ra Línea: </div>
+            {% if entity.gerencia is defined %}
+                <div class="four-columns align-left">{{entity.gerencia.description}}</div>
+                <div class="two-columns bold align-left">Gerencia de 2da Línea: </div>
+                <div class="four-columns align-left">{{entity.description}}</div>
+            {% else %}
+                <div class="four-columns align-left">{{entity.description}}</div>
+            {% endif %}
+        </div> 
+    </fieldset>
+    <br>
+    <fieldset class="fieldset">
+        <legend class="legend"><b>Gráfico de Resultados</b></legend>
+        <div class="columns" >   
+            <div ng-controller="DashboardController" class="dashboard" ng-init="renderChartResult('chartContainerResult',{{ data|json_encode() }},'{{ entity ? entity.description : '' }}','{{ linkToExportResult }}')" style="height: {{ heightChart }}px; width: 90%">
+                <div class="ten-columns ten-columns-mobile align-center" id="chartContainerResult">
+                    <!-- This div will hold the chart generated in the footer -->
+                </div>
+            </div>    
+        </div>
+    </fieldset>
+    <br>
+    <fieldset class="fieldset">
+        <legend class="legend"><b>Detalle en Resultados</b></legend>
+        <div class="with-padding">
+            <div class="columns">               
+                <ul class="fa-ul">
+                    {% set limitTruncate = 0 %}
+                    {% for t in tree %}                        
+                        <li class="with-padding">
+                            {% set p = t['parent'] %}
+                            {% set avancedUsed = p.getResult %}
+                            {% set avancedUsedText = avancedUsed %}
+                            {% set href = generateLinkUrlOnly(p,constant('Pequiven\\SEIPBundle\\Service\\LinkGeneratorService::TYPE_LINK_OBJETIVE_RESULT'),{level:app.request.get('level')}) %}
+                            {% if href != '' %}
+                                <a href="{{ href }}">
+                                {% endif %}
+                                {% include 'PequivenObjetiveBundle:Common:percentajeBarResult.html.twig' %}
+                                {% if href != '' %}
+                                </a>
+                            {% endif %}
+                            {% set parentSummary = resultService.getResultChildresObjetives(p,t['child']) %}
+                            ({{ ((parentSummary['myContributionWithWeight'] ? parentSummary['myContributionWithWeight'] : '0')|number_format(2)) | str_pad(5,'0') }}% / {{ ((parentSummary['myDutyWithWeight'] ? parentSummary['myDutyWithWeight'] : '0')|number_format(2)) | str_pad(5,'0') }}%) - 
+
+                            {#{{ generateLink(p,null,{}) }}#}
+                            <a href="{{generateLinkUrlOnly(p)}}">
+                                {% if (p.objetiveLevel.id=='1') %} <i class="fa fa-cubes"></i> {%endif%} 
+                                {% if (p.objetiveLevel.id=='2') %} <i class="fa fa-cube"></i> {%endif%} 
+                                {% if (p.objetiveLevel.id=='3') %} <i class="fa fa-cog"></i> {%endif%} 
+                                {{p.ref}} {{ p.description }} </a>
+                            <ul class="fa-ul">
+                                {% for chlid in t['child'] %}
+                                    <li class="with-small-padding">
+                                        {% set avancedUsed = chlid.getResult %}
+                                        {% set avancedUsedText = avancedUsed %}
+                                        {% set href = generateLinkUrlOnly(chlid,constant('Pequiven\\SEIPBundle\\Service\\LinkGeneratorService::TYPE_LINK_OBJETIVE_RESULT'),{level:app.request.get('level')}) %}
+                                        {% if href != '' %}
+                                            <a href="{{ href }}">
+                                            {% endif %}
+                                            {% include 'PequivenObjetiveBundle:Common:percentajeBarResult.html.twig' %}
+                                            {% if href != '' %}
+                                            </a>
+                                        {% endif %}
+                                        {#{{ generateLink(chlid,null,{}) }}#}
+                                        <a href="{{generateLinkUrlOnly(chlid)}}">
+                                            {% if (chlid.objetiveLevel.id=='1') %} <i class="fa fa-cubes"></i> {%endif%} 
+                                            {% if (chlid.objetiveLevel.id=='2') %} <i class="fa fa-cube"></i> {%endif%} 
+                                            {% if (chlid.objetiveLevel.id=='3') %} <i class="fa fa-cog"></i> {%endif%} 
+                                            {{chlid.ref}} {{ chlid.description }} </a>
+
+                                        <ul class="fa-ul">
+                                            {% for ch in chlid.childrens %}
+                                                <li>
+                                                    {% set avancedUsed = ch.getResult %}
+                                                    {% set avancedUsedText = avancedUsed %}
+                                                    {% set href = generateLinkUrlOnly(ch,constant('Pequiven\\SEIPBundle\\Service\\LinkGeneratorService::TYPE_LINK_OBJETIVE_RESULT'),{level:app.request.get('level')}) %}
+                                                    {% if href != '' %}
+                                                        <a href="{{ href }}">
+                                                        {% endif %}
+                                                        {% include 'PequivenObjetiveBundle:Common:percentajeBarResult.html.twig' %}
+                                                        {% if href != '' %}
+                                                        </a>
+                                                    {% endif %}
+                                                    {#{{ generateLink(ch,null,{}) }}#}
+                                                    <a href="{{generateLinkUrlOnly(ch)}}">
+                                                        {% if (ch.objetiveLevel.id=='1') %} <i class="fa fa-cubes"></i> {%endif%} 
+                                                        {% if (ch.objetiveLevel.id=='2') %} <i class="fa fa-cube"></i> {%endif%} 
+                                                        {% if (ch.objetiveLevel.id=='3') %} <i class="fa fa-cog"></i> {%endif%} 
+                                                        {{ch.ref}} {{ ch.description }} </a>
+                                                </li>
+                                                {#                                    {% endif %}#}
+                                            {% endfor %}
+                                        </ul>
+
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="columns">
+            <div class="four-columns align-center"><i class="fa fa-cubes"></i> -> Obj. Estratégico</div>
+            <div class="four-columns align-center"><i class="fa fa-cube"></i> -> Obj. Táctico</div>
+            <div class="four-columns align-center"><i class="fa fa-cog"></i> -> Obj. Operativo</div>
+        </div>
+    </fieldset>
+    <br><br>
+    <div class="columns">
+        <div class="twelve-columns align-right">
+            <a href="" id='exportpng' type='button' class="button" value='' />
+            <span class="button-icon"><span class="icon-download"></span></span>
+                {{ 'pequiven_seip.buttons.export_result'|trans({},'PequivenSEIPBundle') }}
+            </a>
+        </div>
+    </div>
+
+
+{% endblock body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/agenda3860.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/dashboard3860.css?v=1') }}">
+{% endblock stylesheets %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{  asset('bundles/pequivenseip/fusioncharts/js/fusioncharts.js') }}"></script>
+    <script src="{{  asset('bundles/pequivenseip/fusioncharts/js/themes/fusioncharts.theme.fint.js') }}"></script>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+    </script>
+
+{% endblock %}

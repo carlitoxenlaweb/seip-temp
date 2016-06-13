@@ -1,0 +1,292 @@
+app:
+    backend:
+            menu:
+                sidebar:
+                    home: Inicio
+                    example:
+                        main: Ejemplo
+                        company: Compañia
+                        technical_reports: Reporte tecnico
+                        other:
+                            main: Otros
+                            admin: Administrador
+                            groups: Grupos
+                    support: Soporte
+                    arrangement_strategic:
+                        main: Gestión Estratégica
+                        objetives:
+                            main: Objetivos
+                            add:
+                                main: Cargar
+                                strategic: Estratégico
+                                tactic: Táctico
+                                operative: Operativo
+                            list:
+                                main: Visualizar
+                                strategic: Estratégico
+                                tactic: Táctico
+                                operative: Operativo
+                        indicators:
+                            main: Indicadores
+                            add:
+                                main: Cargar
+                                strategic: Estratégico
+                                tactic: Táctico
+                                operative: Operativo
+                            list:
+                                main: Visualizar
+                                strategic: Estratégico
+                                tactic: Táctico
+                                operative: Operativo
+                    arrangement_programs:
+                        main: Programas de Gestión
+                        list: Lista
+                        assigned: Asignados
+                        pending: Pendientes
+                        for_reviewing: Por revisar
+                        for_approving: Por aprobar
+                        for_notifying: Por notificar
+                        temaplate: Desde plantilla
+                        add:
+                            main: Cargar
+                            tactic: Táctico
+                            operative: Operativo
+                            other: Otro
+                    reports: Reportes
+                    admin:
+                        main: Administración
+                        complejo:
+                            main: Complejos
+                            list: Lista
+                            add: Cargar
+                        gerencia_first:
+                            main: Gerencia 1ra Línea
+                            list: Lista
+                            add: Cargar
+                        gerencia_second:
+                            main: Gerencia 2da Línea
+                            list: Lista
+                            add: Cargar
+                        cargo:
+                            main: Cargos
+                            list: Lista
+                            add: Cargar
+                        personal:
+                            main: Personal PQV
+                            list: Lista
+                            add: Cargar
+                        rol:
+                            main: Roles
+                            list: Lista
+                            add: Cargar
+                    planning:
+                        main: %titulo%
+                        objetives:
+                            main: Objetivos
+                            strategic: Estratégico
+                            tactic: Táctico
+                            operative: Operativo
+                        indicators:
+                            main: Indicadores
+                            strategic: Estratégico
+                            tactic: Táctico
+                            operative: Operativo
+                            withError: Con errores
+                        arrangement_programs:
+                            main: Programas de Gestión
+                            list: Lista
+                        matriz: Matriz de Objetivos
+                        results:
+                            main: Resultados
+                            strategic: Estratégico
+                            tactic: Táctico
+                            operative: Operativo
+                            recalculate: Recalcular Resultados
+                        operations:
+                            main: Operaciones
+                            recalculate_results: Recalcular Resultados
+                        monitor:
+                            main: Monitor de Carga
+                            objective_tactic: Objetivos Tácticos
+                            objective_operative: Objetivos Operativos
+                            arrangement_program: Programas de Gestión
+                        user:
+                            item_user_list: Consulta de Gestion
+                    users:
+                        main: Usuarios SEIP
+                        real: Lista
+                        aux: Auxiliares
+                        feeStructure: Asignación de Cargos
+                        loadfeeStructure: Cargar Estructura de Cargos
+                    objetives:
+                        main: Objetivos
+                        visualize:
+                            main: Visualizar
+                            strategic: Estratégico
+                            tactic: Táctico
+                            operative: Operativo
+                        matrices_objectives:
+                            Matrices de objetivos
+                    sig:
+                        main: Sistema Integrado de Gestión
+                        evolution: Carga Informe de Evolución
+                        objective:
+                            main: Objetivos
+                            visualize: Visualizar
+                            matrices_objectives:
+                                Matrices de objetivos
+                        indicator:
+                            main: Indicadores
+                            visualize: Visualizar
+                        arrangement_program: 
+                            main: Programas de Gestión
+                            add:
+                                main: Cargar
+                                tactic: Táctico
+                                operative: Operativo
+                                find: Hallazgo SIG
+                            visualize:
+                                main: Visualizar
+                                listManegementSystem: Lista Asignados a Sistemas de Gestión
+                                listAll: Lista
+                                assigned: Asignados
+                                pending: Pendientes
+                                for_reviewing: Por revisar
+                                for_approving: Por aprobar
+                                for_notifying: Por notificar
+                        monitoring:
+                            title: Seguimiento y Eficacia
+                            list_managementSystem: Lista Sistemas de Gestión
+                            list_gerencias: Lista Gerencias Normalizadas
+                    results:
+                        main: Resultados
+                        visualize:
+                            main: Visualizar
+                            strategics: Estratégicos
+                            complejo: Complejos
+                            indicator:
+                                strategics: Indicadores Estratégicos
+                                cphc: Indicadores CPHC
+                                cpamc: Indicadores CPAMC
+                                cpjaa: Indicadores CPJAA
+                                pru:   Indicadores PRU
+                            objetive:
+                                strategics: Objetivos Estratégicos
+                            tactic: Táctico
+                            operative: Operativo
+                            by_gerencia: Por gerencia
+                            by_lineStrategic: Por Línea Estratégica
+                            item_user_list: Consulta de Gestion
+                        notify:
+                            main: Notificar
+                            indicators: Indicadores
+                            arrangement_programs: Programas de Gestión
+                        period:
+                            main: Periodo
+                            objetives: Objetivos
+                            indicators: Indicadores
+                            indicators: Indicadores
+                            arrangement_programs: Programas de Gestión
+                            level:
+                                strategic: Estratégico
+                                tactic: Táctico
+                                operative: Operativo
+                    pre_planning:
+                        main: Planificación %period%
+                        tactic: Táctico
+                        operative: Operativo
+                        planning: Planificación
+                        statistics: Estadística
+                    data_load:
+                        main: Planificación
+                        production: Producción
+                        sales: Ventas
+                        finance: Finanzas
+                        notification: Notificación
+                    operations:
+                        main: Operaciones
+                        reports:
+                            main: Reportes
+                            production: Producción
+                            delivery: Despacho
+                        planning:
+                            main: Planificación
+                            production: Producción
+                            delivery: Despacho
+                        notification:
+                            main: Notificación
+                            production: Producción
+                            delivery: Despacho
+                        monitor:
+                            main: Monitor
+                            production: 
+                                main: Producción
+                                statusCharge: Status de Carga
+                                compliance: % Cumplimiento
+                    work_study_circles:
+                        main: Círculos de Estudio de Trabajo
+                        phase_one: Fase 1
+                        phase_two: Fase 2
+                        phase_three: Fase 3
+                        phase_four: Fase 4
+                        register: 
+                            main: Registro
+                            phase_one: Fase 1
+                            phase_two: Fase 2
+                        vizualice:
+                            main: Visualizar
+                            phase_one: Fase 1
+                            phase_two: Fase 2
+                            phase_three: Fase 3
+                            phase_four: Fase 4
+                        reports:
+                            main: Reportes
+                            phase_one: Fase 1
+                            phase_two: Fase 2
+                            phase_three: Fase 3
+                            phase_four: Fase 4
+                        strategic_plan:
+                            main: Plan Estratégico
+                            phase_one: Fase 1
+                            phase_two: Fase 2
+                            phase_three: Fase 3
+                            phase_four: Fase 4
+                        visualize: Visualizar
+                        general: General
+                        list: Lista
+                        documents: Documentos
+                        meeting: Reuniones
+                    sip:
+                        main: Sistema de Información Política
+                        onePerTen: 1 x 10
+                        cutl: CUTL
+                        centros: Centros
+                        register: Registrar
+                        list: Lista
+                        list_seg: Lista Seguimiento
+                        request: Requerimientos
+                        list_inventory: Lista Inventario
+                        list_request: Lista Requerimientos
+                        list_pqv: Lista Pequiven
+                        list_1x10: Lista 1x10
+                        list_re: Lista Reubicados
+                        list_circuito: Circuito 5
+                        list_cet: Lista Coordinador CET
+                        report: Reportes
+                        display: Monitores
+                        voto: Voto
+                        voto_pqv: Voto Pequiven
+                        voto_general: General
+                        voto_1x10: Voto 1 x 10
+                        voto_re: Voto Reubicados
+                        voto_cet: Voto Coordinador CET
+                        voto_circuito: Circuito 5
+                        voto_zulia: Zulia
+                        voto_anzoategui: Anzoátegui
+                        mesa: Mesas Activas
+                    modules:
+                        ventas: Ventas
+                        despachos: Despachos
+                        contrataciones: Contrataciones
+                        proyectos: Proyectos
+                            

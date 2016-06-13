@@ -1,0 +1,54 @@
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+    impersonating:
+        route:  pequiven_seip_menu_home
+        parameters: { path: / }
+    class:
+        user: Pequiven\SEIPBundle\Entity\User
+        group: Pequiven\MasterBundle\Entity\Rol
+    admin:
+        user:
+            class: Pequiven\MasterBundle\Admin\UserAdmin
+        group:
+            class: Pequiven\MasterBundle\Admin\GroupAdmin
+
+sonata_block:
+    default_contexts: [cms]
+        
+    blocks:
+        sonata.block.service.menu:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.admin.block.search_result:
+            contexts:   [admin]
+        sonata.user.block.menu:    # used to display the menu in profile pages
+            contexts: [user]
+        sonata.user.block.account: # used to display menu option (login option)
+            contexts: [user]
+        sonata.core.block.menu: ~
+        
+sonata_admin:
+    title:      SEIP
+    title_logo: bundles/pequivenseip/logotipos-pqv/logo_menu_seip.png
+    options:
+        title_mode: single_image
+    templates:
+        layout: PequivenSEIPBundle:Sonata:standard_layout.html.twig
+    security:
+        handler: sonata.admin.security.handler.acl
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDIT:     [EDIT,VIEW, LIST]
+            CREATE:   [CREATE, VIEW, LIST]
+            DELETE:   [DELETE, VIEW, LIST]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]

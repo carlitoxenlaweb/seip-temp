@@ -1,0 +1,20 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     seip
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  smtp
+    mailer_host:       mail.pequiven.com
+    mailer_user:       seip
+    mailer_password:   pequiven
+
+    locale:            es
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    main_cdn: http://seip.pequiven.com
+
+    bin_node: /usr/local/bin/node
+    bin_ugly_js: /usr/local/bin/uglifyjs
+    bin_ugly_css: /usr/local/bin/uglifycss

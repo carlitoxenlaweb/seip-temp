@@ -1,0 +1,60 @@
+{% extends "PequivenSEIPBundle:Template:Developer/Common/tableFormat1.html.twig" %}
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+{% block before_body %}    
+    {{ contentHeader(
+        { ( path('userList') ): ("Usuarios Auxiliares") },
+         ("Lista")
+    ) }}
+{% endblock %}
+
+{% block body %}    
+    <div ng-controller="TableFormatController">
+        <div ng-controller="TableUserController">
+            <div loading-container="tableParams.settings().$loading">
+                <table ng-table="tableParams" show-filter="true" template-pagination="custom/pager" template-header="custom/header" api-data-url="{{ path('userAuxList',{_format:'json'}) }}" export-csv="csv" class="table table-responsive table-extra-info">
+                    <tbody>
+                        <tr ng-repeat="result in $data" data="{$ result|json $}">
+                            <td data-title="'{{ 'pequiven_seip.username'|trans }}'" filter="{'username' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.username $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.firstname'|trans }}'" filter="{'firstname' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.firstname $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.lastname'|trans }}'" filter="{'lastname' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.lastname $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.numPersonal'|trans }}'" filter="{'numPersonal' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.numPersonal $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.complejo'|trans }}'" filter="{'complejo' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.complejo.description $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.gerenciaFirst'|trans }}'" filter="{'gerencia' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.gerencia.description $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.gerenciaSecond'|trans }}'" filter="{'gerenciaSecond' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.gerenciaSecond.description $}</a>
+                            </td>
+                            <td data-title="'{{ 'pequiven_seip.rol'|trans }}'" filter="{'role' : 'text'}">
+                                <a href="{$ result._links.self.href $}">{$ result.rol $}</a>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function getTableExtraInfo(data)
+            {
+                var response = '';
+                
+                return response;
+            }
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "PequivenSEIPBundle:Template:Developer/layout.html.twig" %}
+{% trans_default_domain 'PequivenSEIPBundle' %}
+
+{% block before_body %}
+    {{ contentHeader(
+        {(path('monitorArrangementProgram')):("monitor.arrangementProgram"|trans)},
+        (gerenciaGroup.description)
+    ) }}
+{% endblock %}
+
+{% block body %}
+    <div ng-controller="DashboardController" ng-init="renderChartArrangementProgram('chartContainer',{{ categories|json_encode() }},{{ dataPlan|json_encode() }},{{ dataReal|json_encode() }},{{ dataPorc|json_encode() }},'{{ gerenciaGroup.description }}','{{ optionsChart.typeLabel }}')" class="dashboard" style="background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.25)), -webkit-linear-gradient(top, #5e6165, #33373a);">
+        <p class="button-height">
+            <a href="{{ path('monitorObjetiveTacticByGroup',{'typeGroup':gerenciaGroup.groupName}) }}" class="button red-gradient">{{ "principal.button.objTactic"|trans }}</a>
+            <a href="{{ path('monitorObjetiveOperativeByGroup',{'typeGroup':gerenciaGroup.groupName}) }}" class="button red-gradient">{{ "principal.button.objOperative"|trans }}</a>
+        </p>
+        <div id="chart" class="columns">
+            {% if (gerenciaGroup.groupName == "CORP")%}
+                <div class="twelve-columns twelve-columns-mobile" id="chartContainer">
+                </div>
+            {% else %}
+                <div class="nine-columns twelve-columns-mobile" id="chartContainer">
+                </div>
+                <div class="three-columns twelve-columns-mobile new-row-mobile">
+                    <ul class="stats">
+                        {% for data in dataLink%}
+                            <li>
+                                <a href="{{ data.urlGerencia }}">
+                                    {{ data.typeGroup }}<br>
+                                    <b style="font-size:25px">{{ data.porcCarga }}%</b>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif%}
+        </div>
+    </div>
+{% endblock body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/agenda3860.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tecnocreacionesvzlagovernment/template/developer/css/styles/dashboard3860.css?v=1') }}">
+{% endblock stylesheets %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{  asset('bundles/pequivenseip/fusioncharts/js/fusioncharts.js') }}"></script>
+    <script src="{{  asset('bundles/pequivenseip/fusioncharts/js/themes/fusioncharts.theme.fint.js') }}"></script>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}
