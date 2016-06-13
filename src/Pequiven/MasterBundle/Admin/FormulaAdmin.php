@@ -2,17 +2,18 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Admin de formula
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class FormulaAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class FormulaAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {
     private $container;
     
@@ -21,15 +22,23 @@ class FormulaAdmin extends Admin implements \Symfony\Component\DependencyInjecti
             ->add('description')
             ->add('equation')
             ->add('equationReal')
-            ->add('formulaLevel')
+            ->add('formulaLevel', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('enabled')
-            ->add('variables')
+            ->add('variables', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('typeOfCalculation','choice',array(
                 'choices' => \Pequiven\MasterBundle\Entity\Formula::getTypesOfCalculation(),
                 'translation_domain' => 'PequivenIndicatorBundle'
             ))
-            ->add('variableToRealValue')
-            ->add('variableToPlanValue')
+            ->add('variableToRealValue', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('variableToPlanValue', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('sourceEquationReal',null,array(
                 'label' => 'Source Equation Real (equation_real)'
             ))

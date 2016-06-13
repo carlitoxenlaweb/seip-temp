@@ -11,13 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
+
 /**
  * Repositorio de la sede
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class LocationRepository extends SeipEntityRepository
+class LocationRepository extends EntityRepository
 {
     public function findByCompany($company) 
     {

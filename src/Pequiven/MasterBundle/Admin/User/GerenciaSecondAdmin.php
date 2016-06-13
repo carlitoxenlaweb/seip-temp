@@ -11,17 +11,17 @@
 
 namespace Pequiven\MasterBundle\Admin\User;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de gerencia de segunda linea
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class GerenciaSecondAdmin extends Admin
+class GerenciaSecondAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

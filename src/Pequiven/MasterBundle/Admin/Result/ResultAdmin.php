@@ -2,17 +2,18 @@
 
 namespace Pequiven\MasterBundle\Admin\Result;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de resultado
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface 
+class ResultAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {
     protected $container;
     
@@ -43,9 +44,10 @@ class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjectio
                 'choices' => \Pequiven\SEIPBundle\Model\Result\Result::getTypeCalculations(),
                 'translation_domain' => 'PequivenSEIPBundle'
             ))
-            ->add('objetive','sonata_type_model_autocomplete',array(
+            ->add('objetive', null, array( //'sonata_type_model_autocomplete'
                 'property' => array('ref','description'),
                 'required' => false,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add('parent','entity',array(
                 'class' => 'Pequiven\SEIPBundle\Entity\Result\Result',
@@ -54,6 +56,7 @@ class ResultAdmin extends Admin implements \Symfony\Component\DependencyInjectio
                 },
                 'property' => 'descriptionText',
                 'required' => false,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ;
     }

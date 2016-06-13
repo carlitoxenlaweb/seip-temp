@@ -39,10 +39,14 @@ class LocationAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $form) 
     {
         $form
-            ->add('company')
+            ->add('company', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('name')
             ->add('alias')
-            ->add('typeLocation')
+            ->add('typeLocation', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('region')
             ->add('state')
             ;

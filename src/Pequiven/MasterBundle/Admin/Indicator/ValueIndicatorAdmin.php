@@ -11,17 +11,17 @@
 
 namespace Pequiven\MasterBundle\Admin\Indicator;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del valor del indicador
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ValueIndicatorAdmin extends Admin
+class ValueIndicatorAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

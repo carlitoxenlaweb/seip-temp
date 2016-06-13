@@ -1,0 +1,10 @@
+parameters:
+    app.security_listener.class: Pequiven\SEIPBundle\EventListener\LoginListener
+
+services:
+    app.security_listener_login:
+        class: %app.security_listener.class%
+        arguments: [@security.context, @doctrine, @session]
+        tags:
+            - { name: 'kernel.event_subscriber'}
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }

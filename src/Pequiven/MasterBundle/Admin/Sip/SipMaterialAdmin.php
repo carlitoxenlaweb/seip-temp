@@ -2,16 +2,16 @@
 
 namespace Pequiven\MasterBundle\Admin\Sip;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de los Materiales para los centros por CUTL
  *
  */
-class SipMaterialAdmin extends Admin
+class SipMaterialAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {

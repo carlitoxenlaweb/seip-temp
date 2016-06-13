@@ -2,14 +2,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\Delivery;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de report template despacho
  *
  * @author Victor Tortolero <vart10.30@gmail.com>
  */
-class ReportTemplateDeliveryRepository extends SeipEntityRepository {
+class ReportTemplateDeliveryRepository extends EntityRepository {
 
     function createPaginatorReportTemplateDelivery(array $criteria = null, array $orderBy = null) {
         return $this->createPaginator($criteria, $orderBy);

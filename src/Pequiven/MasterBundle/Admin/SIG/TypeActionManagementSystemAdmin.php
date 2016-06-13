@@ -2,16 +2,16 @@
 
 namespace Pequiven\MasterBundle\Admin\SIG;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador los tipos de acciones del plan de acción y seguimiento
  *
  */
-class TypeActionManagementSystemAdmin extends Admin
+class TypeActionManagementSystemAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {

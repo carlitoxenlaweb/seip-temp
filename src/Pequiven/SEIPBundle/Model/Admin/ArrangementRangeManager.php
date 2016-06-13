@@ -8,6 +8,7 @@ use Pequiven\ArrangementBundle\Entity\ArrangementRange;
 use PDOException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager as BaseManager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /**
     * Description of ArrangementRangeManager
@@ -15,6 +16,28 @@ use Sonata\DoctrineORMAdminBundle\Model\ModelManager as BaseManager;
  */
 class ArrangementRangeManager extends BaseManager
 {
+    /* @var $emName stores the preferred entity manager name */
+    protected $emName;
+    
+    /**
+     * set preferred entity manager name to be used in ModelManager
+     * @param string $name
+     */
+    public function setEntityManagerName($name){        
+        $this->emName = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */    
+    public function createQuery($class, $alias = 'o') {
+        //adding second parameter to getRepository method specifying entity manager name
+        $repository = $this->getEntityManager($class)
+                           ->getRepository($class, $this->emName);
+
+        return new ProxyQuery($repository->createQueryBuilder($alias));
+    }
+    
     /**
      * {@inheritdoc}
      */

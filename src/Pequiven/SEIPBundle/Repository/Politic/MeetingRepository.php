@@ -3,14 +3,14 @@
 namespace Pequiven\SEIPBundle\Repository\Politic;
 
 use Pequiven\SEIPBundle\Entity\Politic\Meeting;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de MEETINGS
  *
  * @author Victor Tortolero vart10.30@gmail.com
  */
-class MeetingRepository extends SeipEntityRepository {
+class MeetingRepository extends EntityRepository {
 
     /**
      * Crea un paginador para las reuniones

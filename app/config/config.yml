@@ -60,34 +60,152 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        default_connection:       default
         types:
             json: Sonata\Doctrine\Types\JsonType
+        connections:
+            default:
+                driver:   "%database_driver%"
+                host:     "%database_host_default%"
+                port:     "%database_port_default%"
+                dbname:   "%database_name_default%"
+                user:     "%database_user_default%"
+                password: "%database_password_default%"
+                charset:  UTF8
+            master:
+                driver:   "%database_driver%"
+                host:     "%database_host_master%"
+                port:     "%database_port_master%"
+                dbname:   "%database_name_master%"
+                user:     "%database_user_master%"
+                password: "%database_password_master%"
+                charset:  UTF8
+            pequiven:
+                driver:   "%database_driver%"
+                host:     "%database_host_pequiven%"
+                port:     "%database_port_pequiven%"
+                dbname:   "%database_name_pequiven%"
+                user:     "%database_user_pequiven%"
+                password: "%database_password_pequiven%"
+                charset:  UTF8
+            polinter:
+                driver:   "%database_driver%"
+                host:     "%database_host_polinter%"
+                port:     "%database_port_polinter%"
+                dbname:   "%database_name_polinter%"
+                user:     "%database_user_polinter%"
+                password: "%database_password_polinter%"
+                charset:  UTF8
+            fertinitro:
+                driver:   "%database_driver%"
+                host:     "%database_host_fertinitro%"
+                port:     "%database_port_fertinitro%"
+                dbname:   "%database_name_fertinitro%"
+                user:     "%database_user_fertinitro%"
+                password: "%database_password_fertinitro%"
+                charset:  UTF8
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: default
+        #default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\GosEntityRepository
         entity_managers:
             default:
                 auto_mapping: true
+                connection: default
                 mappings:
-#                    ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
                     FOSUserBundle: ~
-#                    gedmo_loggable:
-#                        type: annotation
-#                        prefix: Gedmo\Loggable\Entity
-#                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-#                        alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
-#                        is_bundle: false
+                    FOSOAuthServerBundle: ~
+                    PequivenSEIPBundle: ~
+                    PequivenSIGBundle: ~
+                    PequivenMasterBundle: ~
+                    PequivenObjetiveBundle: ~
+                    PequivenIndicatorBundle: ~
+                    PequivenArrangementBundle: ~
+                    PequivenArrangementProgramBundle: ~
+                    TecnocreacionesToolsBundle: ~
+                    TecnocreacionesVzlaEntityBundle: ~
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+            master:
+                auto_mapping: false
+                connection: master
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    FOSOAuthServerBundle: ~
+                    PequivenSEIPBundle: ~
+                    PequivenSIGBundle: ~
+                    PequivenMasterBundle: ~
+                    PequivenObjetiveBundle: ~
+                    PequivenIndicatorBundle: ~
+                    PequivenArrangementBundle: ~
+                    PequivenArrangementProgramBundle: ~
+                    TecnocreacionesToolsBundle: ~
+                    TecnocreacionesVzlaEntityBundle: ~
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+            pequiven:
+                auto_mapping: false
+                connection: pequiven
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    FOSOAuthServerBundle: ~
+                    PequivenSEIPBundle: ~
+                    PequivenSIGBundle: ~
+                    PequivenMasterBundle: ~
+                    PequivenObjetiveBundle: ~
+                    PequivenIndicatorBundle: ~
+                    PequivenArrangementBundle: ~
+                    PequivenArrangementProgramBundle: ~
+                    TecnocreacionesToolsBundle: ~
+                    TecnocreacionesVzlaEntityBundle: ~
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+            polinter:
+                auto_mapping: false
+                connection: polinter
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    FOSOAuthServerBundle: ~
+                    PequivenSEIPBundle: ~
+                    PequivenSIGBundle: ~
+                    PequivenMasterBundle: ~
+                    PequivenObjetiveBundle: ~
+                    PequivenIndicatorBundle: ~
+                    PequivenArrangementBundle: ~
+                    PequivenArrangementProgramBundle: ~
+                    TecnocreacionesToolsBundle: ~
+                    TecnocreacionesVzlaEntityBundle: ~
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+            fertinitro:
+                auto_mapping: false
+                connection: fertinitro
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    FOSOAuthServerBundle: ~
+                    PequivenSEIPBundle: ~
+                    PequivenSIGBundle: ~
+                    PequivenMasterBundle: ~
+                    PequivenObjetiveBundle: ~
+                    PequivenIndicatorBundle: ~
+                    PequivenArrangementBundle: ~
+                    PequivenArrangementProgramBundle: ~
+                    TecnocreacionesToolsBundle: ~
+                    TecnocreacionesVzlaEntityBundle: ~
                 filters:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
@@ -98,6 +216,30 @@ stof_doctrine_extensions:
     default_locale: %locale%
     orm:
         default:
+            tree: true
+            timestampable: true
+            sluggable: true
+            softdeleteable: true
+            loggable: true
+        master:
+            tree: true
+            timestampable: true
+            sluggable: true
+            softdeleteable: true
+            loggable: true
+        pequiven:
+            tree: true
+            timestampable: true
+            sluggable: true
+            softdeleteable: true
+            loggable: true
+        polinter:
+            tree: true
+            timestampable: true
+            sluggable: true
+            softdeleteable: true
+            loggable: true
+        fertinitro:
             tree: true
             timestampable: true
             sluggable: true

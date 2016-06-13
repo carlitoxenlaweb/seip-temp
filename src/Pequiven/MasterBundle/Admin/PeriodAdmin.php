@@ -11,17 +11,17 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del periodo
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PeriodAdmin extends Admin {
+class PeriodAdmin extends SonataBaseAdmin {
 
     /**
      *
@@ -67,6 +67,7 @@ class PeriodAdmin extends Admin {
     protected function configureFormFields(FormMapper $form) {
         $object = $this->getSubject();
         $childrensParameters = array(
+            'em' => $this->modelManager->getEntityManagerName(),
             'class' => 'Pequiven\SEIPBundle\Entity\Period',
             'required' => false,
         );

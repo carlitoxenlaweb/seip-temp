@@ -2,16 +2,17 @@
 
 namespace Pequiven\MasterBundle\Admin\LineStrategic;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de las Líneas Estratégicas
  *
  */
-class LineStrategicAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class LineStrategicAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {   
     private $container;
     

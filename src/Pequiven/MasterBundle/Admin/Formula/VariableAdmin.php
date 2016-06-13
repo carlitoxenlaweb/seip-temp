@@ -2,17 +2,18 @@
 
 namespace Pequiven\MasterBundle\Admin\Formula;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Admin de Variable de la formula
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class VariableAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class VariableAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {
     private $container;
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {

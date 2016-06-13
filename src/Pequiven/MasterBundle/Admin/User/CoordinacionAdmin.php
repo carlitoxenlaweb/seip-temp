@@ -11,17 +11,17 @@
 
 namespace Pequiven\MasterBundle\Admin\User;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administracion de Coordinaciones
  *
  * @author Gilbert <glavrjk@gmail.com>
  */
-class CoordinacionAdmin extends Admin {
+class CoordinacionAdmin extends SonataBaseAdmin {
 
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

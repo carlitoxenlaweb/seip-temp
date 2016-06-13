@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\DataLoad;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de product report
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ProductReportRepository extends SeipEntityRepository {
+class ProductReportRepository extends EntityRepository {
 
     public function findByPlantReport($plantReport, $resultType = false) {
         $qb = $this->getQueryBuilder();

@@ -1,0 +1,29 @@
+{% extends "PequivenSEIPBundle:Template:Developer/layoutGestion.html.twig" %}
+{% block stylesheets_base %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/pequivenseip/selectCompany.css') }}">
+{% endblock stylesheets_base %}
+
+{% block body %}
+    <h2 class="marginTop">SELECCIONE UNA EMPRESA</h2>
+    <div style="margin: 0px 20px 0px 20px;">
+        {% for company in companies %}
+            {% set break = false %} 
+            {% set company_link = "#!" %}
+                {% for item in available if not break %}
+                    {% if item.company == company.id %}
+                        {% set company_link = path('switch_server', {'connection': item.server, 'url': lastUrl}) %}
+                        {% set break = true %}
+                    {% endif %}
+                 {% endfor %}
+                <div class="contentLogoCompany">
+                    <a href="{{ company_link }}">
+                        <div class="{{ ( company_link != "#!" ) ? 'companySelected' : 'companyNotSelected' }}">
+                            <img class="logoCompany" src="{{ company.base64image }}" />
+                        </div>
+                        <p class="companyName">{{ company.alias }}</p>
+                    </a>
+                </div>
+         {% endfor %}
+    </div>
+{% endblock body %}

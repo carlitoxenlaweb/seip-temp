@@ -1,13 +1,14 @@
 {% trans_default_domain 'PequivenSEIPBundle' %}
 
 {% set logo = templateConfig.getTemplateOption('developer','logo') %}
-    
+
 <section id="menu" role="complementary">
 
     <!-- This wrapper is used by several responsive layouts -->
     <div id="menu-content">
 
         <header>
+            <a href="{{ path('seip_select_company') }}">{{ not app.session.get('connectionParameter') ? "Default" : app.session.get('connectionParameter') }}</a><br/>
             {% if app.user.hasRole('ROLE_WORKER_PQV') %}
                 {{ 'pequiven_seip.role.worker_pqv'|trans }}
             {% elseif app.user.hasRole('ROLE_SUPERVISER') %}

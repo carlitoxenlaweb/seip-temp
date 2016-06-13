@@ -2,16 +2,16 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del Rango de Gestión
  *
  */
-class ArrangementRangeAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class ArrangementRangeAdmin extends SonataBaseAdmin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {   
     private $container;
     

@@ -1,20 +1,48 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     seip
-    database_user:     root
-    database_password: ~
+    database_driver: pdo_mysql
 
-    mailer_transport:  smtp
-    mailer_host:       mail.pequiven.com
-    mailer_user:       seip
-    mailer_password:   pequiven
+    database_host_default: localhost
+    database_port_default: 3306
+    database_name_default: seip_polinter
+    database_user_default: root
+    database_password_default: 123456
 
-    locale:            es
-    secret:            ThisTokenIsNotSoSecretChangeIt
-    main_cdn: http://seip.pequiven.com
+    database_host_master: localhost
+    database_port_master: 3306
+    database_name_master: seip_master
+    database_user_master: root
+    database_password_master: 123456
 
-    bin_node: /usr/local/bin/node
+    database_host_pequiven: localhost
+    database_port_pequiven: 3306
+    database_name_pequiven: seip_pequiven
+    database_user_pequiven: root
+    database_password_pequiven: 123456
+
+    database_host_polinter: localhost
+    database_port_polinter: 3306
+    database_name_polinter: seip_polinter
+    database_user_polinter: root
+    database_password_polinter: 123456
+
+    database_host_fertinitro: localhost
+    database_port_fertinitro: 3306
+    database_name_fertinitro: seip_fertinitro
+    database_user_fertinitro: root
+    database_password_fertinitro: 123456
+
+    mailer_transport: smtp
+    mailer_host: mail.pequiven.com
+    mailer_user: seip
+    mailer_password: pequiven
+
+    locale: es
+    secret: ThisTokenIsNotSoSecretChangeIt
+    main_cdn: 'http://seip.pequiven.com'
+
+    bin_node: /usr/bin/node
     bin_ugly_js: /usr/local/bin/uglifyjs
     bin_ugly_css: /usr/local/bin/uglifycss
+
+    doctrine.class: Pequiven\SEIPBundle\Doctrine\SeipManagerRegistry
+    doctrine.orm.entity_manager.class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityManager

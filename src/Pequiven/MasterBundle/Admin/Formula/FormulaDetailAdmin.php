@@ -11,7 +11,6 @@
 
 namespace Pequiven\MasterBundle\Admin\Formula;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -19,13 +18,14 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del detalle de formula del indicador
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class FormulaDetailAdmin extends Admin implements ContainerAwareInterface
+class FormulaDetailAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {
     /**
      *

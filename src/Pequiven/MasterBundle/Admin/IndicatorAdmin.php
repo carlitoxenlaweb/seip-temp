@@ -2,18 +2,19 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Pequiven\IndicatorBundle\Entity\IndicatorLevel;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del Indicador
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class IndicatorAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface {
+class IndicatorAdmin extends SonataBaseAdmin implements ContainerAwareInterface {
 
     private $container;
 
@@ -130,9 +131,15 @@ class IndicatorAdmin extends Admin implements \Symfony\Component\DependencyInjec
                 ->add('weight')
                 ->add('indicatorWeight')
                 ->add('goal')
-                ->add('formula')
-                ->add('tendency')
-                ->add('frequencyNotificationIndicator')
+                ->add('formula', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
+                ->add('tendency', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
+                ->add('frequencyNotificationIndicator', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('valueFinal')
                 ->add('charts', 'sonata_type_model_autocomplete', array(
                     'property' => array('alias', 'description'),
@@ -219,13 +226,17 @@ class IndicatorAdmin extends Admin implements \Symfony\Component\DependencyInjec
             if ($object->getIndicatorLevel()->getLevel() == IndicatorLevel::LEVEL_ESTRATEGICO) {
                 $form
                         ->with('Estratégico')
-                        ->add('lineStrategics')
+                        ->add('lineStrategics', null, array(
+                            'em' => $this->modelManager->getEntityManagerName()
+                        ))
                         ->end();
             }
         }
         $form
                 ->with('Gráficos Personalizados')
-                ->add('lineStrategics')
+                ->add('lineStrategics', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('complejoDashboardSpecific', 'sonata_type_model_autocomplete', array(
                     'property' => array('description'),
                     'required' => false,

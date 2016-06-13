@@ -33,3 +33,13 @@ services:
     app.twig_string:
         class:        "%twig.class%"
         arguments:    [@app.twig_string_loader, %knp_menu.renderer.twig.options%]
+
+    app.connection_service:
+        class: Pequiven\MasterBundle\Service\MasterConnection
+        arguments: ["@session", "@doctrine"]
+
+    app.controller.filter_listener:
+        class: Pequiven\SEIPBundle\EventListener\ControllerListener
+        arguments: ["@doctrine", "@session", "@security.token_storage"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

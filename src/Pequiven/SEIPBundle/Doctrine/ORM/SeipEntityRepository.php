@@ -12,6 +12,7 @@
 namespace Pequiven\SEIPBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Pequiven\SEIPBundle\Service\PeriodService;
 use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -124,5 +125,27 @@ class SeipEntityRepository extends EntityRepository
     private function getRequest()
     {
         return $this->container->get('request_stack')->getCurrentRequest();
+    }
+
+    /**
+     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
+     *
+     * @param string $alias
+     * @param string $indexBy The index for the from.
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $entityManager = $this->container ? $this->container->get('app.connection_service')->getManager() : $this->_em;
+        return $entityManager
+            ->createQueryBuilder()
+            ->select($alias)
+            ->from($this->_entityName, $alias, $indexBy);
+    }
+
+    public function __construct($em, ClassMetadata $class, \Pequiven\MasterBundle\Service\MasterConnection $conn = null)
+    {
+        parent::__construct($em, $class);
     }
 }

@@ -56,8 +56,12 @@ class EntityAdmin extends BaseAdmin
             ->add("location")
             ->add("name")
             ->add("alias")
-            ->add("typeLocation")
-            ->add('state')
+            ->add("typeLocation", null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('state', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureDatagridFilters($filter);
     }

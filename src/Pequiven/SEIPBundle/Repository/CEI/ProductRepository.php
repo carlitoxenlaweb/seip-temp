@@ -11,7 +11,7 @@
 
 namespace Pequiven\SEIPBundle\Repository\CEI;
 
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 use Pequiven\SEIPBundle\Entity\CEI\Product;
 
 /**
@@ -19,7 +19,7 @@ use Pequiven\SEIPBundle\Entity\CEI\Product;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ProductRepository extends SeipEntityRepository {
+class ProductRepository extends EntityRepository {
 
     /**
      * Retorna query builder de los componentes activos

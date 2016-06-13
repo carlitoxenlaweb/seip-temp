@@ -4,12 +4,12 @@ namespace Pequiven\IndicatorBundle\Repository\Indicator\EvolutionIndicator;
 
 
 use Pequiven\IndicatorBundle\Entity\Indicator;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de las freuencias de notificación de los indicadores
  */
-class EvolutionCauseRepository extends SeipEntityRepository {
+class EvolutionCauseRepository extends EntityRepository {
 
 
     function getCausesByObject($id, $typeObject) {

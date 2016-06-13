@@ -2,15 +2,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\DataLoad\Production;
 
-//use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Description of Chart(pequiven.repository.chart)
  *
  * @author victor tortolero
  */
-class UnrealizedProductionDayRepository extends SeipEntityRepository {
+class UnrealizedProductionDayRepository extends EntityRepository {
 
     /**
      * 

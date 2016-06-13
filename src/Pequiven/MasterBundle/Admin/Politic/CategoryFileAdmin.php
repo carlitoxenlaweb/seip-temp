@@ -6,13 +6,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Admin\Admin;
-//use Pequiven\MasterBundle\Admin\BaseAdmin;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Admin de etiquetas de archivos cargadsoa reuniones de circulos de trabajo
  */
-class CategoryFileAdmin extends Admin {
+class CategoryFileAdmin extends SonataBaseAdmin {
 
     protected function configureShowFields(ShowMapper $show) {
         $show

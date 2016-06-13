@@ -16,13 +16,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Pequiven\SEIPBundle\Model\DataLoad\ReportTemplate;
+use Pequiven\MasterBundle\Admin\BaseAdmin;
 
 /**
  * Administrador de plantillas de reportes
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ReportTemplateAdmin extends \Pequiven\MasterBundle\Admin\BaseAdmin
+class ReportTemplateAdmin extends BaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

@@ -2,16 +2,16 @@
 
 namespace Pequiven\MasterBundle\Admin\SIG;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de los procesos de los sistemas de gestión
  *
  */
-class ProcessManagementSystemAdmin extends Admin
+class ProcessManagementSystemAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) 
     {
@@ -39,7 +39,9 @@ class ProcessManagementSystemAdmin extends Admin
                     ->add('enabled',null,array(
                         'required' => false,
                     ))
-                    ->add('managementSystem')
+                    ->add('managementSystem', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
                     ->add('levelProcess', 'choice', array(
                     "choices" => \Pequiven\SIGBundle\Entity\ProcessManagementSystem::getlevelProcessArray(),                    
                     'translation_domain' => 'PequivenSIGBundle',                                                           

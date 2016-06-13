@@ -11,17 +11,17 @@
 
 namespace Pequiven\MasterBundle\Admin\ArrangementProgram;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
- * Administrador de las metas
+ * Administrador del programa de gestion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class GoalAdmin extends Admin
+class GoalAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show)
     {

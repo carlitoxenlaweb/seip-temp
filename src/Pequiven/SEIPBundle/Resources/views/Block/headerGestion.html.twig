@@ -4,7 +4,7 @@
     <table width="100%">
         <tr bgcolor="#FFFFFF">
             <td width="12%" height="85px" style="text-align: center; vertical-align: middle; background-color: #B00000;">
-                <img src="{{ asset('bundles/pequivenseip/logotipos-pqv/logotipos-pdf/PQV_Diamante.png') }} " width="70px" height="75px">
+                <img id= "logoCompany" src="{{ asset('bundles/pequivenseip/logotipos-pqv/logotipos-pdf/' ~ app.session.get('companyAlias')|lower ~ '.png') }} " width  ="70px" height="75px">
             </td>
             <td width="76%" height="85px" style="text-align: center; vertical-align: middle; background-color: #B00000; color: #FFFFFF; font-weight: bold; font-style: oblique; font-family: serif; font-size: 20pt;">
                 Sistema Estadístico de Información Petroquímica
@@ -15,7 +15,7 @@
         </tr>
     </table>
 
-    <table width="100%">
+    <table width="100%" id="header-gestion">
         <tr>
             <td width="100%" height="30px" style="text-align: center; font-size: large; color: #FFFFFF; vertical-align: middle; font-family: sans-serif; background-color: #424242">
             COMITÉ DE GESTIÓN. AÑO {{ app.user.period.name }}
@@ -53,7 +53,7 @@
         </div>
         <div class="two-columns tree-columns-tablet hide-768" style="text-align: right;float: right;margin-bottom: 0px;">
             {#        <img class="resize-img-140" src="{{ asset('bundles/tecnocreacionesvzlagovernment/logotipos-vzla/venezuela-ahora-es-todos.png') }}" width="80px" />#}
-            <img class="resize-img-140" src="{{ asset('bundles/pequivenseip/logotipos-pqv/logo_pqv3.gif') }}" height="50px" />
+            <img class="resize-img-140" src="{{ app.session.get('currentLogoCompany') }}" height="50px" />
         </div>
     </div>
     <hr class="hr-line-vzla-red" style="margin-top:0px;margin-bottom: 4px;" />

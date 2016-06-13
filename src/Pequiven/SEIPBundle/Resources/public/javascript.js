@@ -89,7 +89,7 @@ $(function() {
                     if(mov_tab){
                         act_tab.next().next().css('display','none');
                         act_tab.prev().prev().css('display','inherit');
-                    } act_tab = act_tab.prev()
+                    } act_tab = act_tab.prev();
                 } if(!act_tab.prev().length) {
                     $(this).css('visibility', 'hidden');
                 }
@@ -99,13 +99,14 @@ $(function() {
                     if(mov_tab){
                         act_tab.prev().prev().css('display','none');
                         act_tab.next().next().css('display','inherit');
-                    } act_tab = act_tab.next()
+                    } act_tab = act_tab.next();
                 } if(!act_tab.next().length) {
                     $(this).css('visibility', 'hidden');
                 }
                 break;
         } $('a[href="'+act_tab.children('a').attr('href')+'"]').click();
+    }).on('click', 'ul.tabs li a', function(e){
         $('ul.tabs li').css('font-weight', "");
-        $('ul.tabs li.active').css('font-weight', 'bold');
+        $(this).parent('li').css('font-weight', 'bold');
     });
 });

@@ -15,14 +15,14 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository as EntityRepository;
 
 /**
  * Repositorio de Reporte plantilla
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ReportTemplateRepository extends SeipEntityRepository 
+class ReportTemplateRepository extends EntityRepository 
 {
     /**
      * Busca un reporte con todos los datos pre establecidos
@@ -113,9 +113,8 @@ class ReportTemplateRepository extends SeipEntityRepository
     public function getQueryBuilderByUser(){
         $queryBuilder = $this->getCollectionQueryBuilder();
         $user = $this->getUser();
-        
-       if(!$this->getSecurityContext()->isGranted(array('ROLE_SEIP_OPERATION_LIST_PLANNING_PRODUCTION_TEMPLATES_ALL'))){
-           $queryBuilder
+        if(!$this->getSecurityContext()->isGranted(array('ROLE_SEIP_OPERATION_LIST_PLANNING_PRODUCTION_TEMPLATES_ALL'))){
+            $queryBuilder
                 ->innerJoin("rt.users", 'rt_u')
                 ->andWhere("rt_u.id = :user")
                 ->setParameter("user", $user)

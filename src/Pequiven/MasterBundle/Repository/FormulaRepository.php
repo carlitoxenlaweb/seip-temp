@@ -9,6 +9,7 @@
 namespace Pequiven\MasterBundle\Repository;
 
 use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+
 /**
  * Description of FormulaRepository
  *

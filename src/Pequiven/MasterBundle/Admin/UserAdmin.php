@@ -12,119 +12,142 @@
 namespace Pequiven\MasterBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\UserBundle\Admin\Entity\UserAdmin as Base;
 use Pequiven\SEIPBundle\Model\Common\CommonObject;
+use Pequiven\MasterBundle\Model\Admin\MasterUserAdmin;
 
 /**
  * Administrador de usuario
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class UserAdmin extends Base {
-
-    protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper) {
+class UserAdmin extends MasterUserAdmin
+{    
+    protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper){
         $formMapper
-                ->tab("Configuración General")
-                ->with('Status')
-                ->add('username')
-                ->add('email')
-                ->add('plainPassword', 'text', array(
-                    'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
-                ))
-                ->add('locked', null, array('required' => false))
-                ->add('expired', null, array('required' => false))
-                ->add('enabled', null, array('required' => false))
-                ->add('credentialsExpired', null, array('required' => false))
-                ->add('statusWorker', 'choice', array(
-                    'choices' => CommonObject::getLabelsStatusWorker(),
-                    'label' => 'Status del Trabajador',
-                    'translation_domain' => 'PequivenSEIPBundle',
-                ))
-                ->add('affiliatedWorker', null, array(
-                    'label' => 'Trabajador de Empresa Filial o Mixta',
-                    'required' => false,
-                ))
+            ->tab('General')
+                ->with('Datos Básicos')
+                    ->add('username')
+                    ->add('email')
+                    ->add('statusWorker','choice',array(
+                        'choices' => CommonObject::getLabelsStatusWorker(),
+                        'label' => 'pequiven_seip.status_worker',
+                        'translation_domain' => 'PequivenSEIPBundle',
+                    ))
+                    ->add('affiliatedWorker', null, array(
+                        'label' => 'Trabajador de Empresa Filial o Mixta',
+                        'required' => false,
+                    ))
                 ->end()
-                
-                ->with('Localizacion')
-                ->add('complejo', 'sonata_type_model_autocomplete', array(
-                    'required' => false,
-                    'property' => array('description'),
-                    'label' => 'Complejo'
-                ))
-                ->add('gerencia', 'sonata_type_model_autocomplete', array(
-                    'required' => false,
-                    'property' => array('description'),
-                    'label' => 'Gerencia de Primera Línea'
-                ))
-                ->add('gerenciaSecond', 'sonata_type_model_autocomplete', array(
-                    'required' => false,
-                    'property' => array('description'),
-                    'label' => 'Gerencia de Segunda Línea'
-                ))
+                ->with('Empresa / Accesos')
+                    ->add('defaultConnection', 'sonata_type_model', array(
+                        'label'         => 'pequiven_seip.default_connection',
+                        'required'      => true,
+                        'btn_add'       => false,
+                        'btn_list'      => false,
+                        'btn_delete'    => false,
+                        'btn_catalogue' => false
+                    ))
+                    ->add('company', 'sonata_type_model', array(
+                        'label'         => 'pequiven_seip.company',
+                        'required'      => true,
+                        'btn_add'       => false,
+                        'btn_list'      => false,
+                        'btn_delete'    => false,
+                        'btn_catalogue' => false
+                    ))
+                    ->add('connections', 'sonata_type_model', array(
+                        'label'         => 'pequiven_seip.user_connection',
+                        'multiple'      => true,
+                        'required'      => true,
+                        'btn_add'       => false,
+                        'btn_list'      => false,
+                        'btn_delete'    => false,
+                        'btn_catalogue' => false
+                    ))
+                    ->add('userCompanies', 'sonata_type_model', array(
+                        'label'         => 'pequiven_seip.user_companies',
+                        'multiple'      => true,
+                        'required'      => true,
+                        'btn_add'       => false,
+                        'btn_list'      => false,
+                        'btn_delete'    => false,
+                        'btn_catalogue' => false
+                    ))
                 ->end()
-                
-                ->with('Perfil')
-                ->add('dateOfBirth', 'birthday', array('required' => false))
-                ->add('identification', null, array('required' => false, 'label' => 'Cédula'))
-                ->add('firstname', null, array('required' => false))
-                ->add('lastname', null, array('required' => false))
-                ->add('numPersonal', null, array('required' => false, 'label' => 'Número de Personal'))
-                ->add('cellphone', null, array('required' => false, 'label' => 'Número de Celular'))
-                ->add('gender', 'sonata_user_gender', array(
-                    'required' => true,
-                    'translation_domain' => $this->getTranslationDomain()
-                ))
-                ->add('locale', 'locale', array('required' => false))
-                ->add('phone', null, array('required' => false))
+            ->end()
+            ->tab('Detalles')
+                ->with('Datos Personales')
+                    ->add('dateOfBirth', 'birthday', array('required' => false))
+                    ->add('firstname', null, array('required' => false))
+                    ->add('lastname', null, array('required' => false))
+                    ->add('website', 'url', array('required' => false))
+                    ->add('biography', 'text', array('required' => false))
+                    ->add('numPersonal', null, array('required' => false, 'label' => 'Número de Personal'))
+                    ->add('cellphone', null, array('required' => false, 'label' => 'Número de Celular'))
+                    ->add('gender', 'sonata_user_gender', array(
+                        'required' => true,
+                        'translation_domain' => $this->getTranslationDomain()
+                    ))
+                    ->add('locale', 'locale', array('required' => false))
+                    ->add('timezone', 'timezone', array('required' => false))
+                    ->add('phone', null, array('required' => false))
                 ->end()
-                
+                ->with('Social')
+                    ->add('facebookUid', null, array('required' => false))
+                    ->add('facebookName', null, array('required' => false))
+                    ->add('twitterUid', null, array('required' => false))
+                    ->add('twitterName', null, array('required' => false))
+                    ->add('gplusUid', null, array('required' => false))
+                    ->add('gplusName', null, array('required' => false))
                 ->end()
-        ;
-
-        $formMapper
-                ->tab("Grupos de Roles")
-                ->with("Grupos Disponibles")
-                ->add('groups', 'sonata_type_model', array(
-                    'required' => false,
-                    'expanded' => true,
-                    'multiple' => true
-                ))
+                ->with('Localidad')
+                    ->add('complejo', 'sonata_type_model_autocomplete', array(
+                        'required' => false,
+                        'property' => array('description'),
+                        'label' => 'Complejo'
+                    ))
+                    ->add('gerencia', 'sonata_type_model_autocomplete', array(
+                        'required' => false,
+                        'property' => array('description')
+                    ))
+                    ->add('gerenciaSecond', 'sonata_type_model_autocomplete', array(
+                        'required' => false,
+                        'property' => array('description')
+                    ))
                 ->end()
-                ->end()
+            ->end()
         ;
         
         if ($this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
-                    ->tab("Roles Individuales")
-                    ->with("Lista de Roles")
-                    ->add('realRoles', 'sonata_security_roles', array(
-                        'label' => 'form.label_roles',
-                        'expanded' => true,
-                        'multiple' => true,
-                        'required' => false,
-                        'translation_domain' => $this->getTranslationDomain()
-                    ))
+                ->tab('Management')
+                    ->with('Management')
+                        // ->add('realRoles', 'sonata_security_roles', array(
+                        //     'label'    => 'form.label_roles',
+                        //     'expanded' => true,
+                        //     'multiple' => true,
+                        //     'required' => false,
+                        //     'translation_domain' => $this->getTranslationDomain()
+                        // ))
+                        ->add('locked', null, array('required' => false))
+                        ->add('expired', null, array('required' => false))
+                        ->add('enabled', null, array('required' => false))
+                        ->add('credentialsExpired', null, array('required' => false))
                     ->end()
-                    ->end()
+                ->end()
             ;
         }
 
         $formMapper
-                ->tab("Miscelaneos")
-                ->with('Redes Sociales')
-                ->add('facebookUid', null, array('required' => false))
-                ->add('facebookName', null, array('required' => false))
-                ->add('twitterUid', null, array('required' => false))
-                ->add('twitterName', null, array('required' => false))
-                ->add('gplusUid', null, array('required' => false))
-                ->add('gplusName', null, array('required' => false))
+            ->tab('Seguridad')
+                ->with('Security')
+                    ->add('plainPassword', 'text', array(
+                        'required' => (!$this->getSubject() || is_null($this->getSubject()->getId()))
+                    ))
+                    ->add('token', null, array('required' => false))
+                    ->add('twoStepVerificationCode', null, array('required' => false))
                 ->end()
-                ->with('Seguridad')
-                ->add('token', null, array('required' => false))
-                ->add('twoStepVerificationCode', null, array('required' => false))
-                ->end()
-                ->end()
+            ->end()
         ;
     }
 

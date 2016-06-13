@@ -12,14 +12,14 @@
 namespace Pequiven\MasterBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\UserBundle\Admin\Entity\GroupAdmin as BaseGroupAdmin;
+use Pequiven\MasterBundle\Model\Admin\SonataGroupAdmin;
 
 /**
  * Description of GroupAdmin
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class GroupAdmin extends BaseGroupAdmin {
+class GroupAdmin extends SonataGroupAdmin {
 
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show) {
         $show

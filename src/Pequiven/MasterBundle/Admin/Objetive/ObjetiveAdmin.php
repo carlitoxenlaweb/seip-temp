@@ -2,17 +2,17 @@
 
 namespace Pequiven\MasterBundle\Admin\Objetive;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador del objetivo
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ObjetiveAdmin extends Admin
+class ObjetiveAdmin extends SonataBaseAdmin
 {
     protected function configureShowFields(\Sonata\AdminBundle\Show\ShowMapper $show)
     {
@@ -21,13 +21,21 @@ class ObjetiveAdmin extends Admin
             ->add('ref')
             ->add('weight')
             ->add('goal')
-            ->add('complejo')
-            ->add('gerencia')
+            ->add('complejo', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('gerencia', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('gerenciaSecond')
             ->add('parents')
             ->add('indicators')
-            ->add('objetiveLevel')
-            ->add('period')
+            ->add('objetiveLevel', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('period', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('evalObjetive')
             ->add('evalIndicator')
             ->add('evalArrangementProgram')

@@ -38,7 +38,9 @@ class ServiceAdmin extends BaseAdmin
     {
         $form
             ->add('name')
-            ->add('serviceUnit')
+            ->add('serviceUnit', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureFormFields($form);
     }

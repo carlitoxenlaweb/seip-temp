@@ -2,16 +2,17 @@
 
 namespace Pequiven\MasterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Pequiven\MasterBundle\Model\Admin\SonataBaseAdmin;
 
 /**
  * Administrador de los Gráficos
  *
  */
-class ChartAdmin extends Admin implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+class ChartAdmin extends SonataBaseAdmin implements ContainerAwareInterface
 {   
     private $container;
     
