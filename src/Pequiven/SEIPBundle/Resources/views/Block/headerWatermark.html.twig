@@ -10,7 +10,7 @@
     </div>
     <div class="two-columns tree-columns-tablet hide-768" style="text-align: right;float: right;margin-bottom: 0px;">
         <a href="{{ templateConfig.getOption('main_route') != null ? path(templateConfig.getOption('main_route')) : '' }}">
-            <img class="resize-img-140" src="{{ asset('bundles/pequivenseip/logotipos-pqv/logo_pqv_transparente.png') }}" height="75px" />
+                        <img class="resize-img-140" src="{{ app.session.get('currentLogoCompany') }}" height="75px" />
         </a>
     </div>
 </div>

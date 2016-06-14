@@ -527,3 +527,18 @@ En la línea 90, cambiar el
 por
     'choices'           => array(),
 ```
+
+<<<<<<< HEAD
+**OJO PeriodService**
+```php
+$this->getDoctrine()->getEntityManager()->persist($user->getPeriod());
+$this->getDoctrine()->getEntityManager()->persist($user->getParent());
+=======
+**Logos Empresas**
+```
+Los logos de las empresas (color blanco) que se mostrarán en el header de la aplicación se deben guardar en el dir:
+Pequiven/SEIPBundle/Resources/public/logotipos-pqv/logotipos-pdf/nombre_de_la_empresa.png
+
+En la BD se almacenaran los logos con los colores originales de cada empresa.
+>>>>>>> 34732334b27a5b001e112eaf98d3b588c1550eca
+```

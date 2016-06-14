@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05/06/2016, 01:52:01 PM
+    Author     : johana
+*/
+#open-menu, #labelPeriod, #header-gestion{
+    visibility: hidden;
+}
+.marginTop{
+    margin-top: -50px;
+}
+.companiesList{
+    list-style-type: none;
+}
+.companyName{
+        text-align: center;
+        margin-top: 15px; 
+}
+#contentP{
+    min-height: 700px;
+}
+
+.contentLogoCompany{
+    width: 200px; 
+    height: 200px; 
+    margin-bottom: 50px; 
+    float: left; 
+    margin-left: 50px
+}
+
+.companySelected{
+    background: #EEE;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+    width: 200px;
+    height: 200px; 
+}
+
+.companyNotSelected{
+    background: none;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+    width: 200px;
+    height: 200px; 
+}
+
+.logoCompany{
+    width:100px;
+    height:100px;
+    margin: 50px 50px;
+    position: absolute
+}
+
+table{
+    border-top: solid #585858;
+}
+
+hr{
+    border:none;
+}
+
+#logoCompany{
+    visibility: hidden;
+}

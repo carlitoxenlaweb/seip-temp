@@ -59,21 +59,27 @@ class DefaultController extends Controller {
     }
 
     /** Página de Seleccion de empresas
-     * @Route("/selectCompany", name="_selectCompany")
+     * @Route("/selectCompany")
      */
     public function selectOptionAction(){
-        $companies = array();
+        $user_companies = array();
+        $conn = $this->get('app.connection_service');
+        $query = $conn->createQuery('SELECT c.id, c.rif, c.description, c.alias, c.base64image FROM PequivenSEIPBundle:CEI\Company c');
+        $companies = $query->getResult();
+
         foreach ($this->getUser()->getConnections() as $item){
             if($item->getName() !== 'master'){
-                array_push($companies, array(
-                    "alias"  => $item->getCompany(),
-                    "image"  => $item->getCompany()->getBase64Image(),
-                    "server" => $item->getName()
+                array_push($user_companies, array(
+                    "company" => $item->getCompany()->getId(),
+                    "server"  => $item->getName()
                 ));
             }
-        } return $this->render('PequivenSEIPBundle:Default:switch.html.twig', array(
-            "options" => $companies,
-            "lastUrl" => $this->getRequest()->headers->get('referer')
+        }
+
+        return $this->render('PequivenSEIPBundle:Default:switch.html.twig', array(
+            "available" => $user_companies,
+            "companies" => $companies,
+            "lastUrl"   => $this->getRequest()->headers->get('referer')
         ));
         /*
         return count($connections) > 1 ? 
@@ -96,10 +102,13 @@ class DefaultController extends Controller {
                            ->findOneByName($connection);
         if($MasterConn) {
             $this->get('session')->set('currentCompanyId', $MasterConn->getCompany()->getId());
+            $this->get('session')->set('currentLogoCompany', $MasterConn->getCompany()->getBase64Image());
+            $this->get('session')->set('companyAlias', $MasterConn->getCompany());
             $this->get('session')->set('connectionParameter', $connection);
         } else {
             throw new \Exception('Empresa no encontrada');
-        } return $this->redirect($request->query->get('url'));
+        } // return $this->redirect($request->query->get('url'));
+        return $this->redirectToRoute('pequiven_seip_menu_home');
     }
 
     // /**
