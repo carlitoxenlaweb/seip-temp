@@ -67,6 +67,7 @@
         {
             "type": "vcs",
             "url":  "git@172.20.124.26:carlitoxenlaweb/doctrine-orm-admin-bundle.git"
+<<<<<<< HEAD
         },
         {
             "type": "vcs",
@@ -79,6 +80,8 @@
         {
             "type": "vcs",
             "url":  "git@172.20.124.26:carlitoxenlaweb/tools-bundle.git"
+=======
+>>>>>>> 9df7048968b5b20625fb05e45eaca657fad9962f
         }
     ],
     "scripts": {
