@@ -64,7 +64,7 @@ class DefaultController extends Controller {
     public function selectOptionAction(){
         $user_companies = array();
         $conn = $this->get('app.connection_service');
-        $query = $conn->createQuery('SELECT c.id, c.rif, c.description, c.alias, c.base64image FROM PequivenSEIPBundle:CEI\Company c');
+        $query = $conn->createQuery('SELECT c.enabled, c.id, c.rif, c.description, c.alias, c.base64image FROM PequivenSEIPBundle:CEI\Company c');
         $companies = $query->getResult();
 
         foreach ($this->getUser()->getConnections() as $item){
@@ -75,7 +75,6 @@ class DefaultController extends Controller {
                 ));
             }
         }
-
         return $this->render('PequivenSEIPBundle:Default:switch.html.twig', array(
             "available" => $user_companies,
             "companies" => $companies,
