@@ -47,7 +47,7 @@ class EvolutionController extends ResourceController
         $idObject = $request->get('idObject');
         $typeObject = $request->get('typeObject');//typos 1:analisis de causas
 
-        $em = $this->getDoctrine()->getManager();                        
+        $em = $this->getDoctrine()->getManager();
         
         $evolutionService = $this->getEvolutionService();            
         $object = $evolutionService->getObjectLoadFile($idObject, $typeObject);

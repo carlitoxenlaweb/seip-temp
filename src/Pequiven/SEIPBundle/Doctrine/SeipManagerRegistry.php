@@ -24,7 +24,7 @@ class SeipManagerRegistry extends Registry
         if (!isset($managers[$name])) {
             throw new \InvalidArgumentException(sprintf('Doctrine %s Manager named "%s" does not exist.', $this->getName(), $name));
         }
-
+        
         return $this->getService($managers[$name]);
     }
 }

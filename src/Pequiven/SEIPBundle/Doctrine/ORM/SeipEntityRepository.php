@@ -14,14 +14,17 @@ namespace Pequiven\SEIPBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Pequiven\SEIPBundle\Service\PeriodService;
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+//use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
+
 
 /**
  * Repositorio base para entidades seip
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class SeipEntityRepository extends EntityRepository
+class SeipEntityRepository extends ContainerAwareEntityRepository
 {
     public function getQueryPeriod()
     {
@@ -147,5 +150,7 @@ class SeipEntityRepository extends EntityRepository
     public function __construct($em, ClassMetadata $class, \Pequiven\MasterBundle\Service\MasterConnection $conn = null)
     {
         parent::__construct($em, $class);
+        //var_dump($this);
+        //die();
     }
 }

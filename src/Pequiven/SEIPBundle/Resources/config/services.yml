@@ -43,3 +43,7 @@ services:
         arguments: ["@doctrine", "@session", "@security.token_storage"]
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    app.doctrine.orm.repository_factory:
+        class: Pequiven\SEIPBundle\Doctrine\ORM\Repository\SeipRepositoryFactory
+        arguments: [ @service_container ]
