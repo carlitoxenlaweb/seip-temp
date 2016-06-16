@@ -2,7 +2,7 @@
 
 namespace Pequiven\ArrangementProgramBundle\Repository;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 use Pequiven\SEIPBundle\Entity\User;
 
 /**
@@ -10,7 +10,7 @@ use Pequiven\SEIPBundle\Entity\User;
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ArrangementProgramTemplateRepository extends EntityRepository
+class ArrangementProgramTemplateRepository extends ContainerAwareEntityRepository
 {
     //put your code here
 }

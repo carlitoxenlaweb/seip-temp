@@ -150,7 +150,5 @@ class SeipEntityRepository extends ContainerAwareEntityRepository
     public function __construct($em, ClassMetadata $class, \Pequiven\MasterBundle\Service\MasterConnection $conn = null)
     {
         parent::__construct($em, $class);
-        //var_dump($this);
-        //die();
     }
 }

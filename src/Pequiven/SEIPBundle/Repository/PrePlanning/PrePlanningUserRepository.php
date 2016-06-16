@@ -13,7 +13,7 @@ namespace Pequiven\SEIPBundle\Repository\PrePlanning;
 
 use Pequiven\SEIPBundle\Entity\Period;
 use Pequiven\SEIPBundle\Entity\User;
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 use Pequiven\SEIPBundle\Model\PrePlanning\PrePlanning;
 
 /**
@@ -21,7 +21,7 @@ use Pequiven\SEIPBundle\Model\PrePlanning\PrePlanning;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PrePlanningUserRepository extends EntityRepository 
+class PrePlanningUserRepository extends ContainerAwareEntityRepository 
 {
     /**
      * Devuelve el root de una pre planificacion

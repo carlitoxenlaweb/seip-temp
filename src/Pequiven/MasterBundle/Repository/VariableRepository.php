@@ -2,14 +2,14 @@
 
 namespace Pequiven\MasterBundle\Repository;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Description of variableRepository
  *
  * @author victor tortolero
  */
-class VariableRepository extends EntityRepository {
+class VariableRepository extends ContainerAwareEntityRepository {
 
     function getVariablesByFormula($formulaId) {
         $qb = $this->getQueryBuilder();

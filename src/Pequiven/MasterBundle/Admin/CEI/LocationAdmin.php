@@ -47,8 +47,12 @@ class LocationAdmin extends BaseAdmin
             ->add('typeLocation', null, array(
                 'em' => $this->modelManager->getEntityManagerName()
             ))
-            ->add('region')
-            ->add('state')
+            ->add('region', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('state', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureFormFields($form);
     }

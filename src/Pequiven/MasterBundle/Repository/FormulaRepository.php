@@ -8,14 +8,14 @@
 
 namespace Pequiven\MasterBundle\Repository;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Description of FormulaRepository
  *
  * @author matias
  */
-class FormulaRepository extends EntityRepository {
+class FormulaRepository extends ContainerAwareEntityRepository {
     
     
     protected function getAlias() {

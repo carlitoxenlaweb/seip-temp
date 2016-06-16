@@ -2,14 +2,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\Result;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Repositorio de resultado
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class ResultRepository extends EntityRepository
+class ResultRepository extends ContainerAwareEntityRepository
 {
     /**
      * Retorna los resultados que sean de tipo resultado

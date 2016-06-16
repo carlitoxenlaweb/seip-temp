@@ -34,9 +34,15 @@ class CompanyAdmin extends BaseAdminMaster
                 "choices" => \Pequiven\SEIPBundle\Entity\CEI\Company::getTypesOfCompanies(),
                 "translation_domain" => "PequivenMasterBundle"
             ))
-            ->add('affiliates')
-            ->add('mixeds')
-            ->add('region')
+            ->add('affiliates', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('mixeds', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('region', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureShowFields($show);
     }
@@ -63,10 +69,11 @@ class CompanyAdmin extends BaseAdminMaster
                 "choices" => \Pequiven\SEIPBundle\Entity\CEI\Company::getTypesOfCompanies(),
                 "translation_domain" => "PequivenMasterBundle"
             ))
-            ->add('affiliates',null,$parameters)
-            ->add('mixeds',null,$parameters)
-            ->add('region',null,array(
+            ->add('affiliates', null, $parameters)
+            ->add('mixeds', null ,$parameters)
+            ->add('region', null, array(
                 "query_builder" => $queryAllEnable,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add('base64image', 'file', array(
                 'required' => false,

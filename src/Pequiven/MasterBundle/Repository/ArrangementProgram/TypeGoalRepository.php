@@ -2,14 +2,14 @@
 
 namespace Pequiven\MasterBundle\Repository\ArrangementProgram;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Repositorio del tipo de meta
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-class TypeGoalRepository extends EntityRepository 
+class TypeGoalRepository extends ContainerAwareEntityRepository 
 {
     function findByCategory($category)
     {
