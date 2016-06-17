@@ -40,7 +40,8 @@ class TimelineAdmin extends SonataBaseAdmin
                 'multiple' => true,
             ))
             ->add('arrangementProgram',null,array(
-                'disabled' => true
+                'disabled' => true,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
         ;
     }

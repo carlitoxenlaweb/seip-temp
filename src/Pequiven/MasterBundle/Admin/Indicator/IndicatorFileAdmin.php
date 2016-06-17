@@ -36,7 +36,9 @@ class IndicatorFileAdmin extends BaseAdmin {
 
     protected function configureFormFields(FormMapper $form) {
         $form
-                ->add('indicator')
+                ->add('indicator', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('nameFileOriginal')
                 ->add('description')
                 ->add('extensionFile')
