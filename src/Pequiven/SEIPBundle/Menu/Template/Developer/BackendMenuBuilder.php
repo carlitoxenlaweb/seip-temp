@@ -46,6 +46,8 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
      * @return ItemInterface
      */
     public function createSidebarMenu(Request $request) {
+        $session = $this->container->get('session');
+        $company = $session->get('companyAlias');
         $seipConfiguration = $this->getSeipConfiguration();
         $user = $this->getUser();
         $menu = $this->factory->createItem('root', array(
@@ -58,7 +60,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
             'route' => self::ROUTE_DEFAULT, //Route
             'labelAttributes' => array('icon' => 'icon-home'),
         ))->setLabel($this->translate(sprintf('app.backend.menu.%s.home', $section)));
-
+        
         if ($seipConfiguration->isEnablePrePlanning() && $this->isGranted('ROLE_SEIP_PRE_PLANNING_*')) {
             $this->addMenuPrePlanning($menu, $section);
         }
@@ -99,7 +101,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
         }
 
         //Menú Círculos de Estudio de Trabajo
-        if ($this->isGranted('ROLE_SEIP_WORK_STUDY_CIRCLES_*')) {
+        if ($this->isGranted('ROLE_SEIP_WORK_STUDY_CIRCLES_*') && $company == "PEQUIVEN") {
             $this->addMenuWorkStudyCircles($menu, $section);
         }
 
@@ -108,7 +110,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
         }
 
         //Menú Sistema de Informacion Politica
-        if ($this->isGranted('ROLE_SEIP_SIP_*') && $user->getId() != 5942) {
+        if ($this->isGranted('ROLE_SEIP_SIP_*') && $user->getId() != 5942 && $company == "PEQUIVEN") {
             $this->addMenuSip($menu, $section);
         }
 
