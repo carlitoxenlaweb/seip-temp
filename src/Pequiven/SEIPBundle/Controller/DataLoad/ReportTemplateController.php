@@ -1199,7 +1199,8 @@ class ReportTemplateController extends SEIPController {
 
     public function reportAction(Request $request) {
 
-
+        $managerName = $this->container->get('app.connection_service')->getManagerName();
+        
         $plantReportId = null;
         if ($request->isMethod("POST")) {
             $formData = $request->get("form");
@@ -1235,7 +1236,8 @@ class ReportTemplateController extends SEIPController {
             'empty_value' => $emptyValue,
             'translation_domain' => 'PequivenSEIPBundle',
             'attr' => array('class' => 'select2 input-xlarge'),
-            'multiple' => true
+            'multiple' => true,
+            'em' => $managerName
         );
         $qb = function (\Pequiven\SEIPBundle\Repository\DataLoad\ReportTemplateRepository $repository) {
             return $repository->getQueryBuilderByUser();
@@ -1252,7 +1254,7 @@ class ReportTemplateController extends SEIPController {
             'attr' => array('class' => 'select2 input-xlarge'),
             'multiple' => false,
             'group_by' => 'reportTemplateWithName',
-            'em' => 'pequiven'
+            'em' => $managerName
         );
         $qb = function (\Pequiven\SEIPBundle\Repository\DataLoad\PlantReportRepository $repository) {
             return $repository->getQueryBuilderByUser();
