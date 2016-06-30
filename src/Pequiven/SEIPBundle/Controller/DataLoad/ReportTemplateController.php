@@ -14,6 +14,8 @@ namespace Pequiven\SEIPBundle\Controller\DataLoad;
 use Pequiven\SEIPBundle\Controller\SEIPController;
 use Symfony\Component\HttpFoundation\Request;
 
+use Pequiven\MasterBundle\Model\Admin\MasterInterface;
+
 /**
  * Controlador de plantilla de reporte
  *
@@ -1233,7 +1235,7 @@ class ReportTemplateController extends SEIPController {
             'empty_value' => $emptyValue,
             'translation_domain' => 'PequivenSEIPBundle',
             'attr' => array('class' => 'select2 input-xlarge'),
-            'multiple' => true,
+            'multiple' => true
         );
         $qb = function (\Pequiven\SEIPBundle\Repository\DataLoad\ReportTemplateRepository $repository) {
             return $repository->getQueryBuilderByUser();
@@ -1249,7 +1251,8 @@ class ReportTemplateController extends SEIPController {
             'translation_domain' => 'PequivenSEIPBundle',
             'attr' => array('class' => 'select2 input-xlarge'),
             'multiple' => false,
-            'group_by' => 'reportTemplateWithName'
+            'group_by' => 'reportTemplateWithName',
+            'em' => 'pequiven'
         );
         $qb = function (\Pequiven\SEIPBundle\Repository\DataLoad\PlantReportRepository $repository) {
             return $repository->getQueryBuilderByUser();
@@ -1276,6 +1279,7 @@ class ReportTemplateController extends SEIPController {
                     'translation_domain' => 'PequivenSEIPBundle',
                     'required' => false,
                     'attr' => array('class' => 'select2 input-xlarge'),
+                    'em' => 'pequiven'
                 ])
                 ->add('showDay', 'checkbox', [
                     'label_attr' => array('class' => 'label bold'),

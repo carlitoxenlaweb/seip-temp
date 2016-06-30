@@ -38,7 +38,9 @@ class ValueIndicatorAdmin extends SonataBaseAdmin
     protected function configureFormFields(FormMapper $form) {
         $form
 //            ->add('indicator')
-            ->add('formula')
+            ->add('formula', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('formulaParameters')
             ;
     }

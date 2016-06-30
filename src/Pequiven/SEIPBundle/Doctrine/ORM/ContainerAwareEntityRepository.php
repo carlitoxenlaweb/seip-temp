@@ -3,31 +3,13 @@
 namespace Pequiven\SEIPBundle\Doctrine\ORM;
 
 use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
-class ContainerAwareEntityRepository extends EntityRepository implements ContainerAwareInterface
+class ContainerAwareEntityRepository extends EntityRepository
 {
-    /**
-     * Container
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
+    public function __construct($em, ClassMetadata $class)
     {
-        $this->container = $container;
-    }
-
-    /**
-     * Get Container
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
+        parent::__construct($em, $class);
+        $this->container = $em->getEventManager()->getContainer(); //Quitar Cable!
     }
 }

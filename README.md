@@ -541,3 +541,11 @@ Pequiven/SEIPBundle/Resources/public/logotipos-pqv/logotipos-pdf/nombre_de_la_em
 
 En la BD se almacenaran los logos con los colores originales de cada empresa.
 ```
+
+**Agregar al vendor Symfony\Bridge\Doctrine\ContainerAwareEventManager**
+```php
+public function getContainer()
+{
+    return $this->container;
+}
+```

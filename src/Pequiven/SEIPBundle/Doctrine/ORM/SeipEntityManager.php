@@ -9,34 +9,8 @@ use Doctrine\ORM\ORMException;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
-class SeipEntityManager extends EntityManager implements ContainerAwareInterface
+class SeipEntityManager extends EntityManager
 {
-    /**
-     * Container
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * Get Container
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
     public static function create($conn, Configuration $config, EventManager $eventManager = null)
     {
         if (!$config->getMetadataDriverImpl()) {
@@ -78,6 +52,8 @@ class SeipEntityManager extends EntityManager implements ContainerAwareInterface
 	    } else {
 	        $repository = new EntityRepository($this, $metadata);
 	    }
+        
+        //var_dump($this->container);
 
 	    $this->repositories[$entityName] = $repository;
 

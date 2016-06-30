@@ -12,7 +12,7 @@ class MainCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $repositoryFactory = $container->getDefinition('app.doctrine.orm.repository_factory');
-        $container->findDefinition('doctrine.orm.configuration')->addMethodCall('setRepositoryFactory', [$repositoryFactory]);
+        //$repositoryFactory = $container->getDefinition('app.doctrine.orm.repository_factory');
+        //$container->findDefinition('doctrine.orm.configuration')->addMethodCall('setRepositoryFactory', [$repositoryFactory]);
     }
 }

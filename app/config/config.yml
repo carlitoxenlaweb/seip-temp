@@ -104,12 +104,10 @@ doctrine:
                 user:     "%database_user_fertinitro%"
                 password: "%database_password_fertinitro%"
                 charset:  UTF8
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         default_entity_manager: default
-        #default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\GosEntityRepository
-        entity_managers:
+        entity_managers:            
             default:
                 auto_mapping: true
                 connection: default
@@ -130,6 +128,8 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                #repository_factory: app.doctrine.orm.repository_factory
+                default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository
             master:
                 auto_mapping: false
                 connection: master
@@ -150,6 +150,8 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                #repository_factory: app.doctrine.orm.repository_factory
+                default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository
             pequiven:
                 auto_mapping: false
                 connection: pequiven
@@ -170,6 +172,8 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                #repository_factory: app.doctrine.orm.repository_factory
+                default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository
             polinter:
                 auto_mapping: false
                 connection: polinter
@@ -190,6 +194,8 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                #repository_factory: app.doctrine.orm.repository_factory
+                default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository
             fertinitro:
                 auto_mapping: false
                 connection: fertinitro
@@ -210,6 +216,8 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                #repository_factory: app.doctrine.orm.repository_factory
+                default_repository_class: Pequiven\SEIPBundle\Doctrine\ORM\SeipEntityRepository
         
 # Stof Doctrine Configuration
 stof_doctrine_extensions:

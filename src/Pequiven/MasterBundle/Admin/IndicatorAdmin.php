@@ -174,6 +174,49 @@ class IndicatorAdmin extends SonataBaseAdmin implements ContainerAwareInterface 
                         ), array(
                         )
                 )
+                ->add('couldBePenalized', null, array(
+                    'required' => false,
+                ))
+                ->add('evaluateInPeriod', null, array(
+                    'required' => false,
+                ))
+                ->add('notshowIndicatorNoEvaluateInPeriod', null, array(
+                    'required' => false,
+                ))
+                ->add('forcePenalize', null, array(
+                    'required' => false,
+                ))
+                ->add('resultInPercentage', null, array(
+                    'required' => false,
+                ))
+                ->add('showRealValue', null, array(
+                    'required' => false,
+                ))
+                ->add('showPlanValue', null, array(
+                    'required' => false,
+                ))
+                ->add('requiredToImport', null, array(
+                    'required' => false,
+                ))
+                ->add('enabled', null, array(
+                    'required' => false,
+                ))
+                ->add('isValueFromTextReal', null, array(
+                    'required' => false,
+                ))
+                ->add('textValueFromVariableReal', null, array(
+                    'required' => false,
+                ))
+                ->add('isValueFromTextPlan', null, array(
+                    'required' => false,
+                ))
+                ->add('textValueFromVariablePlan', null, array(
+                    'required' => false,
+                ))
+                ->add('planIsNotAccumulative', null, array(
+                    'required' => false,
+                ))
+                ->add('numberValueIndicatorToForce')
                 ->end()
                 ->end()
         ;

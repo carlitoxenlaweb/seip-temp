@@ -146,9 +146,4 @@ class SeipEntityRepository extends ContainerAwareEntityRepository
             ->select($alias)
             ->from($this->_entityName, $alias, $indexBy);
     }
-
-    public function __construct($em, ClassMetadata $class, \Pequiven\MasterBundle\Service\MasterConnection $conn = null)
-    {
-        parent::__construct($em, $class);
-    }
 }
