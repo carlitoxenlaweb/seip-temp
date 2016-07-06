@@ -28,6 +28,7 @@ class AddComplejoFieldListener implements EventSubscriberInterface {
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $complejoObject;
     protected $complejoNameArray = array();
@@ -51,6 +52,7 @@ class AddComplejoFieldListener implements EventSubscriberInterface {
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         $this->complejoObject = new Complejo();
         $this->complejoNameArray = $this->complejoObject->getRefNameArray();
@@ -101,7 +103,8 @@ class AddComplejoFieldListener implements EventSubscriberInterface {
             'label' => 'form.location',
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
-            'property' => 'description'
+            'property' => 'description',
+            'em' => $this->emName
         );
 
         if($this->securityContext->isGranted(array('ROLE_DIRECTIVE','ROLE_DIRECTIVE_AUX','ROLE_WORKER_PLANNING'))){

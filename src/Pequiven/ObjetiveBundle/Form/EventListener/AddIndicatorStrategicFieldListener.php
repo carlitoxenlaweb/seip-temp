@@ -26,6 +26,7 @@ class AddIndicatorStrategicFieldListener implements EventSubscriberInterface {
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $typeStrategic = false;
     protected $typeTactic = false;
@@ -43,6 +44,7 @@ class AddIndicatorStrategicFieldListener implements EventSubscriberInterface {
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         if(isset($options['typeStrategic'])){
             $this->typeStrategic = true;
@@ -81,7 +83,8 @@ class AddIndicatorStrategicFieldListener implements EventSubscriberInterface {
             'attr' => array('class' => 'select2-offscreen populate placeholder','multiple' => 'multiple', 'style' => 'width:300px','required' => false),
             'multiple' => true,
             'required' => false,
-            'mapped' => false
+            'mapped' => false,
+            'em' => $this->emName
         );
         
         if($this->typeStrategic){

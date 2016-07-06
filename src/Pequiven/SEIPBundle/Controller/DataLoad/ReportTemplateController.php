@@ -1200,7 +1200,7 @@ class ReportTemplateController extends SEIPController {
     public function reportAction(Request $request) {
 
         $managerName = $this->container->get('app.connection_service')->getManagerName();
-        
+
         $plantReportId = null;
         if ($request->isMethod("POST")) {
             $formData = $request->get("form");
@@ -1281,7 +1281,7 @@ class ReportTemplateController extends SEIPController {
                     'translation_domain' => 'PequivenSEIPBundle',
                     'required' => false,
                     'attr' => array('class' => 'select2 input-xlarge'),
-                    'em' => 'pequiven'
+                    'em' => $managerName
                 ])
                 ->add('showDay', 'checkbox', [
                     'label_attr' => array('class' => 'label bold'),

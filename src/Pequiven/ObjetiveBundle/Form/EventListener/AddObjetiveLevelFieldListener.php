@@ -26,6 +26,7 @@ class AddObjetiveLevelFieldListener implements EventSubscriberInterface {
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
        
     protected $object;
     
@@ -41,6 +42,7 @@ class AddObjetiveLevelFieldListener implements EventSubscriberInterface {
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         $objLevel = new ObjetiveLevel();
         $this->object = $this->em->getRepository('PequivenObjetiveBundle:ObjetiveLevel')->findOneBy(array('level' => $options['level']));
@@ -74,6 +76,7 @@ class AddObjetiveLevelFieldListener implements EventSubscriberInterface {
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'description',
+            'em' => $this->emName,
             'query_builder' => function(EntityRepository $er) {
                 $qb = $er->createQueryBuilder('objlevel')
                          ->where('objlevel.id = :objLevelId')

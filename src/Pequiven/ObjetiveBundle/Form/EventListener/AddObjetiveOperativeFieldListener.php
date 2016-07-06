@@ -27,6 +27,7 @@ class AddObjetiveOperativeFieldListener implements EventSubscriberInterface{
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $complejoObject;
     protected $complejoNameArray = array();
@@ -45,6 +46,7 @@ class AddObjetiveOperativeFieldListener implements EventSubscriberInterface{
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         $this->complejoObject = new Complejo();
         $this->complejoNameArray = $this->complejoObject->getRefNameArray();
@@ -83,7 +85,8 @@ class AddObjetiveOperativeFieldListener implements EventSubscriberInterface{
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'description',
-            'attr' => array('class' => 'populate select2-offscreen','style' => 'width:400px')
+            'attr' => array('class' => 'populate select2-offscreen','style' => 'width:400px'),
+            'em' => $this->emName
         );
         
         if($this->registerIndicator) {

@@ -27,6 +27,7 @@ class AddGerenciaSecondFieldListener implements EventSubscriberInterface {
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $registerIndicator = false;
     
@@ -47,6 +48,7 @@ class AddGerenciaSecondFieldListener implements EventSubscriberInterface {
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         if(isset($options['registerIndicator'])){
             $this->registerIndicator = true;
@@ -83,6 +85,7 @@ class AddGerenciaSecondFieldListener implements EventSubscriberInterface {
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'description',
+            'em' => $this->emName
         );
 
         $formOptions['attr'] = array('class' => 'select2-offscreen populate placeholder','multiple' => 'multiple', 'style' => 'width:300px');
