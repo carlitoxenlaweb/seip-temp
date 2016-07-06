@@ -38,7 +38,7 @@ class SeipEntityManager extends EntityManager
     }
 
 	public function getRepository($entityName)
-	{
+	{  
 	    $entityName = ltrim($entityName, '\\');
 	    if (isset($this->repositories[$entityName])) {
 	        return $this->repositories[$entityName];
@@ -52,6 +52,8 @@ class SeipEntityManager extends EntityManager
 	    } else {
 	        $repository = new EntityRepository($this, $metadata);
 	    }
+        
+        //var_dump($this->container);
 
 	    $this->repositories[$entityName] = $repository;
 

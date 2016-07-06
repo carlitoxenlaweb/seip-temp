@@ -41,11 +41,16 @@ class EntityAdmin extends BaseAdmin
         $form
             ->add("location",null,array(
                 "query_builder" => $queryAllEnable,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add("name")
             ->add("alias")
-            ->add("typeLocation")
-            ->add('state')
+            ->add("typeLocation", null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('state', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ;
         parent::configureFormFields($form);
     }

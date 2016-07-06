@@ -65,8 +65,12 @@ class ObjetiveAdmin extends SonataBaseAdmin
                     ->add('ref')
                     ->add('weight')
                     ->add('goal')
-                    ->add('complejo')
-                    ->add('gerencia')
+                    ->add('complejo', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
+                    ->add('gerencia', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
                     ->add('gerenciaSecond','sonata_type_model_autocomplete',array(
                         'property' => array('description'),
                         'required' => false,
@@ -81,8 +85,12 @@ class ObjetiveAdmin extends SonataBaseAdmin
                         'multiple' => true,
                         'required' => false,
                     ))
-                    ->add('objetiveLevel')
-                    ->add('period')
+                    ->add('objetiveLevel', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
+                    ->add('period', null, array(
+                        'em' => $this->modelManager->getEntityManagerName()
+                    ))
                 ->end()
             ->end()
             ->tab('Details')

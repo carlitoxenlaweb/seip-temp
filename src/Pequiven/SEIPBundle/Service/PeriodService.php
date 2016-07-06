@@ -285,19 +285,9 @@ class PeriodService extends ContainerAware {
         $session = $request->getSession();
         $periodSerialize = serialize($period);
         $session->set('periodActiveSerialize', $periodSerialize);
-        $user = $this->getUser();
+        $user = $this->getDoctrine()->getManager()->merge($this->getUser());
+        $period = $this->getDoctrine()->getManager()->merge($period);
         $user->setPeriod($period);
-
-        $this->getDoctrine()->getEntityManager()->persist($user->getPeriod());
-
-        if (null !== $period->getParent()) {
-            $this->getDoctrine()->getEntityManager()->persist($period->getParent());
-        }
-
-        if (null !== $period->getChild()) {
-            $this->getDoctrine()->getEntityManager()->persist($period->getChild());
-        }
-
         $this->getUserManager()->updateUser($user);
     }
 

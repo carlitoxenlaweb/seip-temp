@@ -25,6 +25,7 @@ class AddLineStrategicFieldListener implements EventSubscriberInterface {
     protected $typeOperative = false;
     protected $typeTactic = false;
     protected $registerIndicator = false;
+    protected $emName;
     
     /**
      * 
@@ -33,6 +34,8 @@ class AddLineStrategicFieldListener implements EventSubscriberInterface {
      */
     public function __construct(ContainerInterface $container,$options = array()) {
         $this->container = $container;
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
+
         if(isset($options['typeOperative'])){
             $this->typeOperative = true;
         }
@@ -75,7 +78,8 @@ class AddLineStrategicFieldListener implements EventSubscriberInterface {
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'descriptionSelect',
-            'empty_value' => '',            
+            'empty_value' => '',
+            'em' => $this->emName
         );
         
         if($this->typeOperative){

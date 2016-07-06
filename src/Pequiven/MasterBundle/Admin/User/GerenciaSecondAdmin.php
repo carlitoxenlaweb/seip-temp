@@ -47,6 +47,7 @@ class GerenciaSecondAdmin extends SonataBaseAdmin
             ->add('description')
             ->add('gerencia',null,array(
                 'required' => true,
+                'em' => $this->modelManager->getEntityManagerName()
             ))
             ->add('complejo','sonata_type_model_autocomplete',array(
                 'property' => array('description')

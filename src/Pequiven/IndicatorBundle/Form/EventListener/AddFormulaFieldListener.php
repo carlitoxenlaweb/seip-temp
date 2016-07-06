@@ -27,6 +27,7 @@ class AddFormulaFieldListener implements EventSubscriberInterface {
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $typeStrategic = false;
     protected $typeTactic = false;
@@ -50,7 +51,8 @@ class AddFormulaFieldListener implements EventSubscriberInterface {
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
-        
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
+
         if(isset($options['typeStrategic'])){
             $this->typeStrategic = true;
             $this->levelFormula = FormulaLevel::LEVEL_ESTRATEGICO;
@@ -89,7 +91,8 @@ class AddFormulaFieldListener implements EventSubscriberInterface {
             'translation_domain' => 'PequivenIndicatorBundle',
             'property' => 'equation',
             'required' => false,
-            'mapped' => false
+            'mapped' => false,
+            'em' => $this->emName
         );
         if($this->typeStrategic){
             $formOptions['label'] = 'form.formulaIndicatorStrategic';

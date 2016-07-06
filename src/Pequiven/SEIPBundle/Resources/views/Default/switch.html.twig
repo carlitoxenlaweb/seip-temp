@@ -16,6 +16,7 @@
                         {% set break = true %}
                     {% endif %}
                  {% endfor %}
+                 {% if company.enabled == 1%}
                 <div class="contentLogoCompany">
                     <a href="{{ company_link }}">
                         <div class="{{ ( company_link != "#!" ) ? 'companySelected' : 'companyNotSelected' }}">
@@ -24,6 +25,7 @@
                         <p class="companyName">{{ company.alias }}</p>
                     </a>
                 </div>
+                 {% endif%}
          {% endfor %}
     </div>
 {% endblock body %}

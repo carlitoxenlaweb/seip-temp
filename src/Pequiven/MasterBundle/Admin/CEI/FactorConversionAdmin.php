@@ -30,8 +30,12 @@ class FactorConversionAdmin extends BaseAdmin {
 
     protected function configureFormFields(FormMapper $form) {
         $form
-                ->add('productUnitFrom')
-                ->add('productUnitTo')
+                ->add('productUnitFrom', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
+                ->add('productUnitTo', null, array(
+                    'em' => $this->modelManager->getEntityManagerName()
+                ))
                 ->add('formula')
                 ->add('alias')
 

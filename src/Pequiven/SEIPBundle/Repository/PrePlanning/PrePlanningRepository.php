@@ -11,14 +11,14 @@
 
 namespace Pequiven\SEIPBundle\Repository\PrePlanning;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Repositorio de pre planificacion
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class PrePlanningRepository extends EntityRepository
+class PrePlanningRepository extends ContainerAwareEntityRepository
 {
     public function findIn(array $ids) {
         $qb = $this->getQueryBuilder();

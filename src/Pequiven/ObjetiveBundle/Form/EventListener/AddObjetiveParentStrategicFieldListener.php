@@ -34,6 +34,7 @@ class AddObjetiveParentStrategicFieldListener implements EventSubscriberInterfac
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $complejoObject;
     protected $complejoNameArray = array();
@@ -57,6 +58,7 @@ class AddObjetiveParentStrategicFieldListener implements EventSubscriberInterfac
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         $this->complejoObject = new Complejo();
         $this->complejoNameArray = $this->complejoObject->getRefNameArray();
@@ -97,7 +99,8 @@ class AddObjetiveParentStrategicFieldListener implements EventSubscriberInterfac
             'label_attr' => array('class' => 'label'),
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'description',
-            'attr' => array('class' => 'populate placeholder select2-offscreen','style' => 'width:400px')
+            'attr' => array('class' => 'populate placeholder select2-offscreen','style' => 'width:400px'),
+            'em' => $this->emName
         );
 
         if ($objetiveParent) {

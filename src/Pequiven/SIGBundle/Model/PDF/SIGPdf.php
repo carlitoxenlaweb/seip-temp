@@ -43,7 +43,12 @@ class SIGPdf extends TCPDF implements ContainerAwareInterface{
         $this->Image($image_file, 270, 10, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Línea HR
         $lineRed = array('width' => 1.0, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 0, 0));
-        $this->Line(0, 27, 300, 27, $lineRed);        
+        $this->Line(0, 27, 300, 27, $lineRed);   
+        
+        /*if ($this->imgTrend != "") {
+            $image_file = $this->generateAsset('bundles/pequivensig/images/'.$this->imgTrend);
+            $this->Image($image_file, 140, 65, 5, '', 'PNG', '', 'T', false, 10, '', false, false, 0, false, false, false);            
+        }*/
     }
 
     // Footer del pdf de resultados
@@ -80,6 +85,14 @@ class SIGPdf extends TCPDF implements ContainerAwareInterface{
      */
     public function setFooterText($text){
         $this->footerText = $text;
+    }
+
+    /**
+     * Imagen que va a la tendencia
+     * @param type $text
+     */
+    public function setImagenTrend($img){
+        $this->imgTrend = $img;
     }
     
     /**

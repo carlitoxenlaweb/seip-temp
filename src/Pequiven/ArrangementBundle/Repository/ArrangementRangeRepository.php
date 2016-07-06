@@ -8,7 +8,7 @@
 
 namespace Pequiven\ArrangementBundle\Repository;
 
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 use Pequiven\ArrangementProgramBundle\Entity\ArrangementProgram;
 use Pequiven\SEIPBundle\Entity\Period;
 use Pequiven\SEIPBundle\Entity\User;
@@ -17,6 +17,6 @@ use Pequiven\SEIPBundle\Entity\User;
  *
  * @author matias
  */
-class ArrangementRangeRepository extends EntityRepository {
+class ArrangementRangeRepository extends ContainerAwareEntityRepository {
     //put your code here
 }

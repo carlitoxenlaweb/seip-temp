@@ -28,6 +28,7 @@ class AddObjetiveParentTacticFieldListener implements EventSubscriberInterface{
     protected $securityContext;
     protected $user;
     protected $em;
+    protected $emName;
     
     protected $complejoObject;
     protected $complejoNameArray = array();
@@ -51,6 +52,7 @@ class AddObjetiveParentTacticFieldListener implements EventSubscriberInterface{
         $this->securityContext = $this->container->get('security.context');
         $this->user = $this->securityContext->getToken()->getUser();
         $this->em = $this->container->get('doctrine')->getManager();
+        $this->emName = $this->container->get('app.connection_service')->getManagerName();
         
         $this->complejoObject = new Complejo();
         $this->complejoNameArray = $this->complejoObject->getRefNameArray();
@@ -90,7 +92,8 @@ class AddObjetiveParentTacticFieldListener implements EventSubscriberInterface{
             'translation_domain' => 'PequivenObjetiveBundle',
             'property' => 'description',
             'attr' => array('class' => 'placeholder populate select2-offscreen','multiple' => 'multiple','style' => 'width:400px'),
-            'multiple' => true
+            'multiple' => true,
+            'em' => $this->emName
         );
                     
         if($this->registerIndicator) {

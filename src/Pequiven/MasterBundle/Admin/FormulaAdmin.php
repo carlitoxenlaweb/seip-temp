@@ -67,15 +67,23 @@ class FormulaAdmin extends SonataBaseAdmin implements ContainerAwareInterface
             ->add('description')
             ->add('equation')
             ->add('equationReal')
-            ->add('formulaLevel')
+            ->add('formulaLevel', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('enabled')
-            ->add('variables')
+            ->add('variables', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('typeOfCalculation','choice',array(
                 'choices' => \Pequiven\MasterBundle\Entity\Formula::getTypesOfCalculation(),
                 'translation_domain' => 'PequivenIndicatorBundle'
             ))
-            ->add('variableToRealValue')
-            ->add('variableToPlanValue')
+            ->add('variableToRealValue', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
+            ->add('variableToPlanValue', null, array(
+                'em' => $this->modelManager->getEntityManagerName()
+            ))
             ->add('sourceEquationReal',null,array(
                 'label' => 'Source Equation Real (equation_real)'
             ))

@@ -13,14 +13,14 @@ namespace Pequiven\SIGBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Pequiven\SEIPBundle\Service\PeriodService;
-use Tecnocreaciones\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Pequiven\SEIPBundle\Doctrine\ORM\ContainerAwareEntityRepository;
 
 /**
  * Repositorio base para entidades SIG
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class SIGEntityRepository extends EntityRepository
+class SIGEntityRepository extends ContainerAwareEntityRepository
 {
     public function getQueryPeriod()
     {

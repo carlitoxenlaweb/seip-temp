@@ -46,6 +46,8 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
      * @return ItemInterface
      */
     public function createSidebarMenu(Request $request) {
+        $session = $this->container->get('session');
+        $company = $session->get('companyAlias');
         $seipConfiguration = $this->getSeipConfiguration();
         $user = $this->getUser();
         $menu = $this->factory->createItem('root', array(
@@ -58,7 +60,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
             'route' => self::ROUTE_DEFAULT, //Route
             'labelAttributes' => array('icon' => 'icon-home'),
         ))->setLabel($this->translate(sprintf('app.backend.menu.%s.home', $section)));
-
+        
         if ($seipConfiguration->isEnablePrePlanning() && $this->isGranted('ROLE_SEIP_PRE_PLANNING_*')) {
             $this->addMenuPrePlanning($menu, $section);
         }
@@ -99,7 +101,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
         }
 
         //Menú Círculos de Estudio de Trabajo
-        if ($this->isGranted('ROLE_SEIP_WORK_STUDY_CIRCLES_*')) {
+        if ($this->isGranted('ROLE_SEIP_WORK_STUDY_CIRCLES_*') && $company == "PEQUIVEN") {
             $this->addMenuWorkStudyCircles($menu, $section);
         }
 
@@ -108,7 +110,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
         }
 
         //Menú Sistema de Informacion Politica
-        if ($this->isGranted('ROLE_SEIP_SIP_*') && $user->getId() != 5942) {
+        if ($this->isGranted('ROLE_SEIP_SIP_*') && $user->getId() != 5942 && $company == "PEQUIVEN") {
             $this->addMenuSip($menu, $section);
         }
 
@@ -197,13 +199,33 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                         'route' => 'pequiven_objetives_gerencia_list_sig',
                     ))
                     ->setLabel($this->translate(sprintf('app.backend.menu.%s.sig.objective.matrices_objectives', $section)));
-            //Lista de Informe de Evolución Consolidado
-            $visualize->addChild('planning.visualize.objetives.consolid', array(
-                'route' => 'pequiven_objetives_list_sig_evolution',                
-            ))->setLabel($this->translate(sprintf('Informe de Evolución Consolidado', $section)));
-
             $objective->addChild($visualize);
 
+            if ($this->isGranted('ROLE_SEIP_SIG_EVOLUTION_OBJETIVE')) {
+                //Lista de Informe de Evolución Consolidado
+                $evolution = $this->factory->createItem('sig.evolution.visualize', $this->getSubLevelOptions(array(
+                                'uri' => 'null',
+                                'labelAttributes' => array('icon' => '',),
+                            ))
+                    )->setLabel($this->translate(sprintf('Informe de Evolución', $section)));                
+                //Nivel 3
+                $evolution->addChild('planning.visualize.objetives.strategico', array(
+                    'route' => 'pequiven_objetives_list_sig_evolution',
+                    'routeParameters' => array('level' => \Pequiven\ObjetiveBundle\Model\ObjetiveLevel::LEVEL_ESTRATEGICO)
+                ))->setLabel($this->translate(sprintf('app.backend.menu.%s.planning.objetives.strategic', $section)));
+
+                $evolution->addChild('planning.visualize.objetives.tactico', array(
+                    'route' => 'pequiven_objetives_list_sig_evolution',
+                    'routeParameters' => array('level' => \Pequiven\ObjetiveBundle\Model\ObjetiveLevel::LEVEL_TACTICO)
+                ))->setLabel($this->translate(sprintf('app.backend.menu.%s.planning.objetives.tactic', $section)));
+
+                $evolution->addChild('planning.visualize.objetives.operativo', array(
+                    'route' => 'pequiven_objetives_list_sig_evolution',
+                    'routeParameters' => array('level' => \Pequiven\ObjetiveBundle\Model\ObjetiveLevel::LEVEL_OPERATIVO)
+                ))->setLabel($this->translate(sprintf('app.backend.menu.%s.planning.objetives.operative', $section)));                
+                
+                $objective->addChild($evolution);
+            }
             $menuSig->addChild($objective);
         }
         if ($this->isGranted('ROLE_SEIP_SIG_INDICATOR')) {
@@ -1043,8 +1065,15 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
 
             /*             * COMPLEJOS */
             if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_*')) {
-                $complejos = $this->factory->createItem('results.visualize.complejo', $this->getSubLevelOptions())
+                $tableros = $this->factory->createItem('results.visualize.complejo', $this->getSubLevelOptions())
                         ->setLabel($this->translate(sprintf('Tableros de Indicadores', $section)));
+
+                $complejos = $this->factory->createItem('tableros_complejos', $this->getSubLevelOptions(array(
+                            'uri' => null,
+                            'labelAttributes' => array('icon' => 'fa fa-industry',),
+                        ))
+                )
+                ->setLabel($this->translate(sprintf('Complejos Petroquímicos', $section)));
 
                 $em = $this->getDoctrine()->getManager();
                 $complejos_sql = $em->getRepository('PequivenMasterBundle:Complejo')->findAll();
@@ -1064,6 +1093,14 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                         $complejos->addChild($itemStrategicsIndicators);
                     }
                 }
+                $tableros->addChild($complejos);
+
+                 $gerencias = $this->factory->createItem('tableros_gerencias', $this->getSubLevelOptions(array(
+                            'uri' => null,
+                            'labelAttributes' => array('icon' => 'fa fa-cubes',),
+                        ))
+                )
+                ->setLabel($this->translate(sprintf('Gerencias Corporativas', $section)));
 
                 if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_RRHH')) {
                     $itemsTableros = $this->factory->createItem('results.visualize.tableros.rrhh', array(
@@ -1071,7 +1108,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                                 'routeParameters' => array('idGroup' => 5),
                                 'labelAttributes' => array('icon' => 'fa fa-cubes',),
                             ))->setLabel($this->translate(sprintf('Recursos Humanos', $section)));
-                    $complejos->addChild($itemsTableros);
+                    $gerencias->addChild($itemsTableros);
                 }
                 if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_FINANZAS')) {
                     $itemsTableros = $this->factory->createItem('results.visualize.tableros.finanzas', array(
@@ -1079,7 +1116,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                                 'routeParameters' => array('idGroup' => 6),
                                 'labelAttributes' => array('icon' => 'fa fa-cubes',),
                             ))->setLabel($this->translate(sprintf('Finanzas', $section)));
-                    $complejos->addChild($itemsTableros);
+                    $gerencias->addChild($itemsTableros);
                 }
                 if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_SHA')) {
                     $itemsTableros = $this->factory->createItem('results.visualize.tableros.sha', array(
@@ -1087,7 +1124,7 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                                 'routeParameters' => array('idGroup' => 7),
                                 'labelAttributes' => array('icon' => 'fa fa-cubes',),
                             ))->setLabel($this->translate(sprintf('SHA', $section)));
-                    $complejos->addChild($itemsTableros);
+                    $gerencias->addChild($itemsTableros);
                 }
                 if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_SALUD')) {
                     $itemsTableros = $this->factory->createItem('results.visualize.tableros.salud', array(
@@ -1095,11 +1132,46 @@ class BackendMenuBuilder extends MenuBuilder implements \Symfony\Component\Depen
                                 'routeParameters' => array('idGroup' => 8),
                                 'labelAttributes' => array('icon' => 'fa fa-cubes',),
                             ))->setLabel($this->translate(sprintf('Salud', $section)));
-                    $complejos->addChild($itemsTableros);
+                    $gerencias->addChild($itemsTableros);
                 }
+                $tableros->addChild($gerencias);
+
+
+                $comercializadoras = $this->factory->createItem('tableros_comercializadoras', $this->getSubLevelOptions(array(
+                            'uri' => null,
+                            'labelAttributes' => array('icon' => 'fa fa-cube',),
+                        ))
+                )
+                ->setLabel($this->translate(sprintf('Comercializadoras', $section)));
+
+                if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_UNFER')) {
+                    $itemsTableros = $this->factory->createItem('results.visualize.tableros.unfer', array(
+                                'route' => 'pequiven_dasboard_linestrategicbygroup',
+                                'routeParameters' => array('idGroup' => 9),
+                                'labelAttributes' => array('icon' => 'fa fa-cube',),
+                            ))->setLabel($this->translate(sprintf('UNFER', $section)));
+                    $comercializadoras->addChild($itemsTableros);
+                }
+                if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_UNPI')) {
+                    $itemsTableros = $this->factory->createItem('results.visualize.tableros.unpi', array(
+                                'route' => 'pequiven_dasboard_linestrategicbygroup',
+                                'routeParameters' => array('idGroup' => 10),
+                                'labelAttributes' => array('icon' => 'fa fa-cube',),
+                            ))->setLabel($this->translate(sprintf('UNPI', $section)));
+                    $comercializadoras->addChild($itemsTableros);
+                }
+                if ($this->isGranted('ROLE_SEIP_RESULT_VIEW_BY_INDICATORS_UNOP')) {
+                    $itemsTableros = $this->factory->createItem('results.visualize.tableros.unop', array(
+                                'route' => 'pequiven_dasboard_linestrategicbygroup',
+                                'routeParameters' => array('idGroup' => 11),
+                                'labelAttributes' => array('icon' => 'fa fa-cube',),
+                            ))->setLabel($this->translate(sprintf('UNOP', $section)));
+                    $comercializadoras->addChild($itemsTableros);
+                }
+                $tableros->addChild($comercializadoras);
             }
 
-            $visualize->addChild($complejos);
+            $visualize->addChild($tableros);
 
 
 
